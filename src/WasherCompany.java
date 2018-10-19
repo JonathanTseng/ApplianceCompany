@@ -20,8 +20,6 @@ public class WasherCompany implements Serializable {
 	private static WasherCompany washerCompany;
 	private double totalSales = 0;
 	private ArrayList<Washer> washer = new ArrayList<Washer>();
-	
-	
 
 	private WasherCompany() {
 		customerList = CustomerList.instance();
@@ -45,10 +43,8 @@ public class WasherCompany implements Serializable {
 	/**
 	 * Organizes the operations for adding a customer
 	 * 
-	 * @param name
-	 *            customer name
-	 * @param phoneNumber
-	 *            customer phone number
+	 * @param name        customer name
+	 * @param phoneNumber customer phone number
 	 * @return the Customer object created
 	 * 
 	 */
@@ -62,12 +58,9 @@ public class WasherCompany implements Serializable {
 
 	/**
 	 * 
-	 * @param brand
-	 *            washer brand
-	 * @param model
-	 *            washer model
-	 * @param quantity
-	 *            quantity of washers
+	 * @param brand    washer brand
+	 * @param model    washer model
+	 * @param quantity quantity of washers
 	 * @return the result of the operation
 	 */
 	public int addInventory(String brand, String model, int quantity) {
@@ -139,36 +132,35 @@ public class WasherCompany implements Serializable {
 	public int purchaseWasher(String customerId, String brand, String model, int quantity) {
 
 		// FIX THIS!
-		
+		// Test comment SMT
+
 		Washer washer = washerList.search(brand, model);
 		Customer customer = customerList.search(customerId);
 		WasherList washerList = new WasherList();
-		
+
 		if (washer == null) {
 			return (WASHER_NOT_FOUND);
 		}
-		
+
 		if (customer == null) {
 			return (CUSTOMER_NOT_FOUND);
 		}
-		
-		while(quantity > 0) {
-			
-			if(washer.getQuantity() > 0) {
+
+		while (quantity > 0) {
+
+			if (washer.getQuantity() > 0) {
 				washer.purchase();
-				
-			}else {
+
+			} else {
 				BackOrder backOrder = new BackOrder(customer, washer);
 				washer.placeBackOrder(backOrder);
 				return (BACKORDER_PLACED);
 			}
-			
+
 			quantity--;
 			totalSales += washer.getPrice();
 		}
 		return OPERATION_COMPLETED;
-		
-		
 
 	}
 
