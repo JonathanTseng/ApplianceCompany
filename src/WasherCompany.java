@@ -12,13 +12,11 @@ public class WasherCompany implements Serializable {
 	public static final int WASHER_NOT_FOUND = 1;
 	public static final int OPERATION_FAILED = 2;
 	public static final int OPERATION_COMPLETED = 3;
-	private Inventory inventory;
 	private CustomerList customerList;
 	private WasherList washerList;
 	private static WasherCompany washerCompany;
 
 	private WasherCompany() {
-		inventory = Inventory.instance();
 		customerList = CustomerList.instance();
 		washerList = WasherList.instance();
 	}
@@ -66,7 +64,7 @@ public class WasherCompany implements Serializable {
 	 * @return the result of the operation
 	 */
 	public int addInventory(String brand, String model, int quantity) {
-		Washer washer = inventory.search(brand, model);
+		Washer washer = washerList.search(brand, model);
 		if (washer == null) {
 			return (WASHER_NOT_FOUND);
 		} else {
@@ -85,12 +83,15 @@ public class WasherCompany implements Serializable {
 	 */
 	public Washer addWasher(String brand, String model, double price) {
 		Washer washer = new Washer(brand, model, price);
-		if (inventory.insertWasher(washer)) {
+		if (washerList.insertWasher(washer)) {
 			return (washer);
 		}
 		return null;
 	}
 
+	/**
+	 * 
+	 */
 	public void displayTotal() {
 
 	}
@@ -130,7 +131,7 @@ public class WasherCompany implements Serializable {
 	 */
 	public Washer purchaseWasher(String customerId, String brand, String model, int quantity) {
 
-		Washer washer = inventory.search(brand, model);
+		Washer washer = washerList.search(brand, model);
 		if (washer == null) {
 			return (null);
 		}
@@ -200,7 +201,7 @@ public class WasherCompany implements Serializable {
 	 */
 	@Override
 	public String toString() {
-		return inventory + "\n" + customerList + "\n" + washerList;
+		return customerList + "\n" + washerList;
 
 	}
 

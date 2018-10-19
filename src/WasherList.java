@@ -18,4 +18,14 @@ public class WasherList implements Serializable {
 		return null;
 	}
 
+	public boolean insertWasher(Washer washer) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public Washer search(String brand, String model) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
