@@ -1,7 +1,9 @@
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Iterator;
 
 public class WasherList implements Serializable {
+	private ArrayList<Washer> washer = new ArrayList<Washer>();
 
 	public static WasherList instance() {
 		// TODO Auto-generated method stub

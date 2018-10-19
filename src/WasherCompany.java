@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Iterator;
 
 public class WasherCompany implements Serializable {
@@ -12,9 +13,15 @@ public class WasherCompany implements Serializable {
 	public static final int WASHER_NOT_FOUND = 1;
 	public static final int OPERATION_FAILED = 2;
 	public static final int OPERATION_COMPLETED = 3;
+	public static final int BACKORDER_PLACED = 4;
+	public static final int CUSTOMER_NOT_FOUND = 5;
 	private CustomerList customerList;
 	private WasherList washerList;
 	private static WasherCompany washerCompany;
+	private double totalSales = 0;
+	private ArrayList<Washer> washer = new ArrayList<Washer>();
+	
+	
 
 	private WasherCompany() {
 		customerList = CustomerList.instance();
@@ -129,20 +136,39 @@ public class WasherCompany implements Serializable {
 	 * @param quantity
 	 * @return
 	 */
-	public Washer purchaseWasher(String customerId, String brand, String model, int quantity) {
+	public int purchaseWasher(String customerId, String brand, String model, int quantity) {
 
+		// FIX THIS!
+		
 		Washer washer = washerList.search(brand, model);
-		if (washer == null) {
-			return (null);
-		}
 		Customer customer = customerList.search(customerId);
+		WasherList washerList = new WasherList();
+		
+		if (washer == null) {
+			return (WASHER_NOT_FOUND);
+		}
+		
 		if (customer == null) {
-			return (null);
+			return (CUSTOMER_NOT_FOUND);
 		}
-		if (!(customer.purchase(washer))) {
-			return null;
+		
+		while(quantity > 0) {
+			
+			if(washer.getQuantity() > 0) {
+				washer.purchase();
+				
+			}else {
+				BackOrder backOrder = new BackOrder(customer, washer);
+				washer.placeBackOrder(backOrder);
+				return (BACKORDER_PLACED);
+			}
+			
+			quantity--;
+			totalSales += washer.getPrice();
 		}
-		return (washer);
+		return OPERATION_COMPLETED;
+		
+		
 
 	}
 

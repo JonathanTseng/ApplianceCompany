@@ -1,8 +1,11 @@
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Iterator;
 //test comment
 
 public class CustomerList implements Serializable {
+	
+	private ArrayList<Customer> customers = new ArrayList<Customer>();
 
 	public static CustomerList instance() {
 		// TODO Auto-generated method stub
@@ -20,7 +23,7 @@ public class CustomerList implements Serializable {
 	}
 
 	public boolean insertCustomer(Customer member) {
-		// TODO Auto-generated method stub
+		customers.add(member);
 		return false;
 	}
 

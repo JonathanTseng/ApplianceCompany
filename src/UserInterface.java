@@ -246,7 +246,8 @@ public class UserInterface implements Serializable {
 	 * 
 	 */
 	public void purchase() {
-		Washer result;
+		//fix this!!
+		int result;
 		String customerId = getToken("Enter customer id");
 		if (washerCompany.searchCustomer(customerId) == null) {
 			System.out.println("No such customer");
