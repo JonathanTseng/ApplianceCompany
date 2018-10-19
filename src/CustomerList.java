@@ -1,5 +1,6 @@
 import java.io.Serializable;
 import java.util.Iterator;
+//test comment
 
 public class CustomerList implements Serializable {
 
