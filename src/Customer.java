@@ -11,7 +11,17 @@ public class Customer implements Serializable {
 		// TODO Auto-generated constructor stub
 		this.name = name;
 		this.phoneNumber = phoneNumber;
-		id = MEMBER_STRING + (MemberIdServer.instance()).getId();		
+		setId(MEMBER_STRING + (MemberIdServer.instance()).getId());		
+	}
+
+
+	public String getId() {
+		return id;
+	}
+
+
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	
