@@ -12,9 +12,15 @@ public class BackOrder {
     public BackOrder(Customer customer, Washer washer, int backOrderQuantity) {
 		this.customer = customer;
 		this.washer = washer;
+		this.setBackOrderQuantity(backOrderQuantity);
 	}
     
-    /**
+    public BackOrder(Customer customer, Washer washer) {
+		this.customer = customer;
+		this.washer = washer;
+	}
+
+	/**
      * The member and book are stored. The date is computed by adding the
      * duration days to the current date.
      * 
