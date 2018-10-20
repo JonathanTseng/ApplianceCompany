@@ -59,8 +59,7 @@ public class UserInterface implements Serializable {
 	/**
 	 * Gets a token after prompting
 	 * 
-	 * @param prompt
-	 *            - whatever the user wants as prompt
+	 * @param prompt - whatever the user wants as prompt
 	 * @return - the token from the keyboard
 	 * 
 	 */
@@ -82,8 +81,7 @@ public class UserInterface implements Serializable {
 	/**
 	 * Queries for a yes or no and returns true for yes and false for no
 	 * 
-	 * @param prompt
-	 *            The string to be prepended to the yes/no prompt
+	 * @param prompt The string to be prepended to the yes/no prompt
 	 * @return true for yes and false for no
 	 * 
 	 */
@@ -98,8 +96,7 @@ public class UserInterface implements Serializable {
 	/**
 	 * Converts the string to a number
 	 * 
-	 * @param prompt
-	 *            the string for prompting
+	 * @param prompt the string for prompting
 	 * @return the integer corresponding to the string
 	 * 
 	 */
@@ -118,8 +115,7 @@ public class UserInterface implements Serializable {
 	/**
 	 * Prompts for a date and gets a date object
 	 * 
-	 * @param prompt
-	 *            the prompt
+	 * @param prompt the prompt
 	 * @return the data as a Calendar object
 	 */
 	public Calendar getDate(String prompt) {
@@ -246,7 +242,7 @@ public class UserInterface implements Serializable {
 	 * 
 	 */
 	public void purchase() {
-		//fix this!!
+		// fix this!!
 		int result;
 		String customerId = getToken("Enter customer id");
 		if (washerCompany.searchCustomer(customerId) == null) {
@@ -258,7 +254,7 @@ public class UserInterface implements Serializable {
 			String model = getToken("Enter washer model");
 			int quantity = getNumber("Enter quantity");
 			result = washerCompany.purchaseWasher(customerId, brand, model, quantity);
-			if (result != null) {
+			if (result == 3 || result == 4) { // temporary fix look into further
 				System.out.println("Washer successfully purchased.");
 			} else {
 				System.out.println("Purchase could not be completed.");
@@ -382,8 +378,7 @@ public class UserInterface implements Serializable {
 	/**
 	 * The method to start the application. Simply calls process().
 	 * 
-	 * @param args
-	 *            not used
+	 * @param args not used
 	 */
 	public static void main(String[] args) {
 		UserInterface.instance().process();

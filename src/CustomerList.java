@@ -41,23 +41,29 @@ public class CustomerList implements Serializable {
 	public Customer search(String customerId) {
 		for (Iterator iterator = customers.iterator(); iterator.hasNext();) {
 			Customer customer = (Customer) iterator.next();
-			if (customer.getId().equals(customerId)) {
+			if (customer.getId().equals(customerId)) { // may need to change equals method in Customer
 				return customer;
 			}
 		}
 		return null;
 	}
 
+	// might not need may use toString method instead
 	public char[] getCustomer() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public boolean insertCustomer(Customer member) {
-		customers.add(member);
-		return false;
+	public String toString() {
+		return customers.toString(); // test to ensure it is the proper toString
 	}
 
+	public boolean insertCustomer(Customer customer) {
+		customers.add(customer);
+		return true;
+	}
+
+	// might not need may use toString method instead
 	public Iterator getCustomerList() {
 		// TODO Auto-generated method stub
 		return null;
