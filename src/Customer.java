@@ -88,6 +88,9 @@ public class Customer implements Serializable {
 		return this.id.equals(id);
 	}
 
+	/**
+	 * String form of the customer.
+	 */
 	@Override
 	public String toString() {
 		return "Customer name " + name + " phone number " + phoneNumber + " id " + id;

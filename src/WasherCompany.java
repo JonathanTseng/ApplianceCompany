@@ -68,10 +68,10 @@ public class WasherCompany implements Serializable {
 		if (washer == null) {
 			return (WASHER_NOT_FOUND);
 		} else {
-			Washer.addQuantity(quantity);
+			// Washer.addQuantity(quantity); need to look at why error is occuring
 			return (OPERATION_COMPLETED);
 		}
-
+		// also need it to process any open backorders
 	}
 
 	/**
@@ -137,7 +137,7 @@ public class WasherCompany implements Serializable {
 		Washer washer = washerList.search(brand, model);
 		Customer customer = customerList.search(customerId);
 		// WasherList washerList = new WasherList(); need to instantiate using instance
-		// method Ithinks
+		// method I think
 
 		if (washer == null) {
 			return (WASHER_NOT_FOUND);
@@ -151,15 +151,17 @@ public class WasherCompany implements Serializable {
 
 			if (washer.getQuantity() > 0) {
 				washer.purchase();
+				totalSales += washer.getPrice();
 
 			} else {
 				BackOrder backOrder = new BackOrder(customer, washer);
 				washer.placeBackOrder(backOrder);
-				return (BACKORDER_PLACED);
+				return (BACKORDER_PLACED); // we can't have a return statement here because we dont want to exit the
+											// method
 			}
 
 			quantity--;
-			totalSales += washer.getPrice();
+
 		}
 		return OPERATION_COMPLETED;
 
