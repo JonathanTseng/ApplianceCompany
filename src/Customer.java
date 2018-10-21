@@ -78,6 +78,21 @@ public class Customer implements Serializable {
 		this.name = name;
 	}
 
+	/**
+	 * Checks whether the customer is equal to the one with the given id
+	 * 
+	 * @param id id of the customer who should be compared
+	 * @return true iff the customer ids match
+	 */
+	public boolean equals(String id) {
+		return this.id.equals(id);
+	}
+
+	@Override
+	public String toString() {
+		return "Customer name " + name + " phone number " + phoneNumber + " id " + id;
+	}
+
 //	public boolean purchase(Washer washer) {
 //		// TODO Auto-generated method stub
 //		return false;
