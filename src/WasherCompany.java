@@ -136,7 +136,8 @@ public class WasherCompany implements Serializable {
 
 		Washer washer = washerList.search(brand, model);
 		Customer customer = customerList.search(customerId);
-		WasherList washerList = new WasherList();
+		// WasherList washerList = new WasherList(); need to instantiate using instance
+		// method Ithinks
 
 		if (washer == null) {
 			return (WASHER_NOT_FOUND);

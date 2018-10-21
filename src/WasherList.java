@@ -55,14 +55,32 @@ public class WasherList implements Serializable {
 		return null;
 	}
 
+	/**
+	 * Returns an iterator to all books.
+	 * 
+	 * @return iterator to the collection
+	 */
 	public Iterator getWasherList() {
-		// TODO Auto-generated method stub
-		return null;
+		return washers.iterator();
 	}
 
+	/**
+	 * Inserts a washer into the collection
+	 * 
+	 * @param washer the washer to be inserted
+	 * @return true if the washer could be inserted. Currently always true.
+	 */
 	public boolean insertWasher(Washer washer) {
-		// TODO Auto-generated method stub
-		return false;
+		washers.add(washer);
+		return true;
+	}
+
+	/**
+	 * String form of the collection
+	 * 
+	 */
+	public String toString() {
+		return washers.toString();
 	}
 
 }
