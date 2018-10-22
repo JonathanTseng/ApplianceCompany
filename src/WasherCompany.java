@@ -69,9 +69,10 @@ public class WasherCompany implements Serializable {
 			return (WASHER_NOT_FOUND);
 		} else {
 			// Washer.addQuantity(quantity); need to look at why error is occuring
+			washer.addQuantity(quantity);
 			return (OPERATION_COMPLETED);
 		}
-		// also need it to process any open backorders
+		// need it to process any open backorders
 	}
 
 	/**
@@ -92,8 +93,8 @@ public class WasherCompany implements Serializable {
 	/**
 	 * 
 	 */
-	public void displayTotal() {
-
+	public double displayTotal() {
+		return totalSales;
 	}
 
 	/**
@@ -132,7 +133,6 @@ public class WasherCompany implements Serializable {
 	public int purchaseWasher(String customerId, String brand, String model, int quantity) {
 
 		// FIX THIS!
-		// Test comment SMT
 
 		Washer washer = washerList.search(brand, model);
 		Customer customer = customerList.search(customerId);

@@ -63,10 +63,13 @@ public class CustomerList implements Serializable {
 		return true;
 	}
 
-	// might not need may use toString method instead
+	/**
+	 * Returns an iterator to all customers
+	 * 
+	 * @return iterator to the customer list
+	 */
 	public Iterator getCustomerList() {
-		// TODO Auto-generated method stub
-		return null;
+		return customers.iterator();
 	}
 
 }

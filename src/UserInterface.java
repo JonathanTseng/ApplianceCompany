@@ -94,18 +94,38 @@ public class UserInterface implements Serializable {
 	}
 
 	/**
-	 * Converts the string to a number
+	 * Converts the string to a number of type integer
 	 * 
 	 * @param prompt the string for prompting
 	 * @return the integer corresponding to the string
 	 * 
 	 */
-	public int getNumber(String prompt) {
+	public int getIntegerNumber(String prompt) {
 		do {
 			try {
 				String item = getToken(prompt);
 				Integer number = Integer.valueOf(item);
 				return number.intValue();
+			} catch (NumberFormatException nfe) {
+				System.out.println("Please input a number ");
+			}
+		} while (true);
+	}
+
+	/**
+	 * Converts the string to a number of type double
+	 * 
+	 * @param prompt the string for prompting
+	 * @return the double corresponding to the string
+	 */
+	public double getDoubleNumber(String prompt) {
+		do {
+			try {
+				String item = getToken(prompt);
+				Double number = Double.valueOf(item);
+				return number.doubleValue();
+				// Integer number = Integer.valueOf(item);
+				// return number.intValue();
 			} catch (NumberFormatException nfe) {
 				System.out.println("Please input a number ");
 			}
@@ -196,7 +216,7 @@ public class UserInterface implements Serializable {
 		do {
 			String brand = getToken("Enter brand");
 			String model = getToken("Enter model");
-			double price = getNumber("Enter price");
+			double price = getDoubleNumber("Enter price");
 			result = washerCompany.addWasher(brand, model, price);
 			if (result != null) {
 				System.out.println(result);
@@ -214,7 +234,7 @@ public class UserInterface implements Serializable {
 		do {
 			String brand = getToken("Enter washer brand");
 			String model = getToken("Enter washer model");
-			int quantity = getNumber("Enter quantity");
+			int quantity = getIntegerNumber("Enter quantity");
 			result = washerCompany.addInventory(brand, model, quantity);
 			switch (result) {
 			case WasherCompany.WASHER_NOT_FOUND:
@@ -252,7 +272,7 @@ public class UserInterface implements Serializable {
 		do {
 			String brand = getToken("Enter washer brand");
 			String model = getToken("Enter washer model");
-			int quantity = getNumber("Enter quantity");
+			int quantity = getIntegerNumber("Enter quantity");
 			result = washerCompany.purchaseWasher(customerId, brand, model, quantity);
 			if (result == 3 || result == 4) { // temporary fix look into further
 				System.out.println("Washer successfully purchased.");
@@ -271,8 +291,10 @@ public class UserInterface implements Serializable {
 			System.out.println("No customers to print");
 		} else {
 			while (result.hasNext()) {
-				CustomerList customerList = (CustomerList) result.next();
-				System.out.println(customerList.getCustomer());
+				Customer customer = (Customer) result.next();
+				System.out.println(customer.toString());
+				// CustomerList customerList = (CustomerList) result.next();
+				// System.out.println(customerList.getCustomer());
 			}
 		}
 	}
@@ -286,8 +308,10 @@ public class UserInterface implements Serializable {
 			System.out.println("No washer to print");
 		} else {
 			while (result.hasNext()) {
-				WasherList washerList = (WasherList) result.next();
-				System.out.println(washerList.getWasher());
+				// WasherList washerList = (WasherList) result.next();
+				Washer washer = (Washer) result.next();
+				System.out.println(washer.toString());
+				// System.out.println(washerList.getWasher());
 			}
 		}
 	}
@@ -296,7 +320,7 @@ public class UserInterface implements Serializable {
 	 * Add comment
 	 */
 	public void displayTotalSales() {
-		washerCompany.displayTotal();
+		System.out.println("Total Sales " + washerCompany.displayTotal());
 	}
 
 	/**

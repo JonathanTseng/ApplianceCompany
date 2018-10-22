@@ -56,9 +56,9 @@ public class WasherList implements Serializable {
 	}
 
 	/**
-	 * Returns an iterator to all books.
+	 * Returns an iterator to all washers.
 	 * 
-	 * @return iterator to the collection
+	 * @return iterator to the washer list
 	 */
 	public Iterator getWasherList() {
 		return washers.iterator();
