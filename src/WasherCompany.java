@@ -64,12 +64,28 @@ public class WasherCompany implements Serializable {
 	 * @return the result of the operation
 	 */
 	public int addInventory(String brand, String model, int quantity) {
+
+		// May need to fix depending on purchase method, but have yet to test
+
+		int quantityToAdd = quantity;
+
 		Washer washer = washerList.search(brand, model);
 		if (washer == null) {
 			return (WASHER_NOT_FOUND);
 		} else {
-			// Washer.addQuantity(quantity); need to look at why error is occuring
-			washer.addQuantity(quantity);
+			// washer.addQuantity(quantity); previous code that sort of works
+
+			while (quantityToAdd > 0) {
+				washer.addQuantity(1);
+				if (washer.hasBackOrder()) {
+					BackOrder backOrder = washer.getNextBackOrder();
+					purchaseWasher(backOrder.getCustomer().getId(), backOrder.getWasher().getBrand(),
+							backOrder.getWasher().getModel(), backOrder.getQuantity());
+				}
+
+				quantityToAdd--;
+			}
+
 			return (OPERATION_COMPLETED);
 		}
 		// need it to process any open backorders

@@ -161,7 +161,7 @@ public class UserInterface implements Serializable {
 	public int getCommand() {
 		do {
 			try {
-				int value = Integer.parseInt(getToken("Enter command:" + HELP + " for help"));
+				int value = Integer.parseInt(getToken("Enter command (" + HELP + " for help):"));
 				if (value >= EXIT && value <= HELP) {
 					return value;
 				}
@@ -180,7 +180,7 @@ public class UserInterface implements Serializable {
 		System.out.println(EXIT + " to Exit\n");
 		System.out.println(ADD_CUSTOMER + " to add a customer");
 		System.out.println(ADD_WASHER + " to add a washer");
-		System.out.println(ADD_INVENTORY + " to inventory for a washer");
+		System.out.println(ADD_INVENTORY + " to add washer inventory");
 		System.out.println(PURCHASE + " to process a purchase");
 		System.out.println(LIST_CUSTOMERS + " to get a list of all the customers");
 		System.out.println(LIST_WASHERS + " to get a list of all the washers");
@@ -317,10 +317,11 @@ public class UserInterface implements Serializable {
 	}
 
 	/**
-	 * Add comment
+	 * Method to be called for displaying the total sales amount.
+	 * 
 	 */
 	public void displayTotalSales() {
-		System.out.println("Total Sales " + washerCompany.displayTotal());
+		System.out.println("Total Sales $" + washerCompany.displayTotal());
 	}
 
 	/**
