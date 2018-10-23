@@ -153,6 +153,7 @@ public class WasherCompany implements Serializable {
 	 */
 	public int purchaseWasher(String customerId, String brand, String model, int quantity) {
 
+		int result;
 		// FIX THIS!
 
 		Washer washer = washerList.search(brand, model);
@@ -173,18 +174,22 @@ public class WasherCompany implements Serializable {
 			if (washer.getQuantity() > 0) {
 				washer.purchase();
 				totalSales += washer.getPrice();
+				result = OPERATION_COMPLETED;
 			} else {
 				BackOrder backOrder = new BackOrder(customer, washer);
 				washer.placeBackOrder(backOrder);
+				result = BACKORDER_PLACED;
 				// return (BACKORDER_PLACED); we can't have a return statement here because we
 				// dont want to exit the
 				// method
 			}
 
 			quantity--;
+			return result;
 
 		}
-		return OPERATION_COMPLETED;
+		// return OPERATION_COMPLETED;
+		return quantity;
 
 	}
 

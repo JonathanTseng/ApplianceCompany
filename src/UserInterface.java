@@ -283,8 +283,10 @@ public class UserInterface implements Serializable {
 			String model = getToken("Enter washer model");
 			int quantity = getIntegerNumber("Enter quantity");
 			result = washerCompany.purchaseWasher(customerId, brand, model, quantity);
-			if (result == 3 || result == 4) { // temporary fix look into further
+			if (result == 3) { // temporary fix look into further
 				System.out.println("Washer successfully purchased.");
+			} else if (result == 4) {
+				System.out.println("Backorder was placed");
 			} else {
 				System.out.println("Purchase could not be completed.");
 			}
