@@ -43,8 +43,10 @@ public class WasherCompany implements Serializable {
 	/**
 	 * Organizes the operations for adding a customer
 	 * 
-	 * @param name        customer name
-	 * @param phoneNumber customer phone number
+	 * @param name
+	 *            customer name
+	 * @param phoneNumber
+	 *            customer phone number
 	 * @return the Customer object created
 	 * 
 	 */
@@ -58,9 +60,12 @@ public class WasherCompany implements Serializable {
 
 	/**
 	 * 
-	 * @param brand    washer brand
-	 * @param model    washer model
-	 * @param quantity quantity of washers
+	 * @param brand
+	 *            washer brand
+	 * @param model
+	 *            washer model
+	 * @param quantity
+	 *            quantity of washers
 	 * @return the result of the operation
 	 */
 	public int addInventory(String brand, String model, int quantity) {
@@ -193,11 +198,12 @@ public class WasherCompany implements Serializable {
 	}
 
 	/**
-	 * This method will try and deserialize a saved file of Washer Company from a disk
-	 * @return 
+	 * This method will try and deserialize a saved file of Washer Company from a
+	 * disk
+	 * 
+	 * @return
 	 */
-	
-	
+
 	public static WasherCompany retrieve() {
 
 		try {

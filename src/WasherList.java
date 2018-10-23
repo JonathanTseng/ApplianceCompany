@@ -35,8 +35,10 @@ public class WasherList implements Serializable {
 	/**
 	 * Checks whether a washer with a given brand and model exists.
 	 * 
-	 * @param brand the brand of the washer
-	 * @param model the model of washer
+	 * @param brand
+	 *            the brand of the washer
+	 * @param model
+	 *            the model of washer
 	 * @return the Washer object in the list iff the washer exists
 	 * 
 	 */
@@ -61,13 +63,17 @@ public class WasherList implements Serializable {
 	 * @return iterator to the washer list
 	 */
 	public Iterator getWasherList() {
+		if (washers.isEmpty()) {
+			return null;
+		}
 		return washers.iterator();
 	}
 
 	/**
 	 * Inserts a washer into the collection
 	 * 
-	 * @param washer the washer to be inserted
+	 * @param washer
+	 *            the washer to be inserted
 	 * @return true if the washer could be inserted. Currently always true.
 	 */
 	public boolean insertWasher(Washer washer) {

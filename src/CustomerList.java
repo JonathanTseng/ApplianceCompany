@@ -35,7 +35,8 @@ public class CustomerList implements Serializable {
 	/**
 	 * Checks whether a customer with a given customer id exists.
 	 * 
-	 * @param customerId the id of the customer
+	 * @param customerId
+	 *            the id of the customer
 	 * @return the Customer object within the list iff the customer exists
 	 */
 	public Customer search(String customerId) {
@@ -69,6 +70,9 @@ public class CustomerList implements Serializable {
 	 * @return iterator to the customer list
 	 */
 	public Iterator getCustomerList() {
+		if (customers.isEmpty()) {
+			return null;
+		}
 		return customers.iterator();
 	}
 
