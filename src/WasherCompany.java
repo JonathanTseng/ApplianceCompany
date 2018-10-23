@@ -193,9 +193,11 @@ public class WasherCompany implements Serializable {
 	}
 
 	/**
-	 * 
-	 * @return
+	 * This method will try and deserialize a saved file of Washer Company from a disk
+	 * @return 
 	 */
+	
+	
 	public static WasherCompany retrieve() {
 
 		try {
@@ -215,8 +217,10 @@ public class WasherCompany implements Serializable {
 	}
 
 	/**
+	 * This method will try and save data to disk.
 	 * 
-	 * @return
+	 * @return true if file can be saved somewhere on disk.
+	 * @return false if it can't be saved to disk.
 	 */
 	public static boolean save() {
 
