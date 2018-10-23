@@ -15,8 +15,10 @@ public class Customer implements Serializable {
 	/**
 	 * Constructor for an individual customer.
 	 * 
-	 * @param name        name of the customer
-	 * @param phoneNumber phone number of the customer
+	 * @param name
+	 *            name of the customer
+	 * @param phoneNumber
+	 *            phone number of the customer
 	 */
 	public Customer(String name, String phoneNumber) {
 		this.name = name;
@@ -54,7 +56,8 @@ public class Customer implements Serializable {
 	/**
 	 * Setter for id
 	 * 
-	 * @param id customer's new id
+	 * @param id
+	 *            customer's new id
 	 */
 	public void setId(String id) {
 		this.id = id;
@@ -63,7 +66,8 @@ public class Customer implements Serializable {
 	/**
 	 * Setter for phone number
 	 * 
-	 * @param phoneNumber customer's new phone number
+	 * @param phoneNumber
+	 *            customer's new phone number
 	 */
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
@@ -72,7 +76,8 @@ public class Customer implements Serializable {
 	/**
 	 * Setter for name
 	 * 
-	 * @param name customer's new name
+	 * @param name
+	 *            customer's new name
 	 */
 	public void setName(String name) {
 		this.name = name;
@@ -81,7 +86,8 @@ public class Customer implements Serializable {
 	/**
 	 * Checks whether the customer is equal to the one with the given id
 	 * 
-	 * @param id id of the customer who should be compared
+	 * @param id
+	 *            id of the customer who should be compared
 	 * @return true iff the customer ids match
 	 */
 	public boolean equals(String id) {
@@ -93,12 +99,12 @@ public class Customer implements Serializable {
 	 */
 	@Override
 	public String toString() {
-		return "Customer name " + name + " phone number " + phoneNumber + " id " + id;
+		return "Customer name: " + name + "\tPhone number: " + phoneNumber + "\tCustomer ID: " + id;
 	}
 
-//	public boolean purchase(Washer washer) {
-//		// TODO Auto-generated method stub
-//		return false;
-//	}
+	// public boolean purchase(Washer washer) {
+	// // TODO Auto-generated method stub
+	// return false;
+	// }
 
 }

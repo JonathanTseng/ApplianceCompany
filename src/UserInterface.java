@@ -59,7 +59,8 @@ public class UserInterface implements Serializable {
 	/**
 	 * Gets a token after prompting
 	 * 
-	 * @param prompt - whatever the user wants as prompt
+	 * @param prompt
+	 *            - whatever the user wants as prompt
 	 * @return - the token from the keyboard
 	 * 
 	 */
@@ -81,7 +82,8 @@ public class UserInterface implements Serializable {
 	/**
 	 * Queries for a yes or no and returns true for yes and false for no
 	 * 
-	 * @param prompt The string to be prepended to the yes/no prompt
+	 * @param prompt
+	 *            The string to be prepended to the yes/no prompt
 	 * @return true for yes and false for no
 	 * 
 	 */
@@ -96,7 +98,8 @@ public class UserInterface implements Serializable {
 	/**
 	 * Converts the string to a number of type integer
 	 * 
-	 * @param prompt the string for prompting
+	 * @param prompt
+	 *            the string for prompting
 	 * @return the integer corresponding to the string
 	 * 
 	 */
@@ -115,7 +118,8 @@ public class UserInterface implements Serializable {
 	/**
 	 * Converts the string to a number of type double
 	 * 
-	 * @param prompt the string for prompting
+	 * @param prompt
+	 *            the string for prompting
 	 * @return the double corresponding to the string
 	 */
 	public double getDoubleNumber(String prompt) {
@@ -135,7 +139,8 @@ public class UserInterface implements Serializable {
 	/**
 	 * Prompts for a date and gets a date object
 	 * 
-	 * @param prompt the prompt
+	 * @param prompt
+	 *            the prompt
 	 * @return the data as a Calendar object
 	 */
 	public Calendar getDate(String prompt) {
@@ -176,8 +181,8 @@ public class UserInterface implements Serializable {
 	 * 
 	 */
 	public void help() {
-		System.out.println("Enter a number between 0 and 9 as explained below:");
-		System.out.println(EXIT + " to Exit\n");
+		System.out.println("Enter a number between 0 and 9 as explained below:\n");
+		System.out.println(EXIT + " to Exit");
 		System.out.println(ADD_CUSTOMER + " to add a customer");
 		System.out.println(ADD_WASHER + " to add a washer");
 		System.out.println(ADD_INVENTORY + " to add washer inventory");
@@ -186,7 +191,7 @@ public class UserInterface implements Serializable {
 		System.out.println(LIST_WASHERS + " to get a list of all the washers");
 		System.out.println(DISPLAY_TOTAL + " to display the total of all sales");
 		System.out.println(SAVE + " to save data");
-		System.out.println(HELP + " for help");
+		System.out.println(HELP + " for help\n");
 	}
 
 	/**
@@ -203,7 +208,9 @@ public class UserInterface implements Serializable {
 		if (result == null) {
 			System.out.println("Could not add customer");
 		}
+		System.out.println("Customer added!");
 		System.out.println(result);
+		System.out.println();
 	}
 
 	/**
@@ -219,7 +226,9 @@ public class UserInterface implements Serializable {
 			double price = getDoubleNumber("Enter price");
 			result = washerCompany.addWasher(brand, model, price);
 			if (result != null) {
+				System.out.println("Washer was added!");
 				System.out.println(result);
+				System.out.println();
 			} else {
 				System.out.println("Washer could not be added");
 			}
@@ -238,16 +247,16 @@ public class UserInterface implements Serializable {
 			result = washerCompany.addInventory(brand, model, quantity);
 			switch (result) {
 			case WasherCompany.WASHER_NOT_FOUND:
-				System.out.println("No such washer in inventory");
+				System.out.println("No such washer in inventory\n");
 				break;
 			case WasherCompany.OPERATION_FAILED:
-				System.out.println("Washer quantity could not be updated.");
+				System.out.println("Washer quantity could not be updated.\n");
 				break;
 			case WasherCompany.OPERATION_COMPLETED:
-				System.out.println("Washer quantity was updated.");
+				System.out.println("Washer quantity was updated.\n");
 				break;
 			default:
-				System.out.println("An error has occurred.");
+				System.out.println("An error has occurred\n");
 			}
 			if (!yesOrNo("Add more quantity for other washers?")) {
 				break;
@@ -290,12 +299,14 @@ public class UserInterface implements Serializable {
 		if (result == null) {
 			System.out.println("No customers to print");
 		} else {
+			System.out.println("Here is the list of customers: ");
 			while (result.hasNext()) {
 				Customer customer = (Customer) result.next();
 				System.out.println(customer.toString());
 				// CustomerList customerList = (CustomerList) result.next();
 				// System.out.println(customerList.getCustomer());
 			}
+			System.out.println();
 		}
 	}
 
@@ -307,12 +318,14 @@ public class UserInterface implements Serializable {
 		if (result == null) {
 			System.out.println("No washer to print");
 		} else {
+			System.out.println("Here is the list of washers: ");
 			while (result.hasNext()) {
 				// WasherList washerList = (WasherList) result.next();
 				Washer washer = (Washer) result.next();
 				System.out.println(washer.toString());
 				// System.out.println(washerList.getWasher());
 			}
+			System.out.println();
 		}
 	}
 
@@ -403,7 +416,8 @@ public class UserInterface implements Serializable {
 	/**
 	 * The method to start the application. Simply calls process().
 	 * 
-	 * @param args not used
+	 * @param args
+	 *            not used
 	 */
 	public static void main(String[] args) {
 		UserInterface.instance().process();

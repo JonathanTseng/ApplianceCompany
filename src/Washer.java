@@ -18,9 +18,12 @@ public class Washer implements Serializable {
 	/**
 	 * Creates a washer with the given brand, model, and price.
 	 * 
-	 * @param brand washer brand
-	 * @param model washer model
-	 * @param price washer price
+	 * @param brand
+	 *            washer brand
+	 * @param model
+	 *            washer model
+	 * @param price
+	 *            washer price
 	 */
 	public Washer(String brand, String model, double price) {
 		this.brand = brand;
@@ -41,7 +44,8 @@ public class Washer implements Serializable {
 	/**
 	 * Adds the given additional quantity to the quantity of washers
 	 * 
-	 * @param additionalQuantity the quantity of washers being added
+	 * @param additionalQuantity
+	 *            the quantity of washers being added
 	 */
 	public void addQuantity(int additionalQuantity) {
 		quantity += additionalQuantity;
@@ -50,7 +54,8 @@ public class Washer implements Serializable {
 	/**
 	 * Adds on more back order to the washer
 	 * 
-	 * @param backOrder the new back order on the washer
+	 * @param backOrder
+	 *            the new back order on the washer
 	 */
 	public void placeBackOrder(BackOrder backOrder) {
 		backOrderList.add(backOrder);
@@ -120,7 +125,8 @@ public class Washer implements Serializable {
 	/**
 	 * Setter for price
 	 * 
-	 * @param price washer's new price
+	 * @param price
+	 *            washer's new price
 	 */
 	public void setPrice(double price) {
 		this.price = price;
@@ -129,7 +135,8 @@ public class Washer implements Serializable {
 	/**
 	 * Setter for quantity
 	 * 
-	 * @param quantity washer's new quantity
+	 * @param quantity
+	 *            washer's new quantity
 	 */
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
@@ -138,7 +145,8 @@ public class Washer implements Serializable {
 	/**
 	 * Setter for brand
 	 * 
-	 * @param brand washer's new brand
+	 * @param brand
+	 *            washer's new brand
 	 */
 	public void setBrand(String brand) {
 		this.brand = brand;
@@ -147,7 +155,8 @@ public class Washer implements Serializable {
 	/**
 	 * Setter for model
 	 * 
-	 * @param model washer's new model
+	 * @param model
+	 *            washer's new model
 	 */
 	public void setModel(String model) {
 		this.model = model;
@@ -158,7 +167,7 @@ public class Washer implements Serializable {
 	 * 
 	 */
 	public String toString() {
-		return "washer brand " + brand + " model " + model + " price " + price + " quantity " + quantity;
+		return "Washer brand: " + brand + "\tWasher model: " + model + "\tPrice " + price + "\tQuantity " + quantity;
 	}
 
 }
