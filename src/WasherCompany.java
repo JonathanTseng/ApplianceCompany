@@ -80,7 +80,7 @@ public class WasherCompany implements Serializable {
 				if (washer.hasBackOrder()) {
 					BackOrder backOrder = washer.getNextBackOrder();
 					purchaseWasher(backOrder.getCustomer().getId(), backOrder.getWasher().getBrand(),
-							backOrder.getWasher().getModel(), backOrder.getQuantity());
+							backOrder.getWasher().getModel(), 1);
 				}
 
 				quantityToAdd--;
@@ -153,7 +153,7 @@ public class WasherCompany implements Serializable {
 		Washer washer = washerList.search(brand, model);
 		Customer customer = customerList.search(customerId);
 		// WasherList washerList = new WasherList(); need to instantiate using instance
-		// method I think
+		// method I think or may not be neccessary
 
 		if (washer == null) {
 			return (WASHER_NOT_FOUND);
@@ -168,12 +168,12 @@ public class WasherCompany implements Serializable {
 			if (washer.getQuantity() > 0) {
 				washer.purchase();
 				totalSales += washer.getPrice();
-
 			} else {
 				BackOrder backOrder = new BackOrder(customer, washer);
 				washer.placeBackOrder(backOrder);
-				return (BACKORDER_PLACED); // we can't have a return statement here because we dont want to exit the
-											// method
+				// return (BACKORDER_PLACED); we can't have a return statement here because we
+				// dont want to exit the
+				// method
 			}
 
 			quantity--;
