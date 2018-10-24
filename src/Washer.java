@@ -6,7 +6,7 @@ import java.util.Queue;
 /**
  * Object class for an individual washer.
  * 
- * @author Stephen Thomas
+ * @author Stephen Thomas, Jonathan Tseng, Jose Morales, and Xeng Vang
  *
  */
 public class Washer implements Serializable {
@@ -40,7 +40,6 @@ public class Washer implements Serializable {
 	 * 
 	 */
 	public void purchase() {
-		// decrement quantity,update total, holds
 		quantity--;
 	}
 

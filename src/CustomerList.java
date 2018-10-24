@@ -5,12 +5,10 @@ import java.util.Iterator;
 /**
  * The collection class for Customer objects
  * 
- * @author Stephen Thomas
+ * @author Stephen Thomas, Jose Morales, Jonathan Tseng, and Xeng Vang
  *
  */
 public class CustomerList implements Serializable {
-	// do I need the serialVersionUID?
-	// Adding the serialVersionUID since he has it in his example
 	private static final long serialVersionUID = 1L;
 	private ArrayList<Customer> customers = new ArrayList<Customer>();
 	private static CustomerList customerList;
@@ -44,23 +42,19 @@ public class CustomerList implements Serializable {
 	public Customer search(String customerId) {
 		for (Iterator iterator = customers.iterator(); iterator.hasNext();) {
 			Customer customer = (Customer) iterator.next();
-			if (customer.getId().equals(customerId)) { // may need to change equals method in Customer
+			if (customer.getId().equals(customerId)) {
 				return customer;
 			}
 		}
 		return null;
 	}
 
-	// might not need may use toString method instead
-	public char[] getCustomer() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public String toString() {
-		return customers.toString(); // test to ensure it is the proper toString
-	}
-
+	/**
+	 * Insert the customer to the list.
+	 * 
+	 * @param customer
+	 * @return true if successful
+	 */
 	public boolean insertCustomer(Customer customer) {
 		customers.add(customer);
 		return true;

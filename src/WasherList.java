@@ -5,7 +5,7 @@ import java.util.Iterator;
 /**
  * The collection class for the Washer objects.
  * 
- * @author Stephen Thomas
+ * @author Stephen Thomas, Jose Morales, Jonathan Tseng, and Xeng Vang
  *
  */
 public class WasherList implements Serializable {

@@ -9,7 +9,7 @@ import java.util.StringTokenizer;
  * commands are encoded as integers using a number of static final variables. A
  * number of utility methods exist to make it easier to parse the input.
  * 
- * @author Jose
+ * @author Jose Morales, Jonathan Tseng, Stephen Thomas and Xeng Vang
  *
  */
 public class UserInterface {
@@ -262,7 +262,7 @@ public class UserInterface {
 			if (result == WasherCompany.OPERATION_COMPLETED) {
 				System.out.println("Washer was successfully purchased.\n");
 			} else if (result == WasherCompany.BACKORDER_PLACED) {
-				System.out.println("Not enough washers to complete purchase, a back order was placed.\n");
+				System.out.println("A back order was placed.\n");
 			} else if (result == WasherCompany.WASHER_NOT_FOUND) {
 				System.out.println("Washer not found!");
 				System.out.println("Purchase could not be completed.\n");

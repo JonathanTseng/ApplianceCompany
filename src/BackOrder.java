@@ -1,21 +1,18 @@
-import java.util.Calendar;
-import java.util.GregorianCalendar;
+import java.io.Serializable;
 
 /**
  * Represents a back order on a washer from a customer
  * 
- * @author Jonathan
+ * @author Jonathan Tseng, Stephen Thomas, Jose Morales and Xeng Vang
  *
  */
-public class BackOrder {
-
+public class BackOrder implements Serializable {
 	private Washer washer;
 	private Customer customer;
-	private Calendar date;
 	private int quantity;
 
 	/**
-	 * The customer and washer are stored.
+	 * The customer, washer, and back order quantity are stored.
 	 * 
 	 * @param customer
 	 *            name of customer
@@ -31,7 +28,7 @@ public class BackOrder {
 	}
 
 	/**
-	 * **** Jonathan, I'm not sure we need this. *****
+	 * The customer and washer are stored.
 	 *
 	 * @param customer
 	 *            name of customer
@@ -41,27 +38,6 @@ public class BackOrder {
 	public BackOrder(Customer customer, Washer washer) {
 		this.customer = customer;
 		this.washer = washer;
-	}
-
-	/**
-	 * *** Do we need this????? ********
-	 * 
-	 * The member and book are stored. The date is computed by adding the duration
-	 * days to the current date.
-	 * 
-	 * @param member
-	 *            who places the hold
-	 * @param book
-	 *            the book on which hold is placed
-	 * @param duration
-	 *            for how long the hold is valid
-	 * @return
-	 */
-	public void backOrder(Customer customer, Washer washer, int duration) {
-		this.washer = washer;
-		this.customer = customer;
-		date = new GregorianCalendar();
-		date.add(Calendar.DATE, duration);
 	}
 
 	/**
@@ -80,25 +56,6 @@ public class BackOrder {
 	 */
 	public Washer getWasher() {
 		return washer;
-	}
-
-	// Get rid of this method
-	/**
-	 * Getter for date
-	 * 
-	 * @return date until which the hold is valid
-	 */
-	public Calendar getDate() {
-		return date;
-	}
-
-	/**
-	 * Checks whether the hold has become invalid because the last date has passed
-	 * 
-	 * @return true iff the hold is valid
-	 */
-	public boolean isValid() {
-		return (System.currentTimeMillis() < date.getTimeInMillis());
 	}
 
 	/**

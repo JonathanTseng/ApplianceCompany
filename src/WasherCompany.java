@@ -4,14 +4,13 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Iterator;
 
 /**
  * This class implements Serializable. It contains the methods that are used to
  * organize business processes in the WasherCompany project.
  * 
- * @author Jose
+ * @author Jose Morales, Jonathan Tseng, Stephen Thomas, and Xeng Vang
  *
  */
 public class WasherCompany implements Serializable {
@@ -26,7 +25,6 @@ public class WasherCompany implements Serializable {
 	private WasherList washerList;
 	private static WasherCompany washerCompany;
 	private double totalSales = 0;
-	private ArrayList<Washer> washer = new ArrayList<Washer>();
 
 	/**
 	 * Private for the singleton pattern, it creates the customer list and the
@@ -183,12 +181,7 @@ public class WasherCompany implements Serializable {
 	 * @return a code that represents the outcome of the operation
 	 */
 	public int purchaseWasher(String customerId, String brand, String model, int quantity) {
-
-		// Have to go back and handle case where some washers were purchased
-		// successfully but a back order was also placed.
-
 		int result = OPERATION_FAILED;
-
 		Washer washer = washerList.search(brand, model);
 		Customer customer = customerList.search(customerId);
 

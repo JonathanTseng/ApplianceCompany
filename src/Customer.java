@@ -3,7 +3,7 @@ import java.io.Serializable;
 /**
  * Object class for an individual customer of the Washer Company.
  * 
- * @author Stephen Thomas
+ * @author Stephen Thomas, Jonathan Tseng, Jose Morales and Xeng Vang
  *
  */
 public class Customer implements Serializable {
