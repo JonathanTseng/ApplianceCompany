@@ -9,6 +9,7 @@ import java.util.Iterator;
  *
  */
 public class WasherList implements Serializable {
+	private static final long serialVersionUID = 1L;
 	private ArrayList<Washer> washers = new ArrayList<Washer>();
 	private static WasherList washerList;
 
@@ -52,10 +53,10 @@ public class WasherList implements Serializable {
 		return null;
 	}
 
-	public char[] getWasher() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	// public char[] getWasher() {
+	// TODO Auto-generated method stub
+	// return null;
+	// }
 
 	/**
 	 * Returns an iterator to all washers.

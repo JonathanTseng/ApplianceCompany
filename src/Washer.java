@@ -1,4 +1,5 @@
 import java.io.Serializable;
+import java.text.NumberFormat;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -9,6 +10,8 @@ import java.util.Queue;
  *
  */
 public class Washer implements Serializable {
+	private static final long serialVersionUID = 1L;
+	private NumberFormat moneyFormat = NumberFormat.getCurrencyInstance();
 	private double price;
 	private int quantity = 0;
 	private String brand;
@@ -167,7 +170,8 @@ public class Washer implements Serializable {
 	 * 
 	 */
 	public String toString() {
-		return "Washer brand: " + brand + "\tWasher model: " + model + "\tPrice " + price + "\tQuantity " + quantity;
+		return "Washer brand: " + brand + "\tWasher model: " + model + "\tPrice: " + moneyFormat.format(price)
+				+ "\tQuantity " + quantity;
 	}
 
 }

@@ -1,22 +1,19 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.Serializable;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.Iterator;
 import java.util.StringTokenizer;
 
 /**
- * 
  * This class implements the user interface for the WasherCompany project. The
  * commands are encoded as integers using a number of static final variables. A
  * number of utility methods exist to make it easier to parse the input.
+ * 
+ * @author Jose
  *
  */
-public class UserInterface implements Serializable {
+public class UserInterface {
+
 	private static UserInterface userInterface;
 	private BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 	private static WasherCompany washerCompany;
@@ -128,31 +125,8 @@ public class UserInterface implements Serializable {
 				String item = getToken(prompt);
 				Double number = Double.valueOf(item);
 				return number.doubleValue();
-				// Integer number = Integer.valueOf(item);
-				// return number.intValue();
 			} catch (NumberFormatException nfe) {
 				System.out.println("Please input a number ");
-			}
-		} while (true);
-	}
-
-	/**
-	 * Prompts for a date and gets a date object
-	 * 
-	 * @param prompt
-	 *            the prompt
-	 * @return the data as a Calendar object
-	 */
-	public Calendar getDate(String prompt) {
-		do {
-			try {
-				Calendar date = new GregorianCalendar();
-				String item = getToken(prompt);
-				DateFormat dateFormat = SimpleDateFormat.getDateInstance(DateFormat.SHORT);
-				date.setTime(dateFormat.parse(item));
-				return date;
-			} catch (Exception fe) {
-				System.out.println("Please input a date as mm/dd/yy");
 			}
 		} while (true);
 	}
@@ -206,11 +180,10 @@ public class UserInterface implements Serializable {
 		Customer result;
 		result = washerCompany.addCustomer(name, phone);
 		if (result == null) {
-			System.out.println("Could not add customer");
+			System.out.println("Could not add customer.\n");
 		}
 		System.out.println("Customer added!");
-		System.out.println(result);
-		System.out.println();
+		System.out.println(result + "\n");
 	}
 
 	/**
@@ -227,16 +200,18 @@ public class UserInterface implements Serializable {
 			result = washerCompany.addWasher(brand, model, price);
 			if (result != null) {
 				System.out.println("Washer was added!");
-				System.out.println(result);
-				System.out.println();
+				System.out.println(result + "\n");
 			} else {
-				System.out.println("Washer could not be added");
+				System.out.println("Washer could not be added.\n");
 			}
 		} while (yesOrNo("Add more washers?"));
 	}
 
 	/**
-	 * Add comment
+	 * Method to be called for adding inventory of a washer. Prompts the user for
+	 * the appropriate washer information and uses the appropriate WasherCompany
+	 * method for adding inventory.
+	 * 
 	 */
 	public void addInventory() {
 		int result;
@@ -253,7 +228,8 @@ public class UserInterface implements Serializable {
 				System.out.println("Washer quantity could not be updated.\n");
 				break;
 			case WasherCompany.OPERATION_COMPLETED:
-				System.out.println("Washer quantity was updated.\n");
+				System.out.println("Washer quantity was updated.");
+				System.out.println("Any back orders on this washer were processed.\n");
 				break;
 			default:
 				System.out.println("An error has occurred\n");
@@ -271,11 +247,11 @@ public class UserInterface implements Serializable {
 	 * 
 	 */
 	public void purchase() {
-		// fix this!!
+
 		int result;
 		String customerId = getToken("Enter customer id");
 		if (washerCompany.searchCustomer(customerId) == null) {
-			System.out.println("No such customer");
+			System.out.println("No such customer\n");
 			return;
 		}
 		do {
@@ -283,49 +259,50 @@ public class UserInterface implements Serializable {
 			String model = getToken("Enter washer model");
 			int quantity = getIntegerNumber("Enter quantity");
 			result = washerCompany.purchaseWasher(customerId, brand, model, quantity);
-			if (result == 3) { // temporary fix look into further
-				System.out.println("Washer successfully purchased.");
-			} else if (result == 4) {
-				System.out.println("Backorder was placed");
+			if (result == WasherCompany.OPERATION_COMPLETED) {
+				System.out.println("Washer was successfully purchased.\n");
+			} else if (result == WasherCompany.BACKORDER_PLACED) {
+				System.out.println("Not enough washers to complete purchase, a back order was placed.\n");
+			} else if (result == WasherCompany.WASHER_NOT_FOUND) {
+				System.out.println("Washer not found!");
+				System.out.println("Purchase could not be completed.\n");
 			} else {
-				System.out.println("Purchase could not be completed.");
+				System.out.println("Purchase could not be completed.\n");
 			}
 		} while (yesOrNo("Buy more washers?"));
 	}
 
 	/**
-	 * Add comment
+	 * Method to be called to display a list of all the customers.
+	 * 
 	 */
 	public void displayCustomerList() {
 		Iterator result = washerCompany.listCustomers();
 		if (result == null) {
-			System.out.println("No customers to print");
+			System.out.println("No customers to print.\n");
 		} else {
 			System.out.println("Here is the list of customers: ");
 			while (result.hasNext()) {
 				Customer customer = (Customer) result.next();
 				System.out.println(customer.toString());
-				// CustomerList customerList = (CustomerList) result.next();
-				// System.out.println(customerList.getCustomer());
 			}
 			System.out.println();
 		}
 	}
 
 	/**
-	 * Add comment
+	 * Method to be called to display a list of all the washers.
+	 * 
 	 */
 	public void displayWasherList() {
 		Iterator result = washerCompany.listWashers();
 		if (result == null) {
-			System.out.println("No washer to print");
+			System.out.println("No washers to print.\n");
 		} else {
 			System.out.println("Here is the list of washers: ");
 			while (result.hasNext()) {
-				// WasherList washerList = (WasherList) result.next();
 				Washer washer = (Washer) result.next();
 				System.out.println(washer.toString());
-				// System.out.println(washerList.getWasher());
 			}
 			System.out.println();
 		}

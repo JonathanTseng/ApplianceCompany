@@ -7,6 +7,13 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+/**
+ * This class implements Serializable. It contains the methods that are used to
+ * organize business processes in the WasherCompany project.
+ * 
+ * @author Jose
+ *
+ */
 public class WasherCompany implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -21,6 +28,10 @@ public class WasherCompany implements Serializable {
 	private double totalSales = 0;
 	private ArrayList<Washer> washer = new ArrayList<Washer>();
 
+	/**
+	 * Private for the singleton pattern, it creates the customer list and the
+	 * washer list collection objects.
+	 */
 	private WasherCompany() {
 		customerList = CustomerList.instance();
 		washerList = WasherList.instance();
@@ -44,7 +55,7 @@ public class WasherCompany implements Serializable {
 	 * Organizes the operations for adding a customer
 	 * 
 	 * @param name
-	 *            customer name
+	 *            name of customer
 	 * @param phoneNumber
 	 *            customer phone number
 	 * @return the Customer object created
@@ -59,6 +70,7 @@ public class WasherCompany implements Serializable {
 	}
 
 	/**
+	 * Organizes the operations for adding inventory.
 	 * 
 	 * @param brand
 	 *            washer brand
@@ -70,15 +82,13 @@ public class WasherCompany implements Serializable {
 	 */
 	public int addInventory(String brand, String model, int quantity) {
 
-		// May need to fix depending on purchase method, but have yet to test
-
+		int result = OPERATION_FAILED;
 		int quantityToAdd = quantity;
 
 		Washer washer = washerList.search(brand, model);
 		if (washer == null) {
-			return (WASHER_NOT_FOUND);
+			result = WASHER_NOT_FOUND;
 		} else {
-			// washer.addQuantity(quantity); previous code that sort of works
 
 			while (quantityToAdd > 0) {
 				washer.addQuantity(1);
@@ -91,16 +101,28 @@ public class WasherCompany implements Serializable {
 				quantityToAdd--;
 			}
 
-			return (OPERATION_COMPLETED);
+			BackOrder backOrder = washer.getNextBackOrder();
+			if (backOrder == null) {
+				result = OPERATION_COMPLETED;
+			} else {
+				purchaseWasher(backOrder.getCustomer().getName(), backOrder.getWasher().getBrand(),
+						backOrder.getWasher().getModel(), backOrder.getWasher().getQuantity());
+				result = OPERATION_COMPLETED;
+			}
+
 		}
-		// need it to process any open backorders
+		return result;
 	}
 
 	/**
+	 * Organizes the operations to add a new washer
 	 * 
 	 * @param brand
+	 *            washer brand
 	 * @param model
+	 *            washer model
 	 * @param price
+	 *            washer price
 	 * @return
 	 */
 	public Washer addWasher(String brand, String model, double price) {
@@ -112,15 +134,18 @@ public class WasherCompany implements Serializable {
 	}
 
 	/**
+	 * Organizes the operations for displaying the total sales
 	 * 
+	 * @return the amount of total sales
 	 */
 	public double displayTotal() {
 		return totalSales;
 	}
 
 	/**
+	 * Organizes the operations for displaying all the customers.
 	 * 
-	 * @return
+	 * @return iterator to the collection
 	 */
 	public Iterator listCustomers() {
 		if (customerList.getCustomerList() == null) {
@@ -131,8 +156,9 @@ public class WasherCompany implements Serializable {
 	}
 
 	/**
+	 * Organizes the operations for displaying the washers
 	 * 
-	 * @return
+	 * @return iterator to the collection
 	 */
 	public Iterator listWashers() {
 		if (washerList.getWasherList() == null) {
@@ -144,22 +170,27 @@ public class WasherCompany implements Serializable {
 	}
 
 	/**
+	 * Organizes the purchase of a washer
 	 * 
 	 * @param customerId
+	 *            id of customer
 	 * @param brand
+	 *            washer brand
 	 * @param model
+	 *            washer model
 	 * @param quantity
-	 * @return
+	 *            quantity to be purchased
+	 * @return a code that represents the outcome of the operation
 	 */
 	public int purchaseWasher(String customerId, String brand, String model, int quantity) {
 
-		int result;
-		// FIX THIS!
+		// Have to go back and handle case where some washers were purchased
+		// successfully but a back order was also placed.
+
+		int result = OPERATION_FAILED;
 
 		Washer washer = washerList.search(brand, model);
 		Customer customer = customerList.search(customerId);
-		// WasherList washerList = new WasherList(); need to instantiate using instance
-		// method I think or may not be neccessary
 
 		if (washer == null) {
 			return (WASHER_NOT_FOUND);
@@ -179,24 +210,21 @@ public class WasherCompany implements Serializable {
 				BackOrder backOrder = new BackOrder(customer, washer);
 				washer.placeBackOrder(backOrder);
 				result = BACKORDER_PLACED;
-				// return (BACKORDER_PLACED); we can't have a return statement here because we
-				// dont want to exit the
-				// method
 			}
 
 			quantity--;
-			return result;
 
 		}
-		// return OPERATION_COMPLETED;
-		return quantity;
+		return result;
 
 	}
 
 	/**
+	 * Searches for a given customer
 	 * 
 	 * @param customerId
-	 * @return
+	 *            id of customer
+	 * @return true if customer is a part of the customer list collection
 	 */
 	public Customer searchCustomer(String customerId) {
 		return customerList.search(customerId);
@@ -206,7 +234,7 @@ public class WasherCompany implements Serializable {
 	 * This method will try and deserialize a saved file of Washer Company from a
 	 * disk
 	 * 
-	 * @return
+	 * @return a WasherCompany object
 	 */
 
 	public static WasherCompany retrieve() {
@@ -228,10 +256,10 @@ public class WasherCompany implements Serializable {
 	}
 
 	/**
-	 * This method will try and save data to disk.
+	 * Will serialize the WasherCompany object.
 	 * 
-	 * @return true if file can be saved somewhere on disk.
-	 * @return false if it can't be saved to disk.
+	 * @return true if file could be saved somewhere on disk
+	 * @return false if it can't be saved to disk
 	 */
 	public static boolean save() {
 
@@ -249,6 +277,7 @@ public class WasherCompany implements Serializable {
 	}
 
 	/**
+	 * String of the WasherCompany
 	 * 
 	 */
 	@Override

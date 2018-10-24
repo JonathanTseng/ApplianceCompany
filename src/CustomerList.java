@@ -10,6 +10,8 @@ import java.util.Iterator;
  */
 public class CustomerList implements Serializable {
 	// do I need the serialVersionUID?
+	// Adding the serialVersionUID since he has it in his example
+	private static final long serialVersionUID = 1L;
 	private ArrayList<Customer> customers = new ArrayList<Customer>();
 	private static CustomerList customerList;
 

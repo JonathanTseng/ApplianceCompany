@@ -7,6 +7,7 @@ import java.io.Serializable;
  *
  */
 public class Customer implements Serializable {
+	private static final long serialVersionUID = 1L;
 	private static final String MEMBER_STRING = "C";
 	private String id;
 	private String phoneNumber;
@@ -101,10 +102,5 @@ public class Customer implements Serializable {
 	public String toString() {
 		return "Customer name: " + name + "\tPhone number: " + phoneNumber + "\tCustomer ID: " + id;
 	}
-
-	// public boolean purchase(Washer washer) {
-	// // TODO Auto-generated method stub
-	// return false;
-	// }
 
 }
