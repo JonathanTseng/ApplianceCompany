@@ -53,11 +53,6 @@ public class WasherList implements Serializable {
 		return null;
 	}
 
-	// public char[] getWasher() {
-	// TODO Auto-generated method stub
-	// return null;
-	// }
-
 	/**
 	 * Returns an iterator to all washers.
 	 * 
