@@ -1,14 +1,12 @@
 import java.io.Serializable;
 
-//test smt
-
 /**
  * Object class for an individual customer of the Washer Company.
  * 
  * @author Stephen Thomas, Jonathan Tseng, Jose Morales and Xeng Vang
  *
  */
-public class Customer implements Serializable {
+public class Customer implements Serializable, Matchable<String> {
 	private static final long serialVersionUID = 1L;
 	private static final String MEMBER_STRING = "C";
 	private String id;
@@ -81,14 +79,27 @@ public class Customer implements Serializable {
 		this.name = name;
 	}
 
-	/**
-	 * Checks whether the customer is equal to the one with the given id
+	/*
+	 * Old equals method /** Checks whether the customer is equal to the one with
+	 * the given id
 	 * 
 	 * @param id id of the customer who should be compared
+	 * 
 	 * @return true iff the customer ids match
+	 *
+	 * public boolean equals(String id) { return this.id.equals(id); }
 	 */
-	public boolean equals(String id) {
-		return this.id.equals(id);
+
+	/**
+	 * Checks whether the customer is equal to another Customer
+	 * 
+	 * @param object id of the member who should be compared
+	 * @return true iff the member ids match
+	 */
+	@Override
+	public boolean equals(Object object) {
+		Customer customer = (Customer) object;
+		return this.matches(customer.getId(), "");
 	}
 
 	/**
@@ -97,6 +108,16 @@ public class Customer implements Serializable {
 	@Override
 	public String toString() {
 		return "Customer name: " + name + "\tPhone number: " + phoneNumber + "\tCustomer ID: " + id;
+	}
+
+	/**
+	 * To implement the Matchable interface
+	 * 
+	 * @param key the member id
+	 */
+	@Override
+	public boolean matches(String id, String blankKey) {
+		return this.id.equals(id);
 	}
 
 }
