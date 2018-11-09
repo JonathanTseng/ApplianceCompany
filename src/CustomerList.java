@@ -30,6 +30,8 @@ public class CustomerList extends ItemList<Customer, String> {
 		}
 	}
 
+	// not sure if this method is required considering the super class already has
+	// search method
 	/**
 	 * Checks whether a customer with a given customer id exists.
 	 * 

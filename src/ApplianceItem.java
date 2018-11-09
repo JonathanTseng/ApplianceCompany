@@ -167,17 +167,12 @@ public class ApplianceItem implements Matchable<String>, Serializable {
 	}
 
 	/**
-	 * Returns true if and only if the supplied id is the same as the id of the
-	 * item.
+	 * Returns true if and only if the supplied model and brand are the same as the
+	 * id of the model and brand of the item.
 	 */
 	@Override
 	public boolean matches(String model, String brand) {
 		return (this.model.equals(model) && this.brand.equals(brand));
 	}
-
-	/*
-	 * @Override public boolean matches(String key) { // TODO Auto-generated method
-	 * stub return false; }
-	 */
 
 }
