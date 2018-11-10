@@ -52,5 +52,14 @@ public class Furnace extends ApplianceItem implements Serializable, Matchable<St
 	}
 
 	// I think I need to implement something for the visitor pattern
-
+	/**
+	 * Implements the accept method of the Visitor pattern.
+	 * 
+	 * @param visitor
+	 *            the Visitor that will process the Periodical object
+	 */
+	@Override
+	public void accept(ApplianceItemVisitor visitor) {
+		visitor.visit(this);
+	}
 }
