@@ -206,4 +206,8 @@ public class ApplianceItem implements Matchable<String>, Serializable {
 		return (this.model.equals(model) && this.brand.equals(brand));
 	}
 
+	public void accept(ApplianceItemVisitor visitor) {
+		visitor.visit(this);		
+	}
+
 }
