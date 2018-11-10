@@ -162,8 +162,8 @@ public class ApplianceItem implements Matchable<String>, Serializable {
 	 * 
 	 */
 	public String toString() {
-		return "Washer brand: " + brand + "\tWasher model: " + model + "\tPrice: " + moneyFormat.format(price)
-				+ "\tQuantity " + quantity;
+		return "Brand: " + brand + "\tModel: " + model + "\tPrice: " + moneyFormat.format(price) + "\tQuantity "
+				+ quantity;
 	}
 
 	/**
