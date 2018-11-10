@@ -19,7 +19,7 @@ public class Furnace extends ApplianceItem implements Serializable, Matchable<St
 	 * @param price                furnace price
 	 * @param maximumHeatingOutput furnace maximum heating output in BTU
 	 */
-	public Furnace(String brand, String model, int price, int maximumHeatingOutput) {
+	public Furnace(String brand, String model, double price, int maximumHeatingOutput) {
 		super(brand, model, price);
 		this.maximumHeatingOutput = maximumHeatingOutput;
 	}

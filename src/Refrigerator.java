@@ -18,7 +18,7 @@ public class Refrigerator extends ApplianceItem implements Serializable, Matchab
 	 * @param price    refrigerator price
 	 * @param capacity refrigerator capacity
 	 */
-	public Refrigerator(String brand, String model, int price, int capacity) {
+	public Refrigerator(String brand, String model, double price, int capacity) {
 		super(brand, model, price);
 		this.capacity = capacity;
 	}

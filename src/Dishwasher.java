@@ -16,7 +16,7 @@ public class Dishwasher extends ApplianceItem implements Serializable, Matchable
 	 * @param model dishwasher model
 	 * @param price dishwasher price
 	 */
-	public Dishwasher(String brand, String model, int price) {
+	public Dishwasher(String brand, String model, double price) {
 		super(brand, model, price);
 	}
 

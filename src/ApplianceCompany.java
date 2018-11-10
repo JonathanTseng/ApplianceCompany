@@ -13,7 +13,7 @@ import java.util.Iterator;
  * @author Jose Morales, Jonathan Tseng, Stephen Thomas, and Xeng Vang
  *
  */
-public class WasherCompany implements Serializable {
+public class ApplianceCompany implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	public static final int WASHER_NOT_FOUND = 1;
@@ -21,18 +21,25 @@ public class WasherCompany implements Serializable {
 	public static final int OPERATION_COMPLETED = 3;
 	public static final int BACKORDER_PLACED = 4;
 	public static final int CUSTOMER_NOT_FOUND = 5;
+
+	public static final int CLOTHES_WASHER = 1;
+	public static final int CLOTHES_DRYER = 2;
+	public static final int KITCHEN_RANGE = 3;
+	public static final int DISHWASHER = 4;
+	public static final int REFRIGERATOR = 5;
+	public static final int FURNACE = 6;
 	private CustomerList customerList;
-	private WasherList washerList;
-	private static WasherCompany washerCompany;
+	private ApplianceList applianceList;
+	private static ApplianceCompany applianceCompany;
 	private double totalSales = 0;
 
 	/**
 	 * Private for the singleton pattern, it creates the customer list and the
 	 * washer list collection objects.
 	 */
-	private WasherCompany() {
+	private ApplianceCompany() {
 		customerList = CustomerList.instance();
-		washerList = WasherList.instance();
+		applianceList = ApplianceList.instance();
 	}
 
 	/**
@@ -40,22 +47,20 @@ public class WasherCompany implements Serializable {
 	 * 
 	 * @return the singleton object
 	 */
-	public static WasherCompany instance() {
-		if (washerCompany == null) {
+	public static ApplianceCompany instance() {
+		if (applianceCompany == null) {
 			MemberIdServer.instance();
-			return (washerCompany = new WasherCompany());
+			return (applianceCompany = new ApplianceCompany());
 		} else {
-			return washerCompany;
+			return applianceCompany;
 		}
 	}
 
 	/**
 	 * Organizes the operations for adding a customer
 	 * 
-	 * @param name
-	 *            name of customer
-	 * @param phoneNumber
-	 *            customer phone number
+	 * @param name        name of customer
+	 * @param phoneNumber customer phone number
 	 * @return the Customer object created
 	 * 
 	 */
@@ -70,12 +75,9 @@ public class WasherCompany implements Serializable {
 	/**
 	 * Organizes the operations for adding inventory.
 	 * 
-	 * @param brand
-	 *            washer brand
-	 * @param model
-	 *            washer model
-	 * @param quantity
-	 *            quantity of washers
+	 * @param brand    washer brand
+	 * @param model    washer model
+	 * @param quantity quantity of washers
 	 * @return the result of the operation
 	 */
 	public int addInventory(String brand, String model, int quantity) {
@@ -113,23 +115,43 @@ public class WasherCompany implements Serializable {
 	}
 
 	/**
-	 * Organizes the operations to add a new washer
+	 * Organizes the operations for adding an appliance item
 	 * 
-	 * @param brand
-	 *            washer brand
-	 * @param model
-	 *            washer model
-	 * @param price
-	 *            washer price
-	 * @return
+	 * @param type                 the type of appliance that is to be added
+	 * @param model                the model of the appliance
+	 * @param brand                the brand of the appliance
+	 * @param price                the price of the appliance
+	 * @param repairPlanPrice      the repair plan price if applicable
+	 * @param capacity             the appliance capacity if applicable
+	 * @param maximumHeatingOutput the maximum heating output if applicable
+	 * @return the ApplianceItem object that was added
 	 */
-	public Washer addWasher(String brand, String model, double price) {
-		Washer washer = new Washer(brand, model, price);
-		if (washerList.insertWasher(washer)) {
-			return (washer);
+	public ApplianceItem addApplianceItem(int type, String model, String brand, double price, double repairPlanPrice,
+			int capacity, int maximumHeatingOutput) {
+		ApplianceItem item = ApplianceItemFactory.instance().createApplianceItem(type, model, brand, price,
+				repairPlanPrice, capacity, maximumHeatingOutput);
+		if (applianceList.insertApplianceItem(item)) {
+			return (item);
 		}
 		return null;
 	}
+
+	/*
+	 * no longer needed because of the addAppliance method /** Organizes the
+	 * operations to add a new washer
+	 * 
+	 * @param brand washer brand
+	 * 
+	 * @param model washer model
+	 * 
+	 * @param price washer price
+	 * 
+	 * @return
+	 *
+	 * public Washer addWasher(String brand, String model, double price) { Washer
+	 * washer = new Washer(brand, model, price); if
+	 * (washerList.insertWasher(washer)) { return (washer); } return null; }
+	 */
 
 	/**
 	 * Organizes the operations for displaying the total sales
@@ -170,14 +192,10 @@ public class WasherCompany implements Serializable {
 	/**
 	 * Organizes the purchase of a washer
 	 * 
-	 * @param customerId
-	 *            id of customer
-	 * @param brand
-	 *            washer brand
-	 * @param model
-	 *            washer model
-	 * @param quantity
-	 *            quantity to be purchased
+	 * @param customerId id of customer
+	 * @param brand      washer brand
+	 * @param model      washer model
+	 * @param quantity   quantity to be purchased
 	 * @return a code that represents the outcome of the operation
 	 */
 	public int purchaseWasher(String customerId, String brand, String model, int quantity) {
@@ -215,8 +233,7 @@ public class WasherCompany implements Serializable {
 	/**
 	 * Searches for a given customer
 	 * 
-	 * @param customerId
-	 *            id of customer
+	 * @param customerId id of customer
 	 * @return true if customer is a part of the customer list collection
 	 */
 	public Customer searchCustomer(String customerId) {
@@ -230,14 +247,14 @@ public class WasherCompany implements Serializable {
 	 * @return a WasherCompany object
 	 */
 
-	public static WasherCompany retrieve() {
+	public static ApplianceCompany retrieve() {
 
 		try {
 			FileInputStream file = new FileInputStream("WasherCompanyData");
 			ObjectInputStream input = new ObjectInputStream(file);
-			washerCompany = (WasherCompany) input.readObject();
+			applianceCompany = (ApplianceCompany) input.readObject();
 			MemberIdServer.retrieve(input);
-			return washerCompany;
+			return applianceCompany;
 
 		} catch (IOException ioe) {
 			ioe.printStackTrace();
@@ -259,7 +276,7 @@ public class WasherCompany implements Serializable {
 		try {
 			FileOutputStream file = new FileOutputStream("WasherCompanyData");
 			ObjectOutputStream output = new ObjectOutputStream(file);
-			output.writeObject(washerCompany);
+			output.writeObject(applianceCompany);
 			output.writeObject(MemberIdServer.instance());
 			file.close();
 			return true;

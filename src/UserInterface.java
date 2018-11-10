@@ -16,7 +16,7 @@ public class UserInterface {
 
 	private static UserInterface userInterface;
 	private BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-	private static WasherCompany washerCompany;
+	private static ApplianceCompany applianceCompany;
 	private static final int EXIT = 0;
 	private static final int ADD_CUSTOMER = 1;
 	private static final int ADD_WASHER = 2;
@@ -36,7 +36,7 @@ public class UserInterface {
 		if (yesOrNo("Look for saved data and  use it?")) {
 			retrieve();
 		} else {
-			washerCompany = WasherCompany.instance();
+			applianceCompany = ApplianceCompany.instance();
 		}
 	}
 
@@ -56,8 +56,7 @@ public class UserInterface {
 	/**
 	 * Gets a token after prompting
 	 * 
-	 * @param prompt
-	 *            - whatever the user wants as prompt
+	 * @param prompt - whatever the user wants as prompt
 	 * @return - the token from the keyboard
 	 * 
 	 */
@@ -79,8 +78,7 @@ public class UserInterface {
 	/**
 	 * Queries for a yes or no and returns true for yes and false for no
 	 * 
-	 * @param prompt
-	 *            The string to be prepended to the yes/no prompt
+	 * @param prompt The string to be prepended to the yes/no prompt
 	 * @return true for yes and false for no
 	 * 
 	 */
@@ -95,8 +93,7 @@ public class UserInterface {
 	/**
 	 * Converts the string to a number of type integer
 	 * 
-	 * @param prompt
-	 *            the string for prompting
+	 * @param prompt the string for prompting
 	 * @return the integer corresponding to the string
 	 * 
 	 */
@@ -115,8 +112,7 @@ public class UserInterface {
 	/**
 	 * Converts the string to a number of type double
 	 * 
-	 * @param prompt
-	 *            the string for prompting
+	 * @param prompt the string for prompting
 	 * @return the double corresponding to the string
 	 */
 	public double getDoubleNumber(String prompt) {
@@ -178,7 +174,7 @@ public class UserInterface {
 		String name = getToken("Enter customer name");
 		String phone = getToken("Enter phone number");
 		Customer result;
-		result = washerCompany.addCustomer(name, phone);
+		result = applianceCompany.addCustomer(name, phone);
 		if (result == null) {
 			System.out.println("Could not add customer.\n");
 		}
@@ -186,26 +182,67 @@ public class UserInterface {
 		System.out.println(result + "\n");
 	}
 
+	// May want to refractor this method using extraction
 	/**
-	 * Method to be called for adding a washer. Prompts the user for the appropriate
-	 * values and uses the appropriate WasherCompany method for adding a washer.
+	 * Method to be called for adding an appliance item. Prompts the user for the
+	 * appropriate values and uses the appropriate ApplianceCompany method for
+	 * adding the appliance.
 	 * 
 	 */
-	public void addWashers() {
-		Washer result;
+	public void addApplianceItems() {
+		ApplianceItem result;
 		do {
+			int type;
+			do {
+				type = getIntegerNumber("Enter " + ApplianceCompany.CLOTHES_WASHER + " for Clothes Washer\n"
+						+ ApplianceCompany.CLOTHES_DRYER + " for Clothes Dryer\n" + ApplianceCompany.KITCHEN_RANGE
+						+ " for Kitchen Range\n" + ApplianceCompany.DISHWASHER + " for Dishwasher\n"
+						+ ApplianceCompany.REFRIGERATOR + " for Refrigerator\n" + ApplianceCompany.FURNACE
+						+ " for Furnace");
+			} while (type != ApplianceCompany.CLOTHES_WASHER && type != ApplianceCompany.CLOTHES_DRYER
+					&& type != ApplianceCompany.KITCHEN_RANGE && type != ApplianceCompany.DISHWASHER
+					&& type != ApplianceCompany.REFRIGERATOR && type != ApplianceCompany.FURNACE);
 			String brand = getToken("Enter brand");
 			String model = getToken("Enter model");
-			double price = getDoubleNumber("Enter price");
-			result = washerCompany.addWasher(brand, model, price);
-			if (result != null) {
-				System.out.println("Washer was added!");
-				System.out.println(result + "\n");
-			} else {
-				System.out.println("Washer could not be added.\n");
+			double price = getDoubleNumber(getToken("Enter price"));
+			double repairPlanPrice = 0.0;
+			int capacity = 0;
+			int maximumHeatingOutput = 0;
+			if (type == ApplianceCompany.CLOTHES_WASHER || type == ApplianceCompany.CLOTHES_DRYER) {
+				repairPlanPrice = getDoubleNumber(getToken("Enter the price of the repair plan"));
 			}
-		} while (yesOrNo("Add more washers?"));
+			if (type == ApplianceCompany.REFRIGERATOR) {
+				capacity = getIntegerNumber(getToken("Enter the capacity in liters"));
+			}
+			if (type == ApplianceCompany.FURNACE) {
+				maximumHeatingOutput = getIntegerNumber(getToken("Enter the maximum heating output in BTU"));
+			}
+			result = applianceCompany.addApplianceItem(type, model, brand, price, repairPlanPrice, capacity,
+					maximumHeatingOutput);
+			if (result != null) {
+				System.out.println(result);
+			} else {
+				System.out.println("Appliance could not be added");
+			}
+			if (!yesOrNo("Add more appliances?")) {
+				break;
+			}
+		} while (true);
 	}
+	/*
+	 * not needed with addition of addApplianceItems() method /** Method to be
+	 * called for adding a washer. Prompts the user for the appropriate values and
+	 * uses the appropriate WasherCompany method for adding a washer.
+	 * 
+	 *
+	 * public void addWashers() { Washer result; do { String brand =
+	 * getToken("Enter brand"); String model = getToken("Enter model"); double price
+	 * = getDoubleNumber("Enter price"); result = applianceCompany.addWasher(brand,
+	 * model, price); if (result != null) { System.out.println("Washer was added!");
+	 * System.out.println(result + "\n"); } else {
+	 * System.out.println("Washer could not be added.\n"); } } while
+	 * (yesOrNo("Add more washers?")); }
+	 */
 
 	/**
 	 * Method to be called for adding inventory of a washer. Prompts the user for
@@ -219,15 +256,15 @@ public class UserInterface {
 			String brand = getToken("Enter washer brand");
 			String model = getToken("Enter washer model");
 			int quantity = getIntegerNumber("Enter quantity");
-			result = washerCompany.addInventory(brand, model, quantity);
+			result = applianceCompany.addInventory(brand, model, quantity);
 			switch (result) {
-			case WasherCompany.WASHER_NOT_FOUND:
+			case ApplianceCompany.WASHER_NOT_FOUND:
 				System.out.println("No such washer in inventory\n");
 				break;
-			case WasherCompany.OPERATION_FAILED:
+			case ApplianceCompany.OPERATION_FAILED:
 				System.out.println("Washer quantity could not be updated.\n");
 				break;
-			case WasherCompany.OPERATION_COMPLETED:
+			case ApplianceCompany.OPERATION_COMPLETED:
 				System.out.println("Washer quantity was updated.");
 				System.out.println("Any back orders on this washer were processed.\n");
 				break;
@@ -250,7 +287,7 @@ public class UserInterface {
 
 		int result;
 		String customerId = getToken("Enter customer id");
-		if (washerCompany.searchCustomer(customerId) == null) {
+		if (applianceCompany.searchCustomer(customerId) == null) {
 			System.out.println("No such customer\n");
 			return;
 		}
@@ -258,12 +295,12 @@ public class UserInterface {
 			String brand = getToken("Enter washer brand");
 			String model = getToken("Enter washer model");
 			int quantity = getIntegerNumber("Enter quantity");
-			result = washerCompany.purchaseWasher(customerId, brand, model, quantity);
-			if (result == WasherCompany.OPERATION_COMPLETED) {
+			result = applianceCompany.purchaseWasher(customerId, brand, model, quantity);
+			if (result == ApplianceCompany.OPERATION_COMPLETED) {
 				System.out.println("Washer was successfully purchased.\n");
-			} else if (result == WasherCompany.BACKORDER_PLACED) {
+			} else if (result == ApplianceCompany.BACKORDER_PLACED) {
 				System.out.println("A back order was placed.\n");
-			} else if (result == WasherCompany.WASHER_NOT_FOUND) {
+			} else if (result == ApplianceCompany.WASHER_NOT_FOUND) {
 				System.out.println("Washer not found!");
 				System.out.println("Purchase could not be completed.\n");
 			} else {
@@ -277,7 +314,7 @@ public class UserInterface {
 	 * 
 	 */
 	public void displayCustomerList() {
-		Iterator result = washerCompany.listCustomers();
+		Iterator result = applianceCompany.listCustomers();
 		if (result == null) {
 			System.out.println("No customers to print.\n");
 		} else {
@@ -295,7 +332,7 @@ public class UserInterface {
 	 * 
 	 */
 	public void displayWasherList() {
-		Iterator result = washerCompany.listWashers();
+		Iterator result = applianceCompany.listWashers();
 		if (result == null) {
 			System.out.println("No washers to print.\n");
 		} else {
@@ -313,7 +350,7 @@ public class UserInterface {
 	 * 
 	 */
 	public void displayTotalSales() {
-		System.out.println("Total Sales $" + washerCompany.displayTotal());
+		System.out.println("Total Sales $" + applianceCompany.displayTotal());
 	}
 
 	/**
@@ -322,7 +359,7 @@ public class UserInterface {
 	 * 
 	 */
 	private void save() {
-		if (washerCompany.save()) {
+		if (applianceCompany.save()) {
 			System.out.println(" The WasherCompany has been successfully saved in the file WasherCompanyData \n");
 		} else {
 			System.out.println(" There has been an error in saving \n");
@@ -336,14 +373,14 @@ public class UserInterface {
 	 */
 	private void retrieve() {
 		try {
-			if (washerCompany == null) {
-				washerCompany = WasherCompany.retrieve();
-				if (washerCompany != null) {
+			if (applianceCompany == null) {
+				applianceCompany = ApplianceCompany.retrieve();
+				if (applianceCompany != null) {
 					System.out.println(
 							"The WasherCompany has been successfully retrieved from the file WasherCompany \n");
 				} else {
 					System.out.println("File doesnt exist; creating new WasherCompany");
-					washerCompany = WasherCompany.instance();
+					applianceCompany = ApplianceCompany.instance();
 				}
 			}
 		} catch (Exception cnfe) {
@@ -395,8 +432,7 @@ public class UserInterface {
 	/**
 	 * The method to start the application. Simply calls process().
 	 * 
-	 * @param args
-	 *            not used
+	 * @param args not used
 	 */
 	public static void main(String[] args) {
 		UserInterface.instance().process();

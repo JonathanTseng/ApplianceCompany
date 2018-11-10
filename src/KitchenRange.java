@@ -16,7 +16,7 @@ public class KitchenRange extends ApplianceItem implements Serializable, Matchab
 	 * @param model kitchen range model
 	 * @param price kitchen range price
 	 */
-	public KitchenRange(String brand, String model, int price) {
+	public KitchenRange(String brand, String model, double price) {
 		super(brand, model, price);
 	}
 
