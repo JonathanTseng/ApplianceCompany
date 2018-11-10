@@ -99,7 +99,7 @@ public class Customer implements Serializable, Matchable<String> {
 	@Override
 	public boolean equals(Object object) {
 		Customer customer = (Customer) object;
-		return this.matches(customer.getId(), "");
+		return this.matches(customer.getId(), "", "");
 	}
 
 	/**
@@ -116,7 +116,7 @@ public class Customer implements Serializable, Matchable<String> {
 	 * @param key the member id
 	 */
 	@Override
-	public boolean matches(String id, String blankKey) {
+	public boolean matches(String id, String blankKey1, String blankKey2) {
 		return this.id.equals(id);
 	}
 

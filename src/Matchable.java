@@ -15,5 +15,5 @@ public interface Matchable<K> {
 	 * @param key the key value
 	 * @return true iff the item's key matches the given key
 	 */
-	public boolean matches(K key1, K key2);
+	public boolean matches(K key1, K key2, K key3);
 }

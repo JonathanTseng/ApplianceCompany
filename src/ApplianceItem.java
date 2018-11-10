@@ -202,7 +202,7 @@ public class ApplianceItem implements Matchable<String>, Serializable {
 	 * id of the model and brand of the item.
 	 */
 	@Override
-	public boolean matches(String brand, String model) {
+	public boolean matches(String brand, String model, String blankKey) {
 		return (this.model.equals(model) && this.brand.equals(brand));
 	}
 

@@ -32,15 +32,16 @@ public class ApplianceList extends ItemList<ApplianceItem, String> {
 	/**
 	 * Removes an appliance from the appliance list
 	 * 
-	 * @param applianceItemId appliance id
+	 * @param applianceModel the appliance's model
+	 * @param applianceBrand the appliance's brand
 	 * @return true iff appliance could be removed
 	 */
 	public boolean removeApplianceItem(String applianceModel, String applianceBrand) {
-		ApplianceItem loanableItem = search(applianceModel, applianceBrand);
-		if (loanableItem == null) {
+		ApplianceItem applianceItem = search(applianceModel, applianceBrand, "");
+		if (applianceItem == null) {
 			return false;
 		} else {
-			return super.remove(loanableItem);
+			return super.remove(applianceItem);
 		}
 	}
 

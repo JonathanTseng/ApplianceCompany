@@ -186,10 +186,10 @@ public class ApplianceCompany implements Serializable {
 	 * @return iterator to the collection
 	 */
 	public Iterator listWashers() {
-		if (washerList.getWasherList() == null) {
+		if (applianceList.iterator() == null) {
 			return (null);
 		} else {
-			return washerList.getWasherList();
+			return applianceList.iterator();
 		}
 
 	}

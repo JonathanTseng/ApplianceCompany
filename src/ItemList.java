@@ -24,9 +24,9 @@ public class ItemList<T extends Matchable<K>, K> implements Serializable {
 	 * @return the item iff the item exists
 	 * 
 	 */
-	public T search(K key1, K key2) {
+	public T search(K key1, K key2, K key3) {
 		for (T item : list) {
-			if (item.matches(key1, key2)) {
+			if (item.matches(key1, key2, key3)) {
 				return item;
 			}
 		}
