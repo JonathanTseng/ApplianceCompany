@@ -47,7 +47,7 @@ public class Refrigerator extends ApplianceItem implements Serializable, Matchab
 	 */
 	@Override
 	public String toString() {
-		return "Refrigerator Information: \n" + super.toString();
+		return "Refrigerator Information: \n" + super.toString() + "Capacity (liters) " + capacity;
 	}
 
 	// I think I need to implement something for the visitor pattern

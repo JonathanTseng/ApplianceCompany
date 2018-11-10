@@ -48,7 +48,7 @@ public class ClothesWasher extends ApplianceItem implements Serializable, Matcha
 	 */
 	@Override
 	public String toString() {
-		return "Clothes Washer Information: \n" + super.toString();
+		return "Clothes Washer Information: \n" + super.toString() + "\tRepair Plan Price " + repairPlanPrice;
 	}
 
 	// I think I need to implement something for the visitor pattern

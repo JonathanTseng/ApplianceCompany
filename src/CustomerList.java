@@ -55,7 +55,7 @@ public class CustomerList extends ItemList<Customer, String> {
 	 * @param customer
 	 * @return true if successful
 	 */
-	public boolean insertMember(Customer customer) {
+	public boolean insertCustomer(Customer customer) {
 		return super.add(customer);
 	}
 	/*

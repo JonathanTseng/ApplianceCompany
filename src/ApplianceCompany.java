@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
-import java.util.Iterator;
 
 /**
  * This class implements Serializable. It contains the methods that are used to
@@ -75,9 +74,9 @@ public class ApplianceCompany implements Serializable {
 	/**
 	 * Organizes the operations for adding inventory.
 	 * 
-	 * @param brand    washer brand
-	 * @param model    washer model
-	 * @param quantity quantity of washers
+	 * @param brand    appliance brand
+	 * @param model    appliance model
+	 * @param quantity quantity of appliances
 	 * @return the result of the operation
 	 */
 	public int addInventory(String brand, String model, int quantity) {
@@ -85,28 +84,28 @@ public class ApplianceCompany implements Serializable {
 		int result = OPERATION_FAILED;
 		int quantityToAdd = quantity;
 
-		Washer washer = washerList.search(brand, model);
-		if (washer == null) {
+		ApplianceItem appliance = applianceList.search(brand, model);
+		if (appliance == null) {
 			result = WASHER_NOT_FOUND;
 		} else {
 
 			while (quantityToAdd > 0) {
-				washer.addQuantity(1);
-				if (washer.hasBackOrder()) {
-					BackOrder backOrder = washer.getNextBackOrder();
-					purchaseWasher(backOrder.getCustomer().getId(), backOrder.getWasher().getBrand(),
-							backOrder.getWasher().getModel(), 1);
+				appliance.addQuantity(1);
+				if (appliance.hasBackOrder()) {
+					BackOrder backOrder = appliance.getNextBackOrder();
+					purchaseWasher(backOrder.getCustomer().getId(), backOrder.getApplianceItem().getBrand(),
+							backOrder.getApplianceItem().getModel(), 1);
 				}
-
 				quantityToAdd--;
 			}
 
-			BackOrder backOrder = washer.getNextBackOrder();
+			// What is the purpose of the following segment of code
+			BackOrder backOrder = appliance.getNextBackOrder();
 			if (backOrder == null) {
 				result = OPERATION_COMPLETED;
 			} else {
-				purchaseWasher(backOrder.getCustomer().getName(), backOrder.getWasher().getBrand(),
-						backOrder.getWasher().getModel(), backOrder.getWasher().getQuantity());
+				purchaseWasher(backOrder.getCustomer().getName(), backOrder.getApplianceItem().getBrand(),
+						backOrder.getApplianceItem().getModel(), backOrder.getApplianceItem().getQuantity());
 				result = OPERATION_COMPLETED;
 			}
 
@@ -162,48 +161,49 @@ public class ApplianceCompany implements Serializable {
 		return totalSales;
 	}
 
+	public void setTotalSales(double additionalSaleTotal) {
+		totalSales += additionalSaleTotal;
+	}
+
 	/**
 	 * Organizes the operations for displaying all the customers.
 	 * 
 	 * @return iterator to the collection
 	 */
-	public Iterator listCustomers() {
-		if (customerList.getCustomerList() == null) {
-			return (null);
-		} else {
-			return customerList.getCustomerList();
-		}
-	}
+	/*
+	 * Commentend out for testing only, do not erase public Iterator listCustomers()
+	 * { if (customerList.getCustomerList() == null) { return (null); } else {
+	 * return customerList.getCustomerList(); } }
+	 */
 
 	/**
 	 * Organizes the operations for displaying the washers
 	 * 
 	 * @return iterator to the collection
 	 */
-	public Iterator listWashers() {
-		if (washerList.getWasherList() == null) {
-			return (null);
-		} else {
-			return washerList.getWasherList();
-		}
-
-	}
+	/*
+	 * Commentend out for testing only, do not erase public Iterator listWashers() {
+	 * if (washerList.getWasherList() == null) { return (null); } else { return
+	 * washerList.getWasherList(); }
+	 * 
+	 * }
+	 */
 
 	/**
-	 * Organizes the purchase of a washer
+	 * Organizes the purchase of an appliance
 	 * 
 	 * @param customerId id of customer
-	 * @param brand      washer brand
-	 * @param model      washer model
+	 * @param brand      appliance brand
+	 * @param model      appliance model
 	 * @param quantity   quantity to be purchased
 	 * @return a code that represents the outcome of the operation
 	 */
 	public int purchaseWasher(String customerId, String brand, String model, int quantity) {
 		int result = OPERATION_FAILED;
-		Washer washer = washerList.search(brand, model);
-		Customer customer = customerList.search(customerId);
+		ApplianceItem appliance = applianceList.search(brand, model);
+		Customer customer = customerList.search(customerId, "");
 
-		if (washer == null) {
+		if (appliance == null) {
 			return (WASHER_NOT_FOUND);
 		}
 
@@ -211,21 +211,21 @@ public class ApplianceCompany implements Serializable {
 			return (CUSTOMER_NOT_FOUND);
 		}
 
-		while (quantity > 0) {
+		result = appliance.purchase(quantity, customer, appliance);
 
-			if (washer.getQuantity() > 0) {
-				washer.purchase();
-				totalSales += washer.getPrice();
-				result = OPERATION_COMPLETED;
-			} else {
-				BackOrder backOrder = new BackOrder(customer, washer);
-				washer.placeBackOrder(backOrder);
-				result = BACKORDER_PLACED;
-			}
+		/*
+		 * code moved to the ApplianceItem and Furnace classes while (quantity > 0) {
+		 * 
+		 * if (appliance.getQuantity() > 0) { appliance.purchase(); totalSales +=
+		 * appliance.getPrice(); result = OPERATION_COMPLETED; } else { BackOrder
+		 * backOrder = new BackOrder(customer, appliance);
+		 * appliance.placeBackOrder(backOrder); result = BACKORDER_PLACED; }
+		 * 
+		 * quantity--;
+		 * 
+		 * }
+		 */
 
-			quantity--;
-
-		}
 		return result;
 
 	}
@@ -237,7 +237,7 @@ public class ApplianceCompany implements Serializable {
 	 * @return true if customer is a part of the customer list collection
 	 */
 	public Customer searchCustomer(String customerId) {
-		return customerList.search(customerId);
+		return customerList.search(customerId, "");
 	}
 
 	/**
@@ -292,7 +292,7 @@ public class ApplianceCompany implements Serializable {
 	 */
 	@Override
 	public String toString() {
-		return customerList + "\n" + washerList;
+		return customerList + "\n" + applianceList;
 
 	}
 

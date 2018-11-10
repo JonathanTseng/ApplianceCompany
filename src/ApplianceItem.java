@@ -34,13 +34,40 @@ public class ApplianceItem implements Matchable<String>, Serializable {
 	}
 
 	/**
-	 * Represents a purchase of an appliance. Thus, the quantity of the appliance is
-	 * decremented.
+	 * Performs a purchase of an appliance.
 	 * 
+	 * @param purchaseQuantity the requested quantity to be purchased
+	 * @param customer         the customer who is purchasing
+	 * @param appliance        the appliance item to be purchased
+	 * @return the result of integer of the purchase
 	 */
-	public void purchase() {
-		quantity--;
+	public int purchase(int purchaseQuantity, Customer customer, ApplianceItem appliance) {
+		int result = ApplianceCompany.OPERATION_FAILED;
+		while (purchaseQuantity > 0) {
+			if (quantity > 0) {
+				quantity--;
+				ApplianceCompany.instance().setTotalSales(price);
+				result = ApplianceCompany.OPERATION_COMPLETED;
+			} else {
+				BackOrder backOrder = new BackOrder(customer, appliance);
+				appliance.placeBackOrder(backOrder);
+				result = ApplianceCompany.BACKORDER_PLACED;
+			}
+			purchaseQuantity--;
+		}
+		return result;
 	}
+
+	/*
+	 * Old code Represents a purchase of an appliance. Thus, the quantity of the
+	 * appliance is decremented.
+	 * 
+	 *
+	 * public void purchase() {
+	 * 
+	 * 
+	 * quantity--; }
+	 */
 
 	/**
 	 * Adds the given additional quantity to the quantity of the appliance
@@ -49,6 +76,10 @@ public class ApplianceItem implements Matchable<String>, Serializable {
 	 */
 	public void addQuantity(int additionalQuantity) {
 		quantity += additionalQuantity;
+	}
+
+	public void decrementQuantity() {
+		quantity--;
 	}
 
 	/**
@@ -171,7 +202,7 @@ public class ApplianceItem implements Matchable<String>, Serializable {
 	 * id of the model and brand of the item.
 	 */
 	@Override
-	public boolean matches(String model, String brand) {
+	public boolean matches(String brand, String model) {
 		return (this.model.equals(model) && this.brand.equals(brand));
 	}
 

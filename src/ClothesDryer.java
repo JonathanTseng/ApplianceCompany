@@ -48,7 +48,7 @@ public class ClothesDryer extends ApplianceItem implements Serializable, Matchab
 	 */
 	@Override
 	public String toString() {
-		return "Clothes Dryer Information: \n" + super.toString();
+		return "Clothes Dryer Information: \n" + super.toString() + "\tRepair Plan Price " + repairPlanPrice;
 	}
 
 	// I think I need to implement something for the visitor pattern

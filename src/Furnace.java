@@ -25,6 +25,31 @@ public class Furnace extends ApplianceItem implements Serializable, Matchable<St
 	}
 
 	/**
+	 * Performs a purchase of an appliance.
+	 * 
+	 * @param purchaseQuantity the requested quantity to be purchased
+	 * @param customer         the customer who is purchasing
+	 * @param appliance        the appliance item to be purchased
+	 * @return the result of integer of the purchase
+	 */
+	@Override
+	public int purchase(int purchaseQuantity, Customer customer, ApplianceItem appliance) {
+		int result = ApplianceCompany.OPERATION_FAILED;
+		int quantity = super.getQuantity();
+		while (purchaseQuantity > 0) {
+			if (quantity > 0) {
+				super.decrementQuantity();
+				ApplianceCompany.instance().setTotalSales(super.getPrice());
+				result = ApplianceCompany.OPERATION_COMPLETED;
+			} else {
+				System.out.println("Insufficient quantity of furnaces to complete purchase.");
+			}
+			purchaseQuantity--;
+		}
+		return result;
+	}
+
+	/**
 	 * Getter for the maximum heating output
 	 * 
 	 * @return the maximum heating output of the furnace in BTU
@@ -48,7 +73,7 @@ public class Furnace extends ApplianceItem implements Serializable, Matchable<St
 	 */
 	@Override
 	public String toString() {
-		return "Furnace Information: \n" + super.toString();
+		return "Furnace Information: \n" + super.toString() + "\tMaxiumum Heating Output (BTU) " + maximumHeatingOutput;
 	}
 
 	// I think I need to implement something for the visitor pattern

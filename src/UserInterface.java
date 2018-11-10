@@ -1,7 +1,6 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Iterator;
 import java.util.StringTokenizer;
 
 /**
@@ -19,7 +18,7 @@ public class UserInterface {
 	private static ApplianceCompany applianceCompany;
 	private static final int EXIT = 0;
 	private static final int ADD_CUSTOMER = 1;
-	private static final int ADD_WASHER = 2;
+	private static final int ADD_APPLIANCE = 2;
 	private static final int ADD_INVENTORY = 3;
 	private static final int PURCHASE = 4;
 	private static final int LIST_CUSTOMERS = 5;
@@ -154,8 +153,8 @@ public class UserInterface {
 		System.out.println("Enter a number between 0 and 9 as explained below:\n");
 		System.out.println(EXIT + " to Exit");
 		System.out.println(ADD_CUSTOMER + " to add a customer");
-		System.out.println(ADD_WASHER + " to add a washer");
-		System.out.println(ADD_INVENTORY + " to add washer inventory");
+		System.out.println(ADD_APPLIANCE + " to add an appliance item");
+		System.out.println(ADD_INVENTORY + " to add appliance inventory");
 		System.out.println(PURCHASE + " to process a purchase");
 		System.out.println(LIST_CUSTOMERS + " to get a list of all the customers");
 		System.out.println(LIST_WASHERS + " to get a list of all the washers");
@@ -194,7 +193,7 @@ public class UserInterface {
 		do {
 			int type;
 			do {
-				type = getIntegerNumber("Enter " + ApplianceCompany.CLOTHES_WASHER + " for Clothes Washer\n"
+				type = getIntegerNumber("Enter \n" + ApplianceCompany.CLOTHES_WASHER + " for Clothes Washer\n"
 						+ ApplianceCompany.CLOTHES_DRYER + " for Clothes Dryer\n" + ApplianceCompany.KITCHEN_RANGE
 						+ " for Kitchen Range\n" + ApplianceCompany.DISHWASHER + " for Dishwasher\n"
 						+ ApplianceCompany.REFRIGERATOR + " for Refrigerator\n" + ApplianceCompany.FURNACE
@@ -204,18 +203,18 @@ public class UserInterface {
 					&& type != ApplianceCompany.REFRIGERATOR && type != ApplianceCompany.FURNACE);
 			String brand = getToken("Enter brand");
 			String model = getToken("Enter model");
-			double price = getDoubleNumber(getToken("Enter price"));
+			double price = getDoubleNumber("EnterPrice");
 			double repairPlanPrice = 0.0;
 			int capacity = 0;
 			int maximumHeatingOutput = 0;
 			if (type == ApplianceCompany.CLOTHES_WASHER || type == ApplianceCompany.CLOTHES_DRYER) {
-				repairPlanPrice = getDoubleNumber(getToken("Enter the price of the repair plan"));
+				repairPlanPrice = getDoubleNumber("Enter the price of the repair plan");
 			}
 			if (type == ApplianceCompany.REFRIGERATOR) {
-				capacity = getIntegerNumber(getToken("Enter the capacity in liters"));
+				capacity = getIntegerNumber("Enter the capacity in liters");
 			}
 			if (type == ApplianceCompany.FURNACE) {
-				maximumHeatingOutput = getIntegerNumber(getToken("Enter the maximum heating output in BTU"));
+				maximumHeatingOutput = getIntegerNumber("Enter the maximum heating output in BTU");
 			}
 			result = applianceCompany.addApplianceItem(type, model, brand, price, repairPlanPrice, capacity,
 					maximumHeatingOutput);
@@ -245,16 +244,16 @@ public class UserInterface {
 	 */
 
 	/**
-	 * Method to be called for adding inventory of a washer. Prompts the user for
-	 * the appropriate washer information and uses the appropriate WasherCompany
-	 * method for adding inventory.
+	 * Method to be called for adding inventory of an appliance. Prompts the user
+	 * for the appropriate appliance information and uses the appropriate
+	 * ApplianceCompany method for adding inventory.
 	 * 
 	 */
 	public void addInventory() {
 		int result;
 		do {
-			String brand = getToken("Enter washer brand");
-			String model = getToken("Enter washer model");
+			String brand = getToken("Enter appliance brand");
+			String model = getToken("Enter appliance model");
 			int quantity = getIntegerNumber("Enter quantity");
 			result = applianceCompany.addInventory(brand, model, quantity);
 			switch (result) {
@@ -278,8 +277,8 @@ public class UserInterface {
 	}
 
 	/**
-	 * Method to be called for purchasing washers. Prompts the user for the
-	 * appropriate values and uses the appropriate WasherCompany method for
+	 * Method to be called for purchasing appliances. Prompts the user for the
+	 * appropriate values and uses the appropriate ApplianceCompany method for
 	 * processing purchases.
 	 * 
 	 */
@@ -292,16 +291,16 @@ public class UserInterface {
 			return;
 		}
 		do {
-			String brand = getToken("Enter washer brand");
-			String model = getToken("Enter washer model");
+			String brand = getToken("Enter appliance brand");
+			String model = getToken("Enter appliance model");
 			int quantity = getIntegerNumber("Enter quantity");
 			result = applianceCompany.purchaseWasher(customerId, brand, model, quantity);
 			if (result == ApplianceCompany.OPERATION_COMPLETED) {
-				System.out.println("Washer was successfully purchased.\n");
+				System.out.println("Appliance was successfully purchased.\n");
 			} else if (result == ApplianceCompany.BACKORDER_PLACED) {
 				System.out.println("A back order was placed.\n");
 			} else if (result == ApplianceCompany.WASHER_NOT_FOUND) {
-				System.out.println("Washer not found!");
+				System.out.println("Appliance not found!");
 				System.out.println("Purchase could not be completed.\n");
 			} else {
 				System.out.println("Purchase could not be completed.\n");
@@ -313,37 +312,27 @@ public class UserInterface {
 	 * Method to be called to display a list of all the customers.
 	 * 
 	 */
-	public void displayCustomerList() {
-		Iterator result = applianceCompany.listCustomers();
-		if (result == null) {
-			System.out.println("No customers to print.\n");
-		} else {
-			System.out.println("Here is the list of customers: ");
-			while (result.hasNext()) {
-				Customer customer = (Customer) result.next();
-				System.out.println(customer.toString());
-			}
-			System.out.println();
-		}
-	}
+	/*
+	 * Commentend out for testing only, do not erase public void
+	 * displayCustomerList() { Iterator result = applianceCompany.listCustomers();
+	 * if (result == null) { System.out.println("No customers to print.\n"); } else
+	 * { System.out.println("Here is the list of customers: "); while
+	 * (result.hasNext()) { Customer customer = (Customer) result.next();
+	 * System.out.println(customer.toString()); } System.out.println(); } }
+	 */
 
 	/**
 	 * Method to be called to display a list of all the washers.
 	 * 
 	 */
-	public void displayWasherList() {
-		Iterator result = applianceCompany.listWashers();
-		if (result == null) {
-			System.out.println("No washers to print.\n");
-		} else {
-			System.out.println("Here is the list of washers: ");
-			while (result.hasNext()) {
-				Washer washer = (Washer) result.next();
-				System.out.println(washer.toString());
-			}
-			System.out.println();
-		}
-	}
+	/*
+	 * Commentend out for testing only, do not erase public void displayWasherList()
+	 * { Iterator result = applianceCompany.listWashers(); if (result == null) {
+	 * System.out.println("No washers to print.\n"); } else {
+	 * System.out.println("Here is the list of washers: "); while (result.hasNext())
+	 * { Washer washer = (Washer) result.next();
+	 * System.out.println(washer.toString()); } System.out.println(); } }
+	 */
 
 	/**
 	 * Method to be called for displaying the total sales amount.
@@ -401,8 +390,8 @@ public class UserInterface {
 			case ADD_CUSTOMER:
 				addCustomer();
 				break;
-			case ADD_WASHER:
-				addWashers();
+			case ADD_APPLIANCE:
+				addApplianceItems();
 				break;
 			case ADD_INVENTORY:
 				addInventory();
@@ -411,10 +400,10 @@ public class UserInterface {
 				purchase();
 				break;
 			case LIST_WASHERS:
-				displayWasherList();
+				// displayWasherList(); Commentend out for testing only, do not erase
 				break;
 			case LIST_CUSTOMERS:
-				displayCustomerList();
+				// displayCustomerList(); Commentend out for testing only, do not erase
 				break;
 			case DISPLAY_TOTAL:
 				displayTotalSales();
