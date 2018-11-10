@@ -205,5 +205,14 @@ public class ApplianceItem implements Matchable<String>, Serializable {
 	public boolean matches(String brand, String model) {
 		return (this.model.equals(model) && this.brand.equals(brand));
 	}
+	/**
+	 * Implements the accept method of the Visitor pattern.
+	 * 
+	 * @param visitor
+	 *            the Visitor that will process the LoanableItem object
+	 */
+	public void accept(ApplianceItemVisitor visitor) {
+		visitor.visit(this);
+	}
 
 }
