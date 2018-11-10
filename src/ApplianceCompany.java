@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.util.Iterator;
 
 /**
  * This class implements Serializable. It contains the methods that are used to
@@ -170,24 +171,28 @@ public class ApplianceCompany implements Serializable {
 	 * 
 	 * @return iterator to the collection
 	 */
-	/*
-	 * Commentend out for testing only, do not erase public Iterator listCustomers()
-	 * { if (customerList.getCustomerList() == null) { return (null); } else {
-	 * return customerList.getCustomerList(); } }
-	 */
+
+	public Iterator listCustomers() {
+		if (customerList.iterator() == null) {
+			return (null);
+		} else {
+			return customerList.iterator();
+		}
+	}
 
 	/**
 	 * Organizes the operations for displaying the washers
 	 * 
 	 * @return iterator to the collection
 	 */
-	/*
-	 * Commentend out for testing only, do not erase public Iterator listWashers() {
-	 * if (washerList.getWasherList() == null) { return (null); } else { return
-	 * washerList.getWasherList(); }
-	 * 
-	 * }
-	 */
+	public Iterator listWashers() {
+		if (washerList.getWasherList() == null) {
+			return (null);
+		} else {
+			return washerList.getWasherList();
+		}
+
+	}
 
 	/**
 	 * Organizes the purchase of an appliance

@@ -312,14 +312,20 @@ public class UserInterface {
 	 * Method to be called to display a list of all the customers.
 	 * 
 	 */
-	/*
-	 * Commentend out for testing only, do not erase public void
-	 * displayCustomerList() { Iterator result = applianceCompany.listCustomers();
-	 * if (result == null) { System.out.println("No customers to print.\n"); } else
-	 * { System.out.println("Here is the list of customers: "); while
-	 * (result.hasNext()) { Customer customer = (Customer) result.next();
-	 * System.out.println(customer.toString()); } System.out.println(); } }
-	 */
+
+	public void displayCustomerList() {
+		Iterator result = applianceCompany.listCustomers();
+		if (result == null) {
+			System.out.println("No customers to print.\n");
+		} else {
+			System.out.println("Here is the list of customers: ");
+			while (result.hasNext()) {
+				Customer customer = (Customer) result.next();
+				System.out.println(customer.toString());
+			}
+			System.out.println();
+		}
+	}
 
 	/**
 	 * Method to be called to display a list of all the washers.
