@@ -359,27 +359,26 @@ public class UserInterface {
 	public void displayTotalSales() {
 		System.out.println("Total Sales $" + applianceCompany.displayTotal());
 	}
-	
+
 	private void listBackOrder() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	private void listRepairPlans() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	private void billRepairPlan() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	private void withdrawRepairPlan() {
 		// TODO Auto-generated method stub
-		
-	}
 
+	}
 
 	/**
 	 * Method to be called to enroll a customer in a repair plan. Prompts the user
@@ -478,7 +477,8 @@ public class UserInterface {
 				break;
 			case ENROLL_REPAIR_PLAN:
 				enrollInRepairPlan();
-				WITHDRAW_REPAIRPLAN:
+				break;
+			case WITHDRAW_REPAIRPLAN:
 				withdrawRepairPlan();
 				break;
 			case BILL_REPAIRPLAN:
