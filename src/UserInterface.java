@@ -26,19 +26,13 @@ public class UserInterface {
 	private static final int LIST_CUSTOMERS = 5;
 	private static final int LIST_APPLIANCE = 6;
 	private static final int DISPLAY_TOTAL = 7;
-<<<<<<< HEAD
 	private static final int ENROLL_REPAIR_PLAN = 8;
-	private static final int SAVE = 9;
-	private static final int HELP = 10;
-=======
-	private static final int ENROLL_REPAIRPLAN = 8;
 	private static final int WITHDRAW_REPAIRPLAN = 9;
 	private static final int BILL_REPAIRPLAN = 10;
 	private static final int LIST_REPAIRPLANS = 11;
 	private static final int LIST_BACKORDER = 12;
 	private static final int SAVE = 13;
 	private static final int HELP = 14;
->>>>>>> f60628d000b92185b5c88d3954805f321306057a
 
 	/**
 	 * Made private for singleton pattern. Conditionally looks for any saved data.
@@ -172,15 +166,11 @@ public class UserInterface {
 		System.out.println(LIST_CUSTOMERS + " to get a list of all the customers");
 		System.out.println(LIST_APPLIANCE + " to get a list of all the appliances");
 		System.out.println(DISPLAY_TOTAL + " to display the total of all sales");
-<<<<<<< HEAD
 		System.out.println(ENROLL_REPAIR_PLAN + " to enroll a customer in a repair plan");
-=======
-		System.out.println(ENROLL_REPAIRPLAN + " to enroll into a repair plan");
 		System.out.println(WITHDRAW_REPAIRPLAN + " to withdraw repair plan");
 		System.out.println(BILL_REPAIRPLAN + " to bill all users for repair plan");
 		System.out.println(LIST_REPAIRPLANS + " to display all user repair plans");
 		System.out.println(LIST_BACKORDER + " to display the total of all back orders");
->>>>>>> f60628d000b92185b5c88d3954805f321306057a
 		System.out.println(SAVE + " to save data");
 		System.out.println(HELP + " for help\n");
 	}
@@ -390,10 +380,6 @@ public class UserInterface {
 		
 	}
 
-	private void enrollRepairPlan() {
-		// TODO Auto-generated method stub
-		
-	}
 
 	/**
 	 * Method to be called to enroll a customer in a repair plan. Prompts the user
@@ -490,14 +476,9 @@ public class UserInterface {
 			case DISPLAY_TOTAL:
 				displayTotalSales();
 				break;
-<<<<<<< HEAD
 			case ENROLL_REPAIR_PLAN:
 				enrollInRepairPlan();
-=======
-			case ENROLL_REPAIRPLAN:
-				enrollRepairPlan();
-				break;
-			case WITHDRAW_REPAIRPLAN:
+				WITHDRAW_REPAIRPLAN:
 				withdrawRepairPlan();
 				break;
 			case BILL_REPAIRPLAN:
@@ -508,7 +489,6 @@ public class UserInterface {
 				break;
 			case LIST_BACKORDER:
 				listBackOrder();
->>>>>>> f60628d000b92185b5c88d3954805f321306057a
 				break;
 			case SAVE:
 				save();
