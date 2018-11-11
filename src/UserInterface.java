@@ -359,6 +359,7 @@ public class UserInterface {
 	public void displayTotalSales() {
 		System.out.println("Total Sales $" + applianceCompany.displayTotal());
 	}
+	
 	private void listBackOrder() {
 		// TODO Auto-generated method stub
 		

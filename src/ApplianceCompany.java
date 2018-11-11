@@ -244,6 +244,52 @@ public class ApplianceCompany implements Serializable {
 	public Customer searchCustomer(String customerId) {
 		return customerList.search(customerId, "");
 	}
+	
+	/*
+	 * List all current back orders.
+	 */
+	
+	private void listBackOrder() {
+		
+		
+	}
+	
+	/*
+	 * This method will list all users currently under a repair plan.
+	 */
+	private void listUsersRepairPlans() {
+		
+		
+	}
+	
+	/*
+	 * This method will bill all users who are currently signed up for a repair plan. 
+	 */
+	private void billRepairPlan() {
+		
+		
+	}
+	
+	/*
+	 * @param customerID id of customer
+	 * @param brand brand of appliance
+	 * @param model  model of appliance
+	 */
+	
+	private void withdrawRepairPlan(int customerID, String brand,String model) {
+		
+		
+	}
+	
+	/*
+	 * @param customerID id of customer
+	 * @param brand brand of appliance
+	 * @param model  model of appliance
+	 */
+	private void enrollRepairPlan(int customerID, String brand,String model) {
+		
+		
+	}
 
 	/**
 	 * This method will try and deserialize a saved file of Washer Company from a
