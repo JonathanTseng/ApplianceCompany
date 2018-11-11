@@ -275,7 +275,7 @@ public class ApplianceCompany implements Serializable {
 	 * List all current back orders.
 	 */
 	
-	private void listBackOrder() {
+	public void listBackOrders() {
 		
 		
 	}
@@ -283,15 +283,20 @@ public class ApplianceCompany implements Serializable {
 	/*
 	 * This method will list all users currently under a repair plan.
 	 */
-	private void listUsersRepairPlans() {
-		
+	public Iterator listUsersRepairPlans() {
+		if (repairPlanList.iterator() == null) {
+			return (null);
+		} else {
+			return repairPlanList.iterator();
+		}
 		
 	}
+	
 	
 	/*
 	 * This method will bill all users who are currently signed up for a repair plan. 
 	 */
-	private void billRepairPlan() {
+	public void billRepairPlan() {
 		
 		
 	}
@@ -302,20 +307,24 @@ public class ApplianceCompany implements Serializable {
 	 * @param model  model of appliance
 	 */
 	
-	private void withdrawRepairPlan(int customerID, String brand,String model) {
+	public int withdrawRepairPlan(String customerId, String brand,String model) {
 		
+		int result = OPERATION_FAILED;
+		ApplianceItem appliance = applianceList.search(brand, model, "");
+		Customer customer = customerList.search(customerId, "", "");
 		
+		if (appliance == null) {
+			return (APPLIANCE_NOT_FOUND);
+		}
+
+		if (customer == null) {
+			return (CUSTOMER_NOT_FOUND);
+		}
+		
+		repairPlanList.removeRepairPlan(customerId,brand, model);
+		return result;
 	}
 	
-	/*
-	 * @param customerID id of customer
-	 * @param brand brand of appliance
-	 * @param model  model of appliance
-	 */
-	private void enrollRepairPlan(int customerID, String brand,String model) {
-		
-		
-	}
 
 	/**
 	 * This method will try and deserialize a saved file of Washer Company from a

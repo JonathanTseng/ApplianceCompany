@@ -359,25 +359,65 @@ public class UserInterface {
 	public void displayTotalSales() {
 		System.out.println("Total Sales $" + applianceCompany.displayTotal());
 	}
-
+// 	NEED TO UPDATE TAKEN FROM LIST CUSTOMERS,NEED TO SHOW ENTIRE BACK ORDER WITH VISIOR PATTERN
 	private void listBackOrder() {
-		// TODO Auto-generated method stub
+		Iterator result = applianceCompany.listCustomers();
+		if (result == null) {
+			System.out.println("No customers to print.\n");
+		} else {
+			System.out.println("Here is the list of customers: ");
+			while (result.hasNext()) {
+				Customer customer = (Customer) result.next();
+				System.out.println(customer.toString());
+			}
+			System.out.println();
+		}
 
 	}
-
-	private void listRepairPlans() {
-		// TODO Auto-generated method stub
+	// 	NEED TO UPDATE TAKEN FROM LIST CUSTOMERS,NEED TO SHOW LIST OF USER WITHIN REPAIR PLANS
+	private void listUserRepairPlans() {
+		Iterator result = applianceCompany.listUsersRepairPlans();
+		if (result == null) {
+			System.out.println("No customers in repair plans.\n");
+		} else {
+			System.out.println("Here is the list of customers in a repair plan: ");
+			while (result.hasNext()) {
+				Customer customer = (Customer) result.next();
+				System.out.println(customer.toString());
+			}
+			System.out.println();
+		}
 
 	}
 
 	private void billRepairPlan() {
-		// TODO Auto-generated method stub
+		applianceCompany.billRepairPlan();
 
 	}
 
 	private void withdrawRepairPlan() {
-		// TODO Auto-generated method stub
-
+		int result;
+		String customerId = getToken("Enter customer ID");
+		String brand = getToken("Enter appliance brand");
+		String model = getToken("Enter appliance model");
+		result = applianceCompany.withdrawRepairPlan(customerId, brand, model);
+		switch (result) {
+		case ApplianceCompany.APPLIANCE_NOT_FOUND:
+			System.out.println("No such washer in inventory\n");
+			break;
+		case ApplianceCompany.CUSTOMER_NOT_FOUND:
+			System.out.println("No such customer in customer list\n");
+			break;
+		case ApplianceCompany.OPERATION_FAILED:
+			System.out.println("Could not withdraw from Repair Plan.\n");
+			break;
+		case ApplianceCompany.OPERATION_COMPLETED:
+			System.out.println("Customer succesfully withdrew from"
+					+ " Repair Plan.");
+			break;
+		default:
+			System.out.println("An error has occurred\n");
+		}
 	}
 
 	/**
@@ -485,7 +525,7 @@ public class UserInterface {
 				billRepairPlan();
 				break;
 			case LIST_REPAIRPLANS:
-				listRepairPlans();
+				listUserRepairPlans();
 				break;
 			case LIST_BACKORDER:
 				listBackOrder();
