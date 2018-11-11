@@ -25,8 +25,9 @@ public class UserInterface {
 	private static final int LIST_CUSTOMERS = 5;
 	private static final int LIST_WASHERS = 6;
 	private static final int DISPLAY_TOTAL = 7;
-	private static final int SAVE = 8;
-	private static final int HELP = 9;
+	private static final int ENROLL_REPAIR_PLAN = 8;
+	private static final int SAVE = 9;
+	private static final int HELP = 10;
 
 	/**
 	 * Made private for singleton pattern. Conditionally looks for any saved data.
@@ -160,6 +161,7 @@ public class UserInterface {
 		System.out.println(LIST_CUSTOMERS + " to get a list of all the customers");
 		System.out.println(LIST_WASHERS + " to get a list of all the washers");
 		System.out.println(DISPLAY_TOTAL + " to display the total of all sales");
+		System.out.println(ENROLL_REPAIR_PLAN + " to enroll a customer in a repair plan");
 		System.out.println(SAVE + " to save data");
 		System.out.println(HELP + " for help\n");
 	}
@@ -258,7 +260,7 @@ public class UserInterface {
 			int quantity = getIntegerNumber("Enter quantity");
 			result = applianceCompany.addInventory(brand, model, quantity);
 			switch (result) {
-			case ApplianceCompany.WASHER_NOT_FOUND:
+			case ApplianceCompany.APPLIANCE_NOT_FOUND:
 				System.out.println("No such washer in inventory\n");
 				break;
 			case ApplianceCompany.OPERATION_FAILED:
@@ -300,7 +302,7 @@ public class UserInterface {
 				System.out.println("Appliance was successfully purchased.\n");
 			} else if (result == ApplianceCompany.BACKORDER_PLACED) {
 				System.out.println("A back order was placed.\n");
-			} else if (result == ApplianceCompany.WASHER_NOT_FOUND) {
+			} else if (result == ApplianceCompany.APPLIANCE_NOT_FOUND) {
 				System.out.println("Appliance not found!");
 				System.out.println("Purchase could not be completed.\n");
 			} else {
@@ -347,6 +349,35 @@ public class UserInterface {
 	 */
 	public void displayTotalSales() {
 		System.out.println("Total Sales $" + applianceCompany.displayTotal());
+	}
+
+	/**
+	 * Method to be called to enroll a customer in a repair plan. Prompts the user
+	 * for important appliance and customer information.
+	 * 
+	 */
+	public void enrollInRepairPlan() {
+		int result;
+		String customerId = getToken("Enter customer ID");
+		String brand = getToken("Enter appliance brand");
+		String model = getToken("Enter appliance model");
+		result = applianceCompany.enrollInRepairPlan(customerId, brand, model);
+		switch (result) {
+		case ApplianceCompany.APPLIANCE_NOT_FOUND:
+			System.out.println("No such washer in inventory\n");
+			break;
+		case ApplianceCompany.CUSTOMER_NOT_FOUND:
+			System.out.println("No such customer in customer list\n");
+			break;
+		case ApplianceCompany.OPERATION_FAILED:
+			System.out.println("Could not be enrolled in Repair Plan.\n");
+			break;
+		case ApplianceCompany.OPERATION_COMPLETED:
+			System.out.println("Customer was enrolled in a Repair Plan.");
+			break;
+		default:
+			System.out.println("An error has occurred\n");
+		}
 	}
 
 	/**
@@ -414,6 +445,9 @@ public class UserInterface {
 				break;
 			case DISPLAY_TOTAL:
 				displayTotalSales();
+				break;
+			case ENROLL_REPAIR_PLAN:
+				enrollInRepairPlan();
 				break;
 			case SAVE:
 				save();

@@ -39,8 +39,8 @@ public class CustomerList extends ItemList<Customer, String> {
 	 * @return the Customer object within the list iff the customer exists
 	 */
 	@Override
-	public Customer search(String customerId, String blankId) {
-		return super.search(customerId, blankId);
+	public Customer search(String customerId, String blankId1, String blankId2) {
+		return super.search(customerId, blankId1, blankId2);
 	}
 	/*
 	 * prior to extending the ItemList class search method public Customer

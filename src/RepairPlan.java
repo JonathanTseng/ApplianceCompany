@@ -11,10 +11,10 @@ public class RepairPlan implements Matchable<String>, Serializable {
 	private ApplianceItem appliance;
 	private double price;
 
-	public RepairPlan(Customer customer, ApplianceItem appliance, double price) {
+	public RepairPlan(Customer customer, ApplianceItem appliance) {
 		this.setCustomer(customer);
 		this.setAppliance(appliance);
-		this.setPrice(price);
+		this.setPrice(appliance.getPrice());
 	}
 
 	public Customer getCustomer() {

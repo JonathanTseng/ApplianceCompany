@@ -16,7 +16,7 @@ import java.util.Iterator;
 public class ApplianceCompany implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	public static final int WASHER_NOT_FOUND = 1;
+	public static final int APPLIANCE_NOT_FOUND = 1;
 	public static final int OPERATION_FAILED = 2;
 	public static final int OPERATION_COMPLETED = 3;
 	public static final int BACKORDER_PLACED = 4;
@@ -30,6 +30,7 @@ public class ApplianceCompany implements Serializable {
 	public static final int FURNACE = 6;
 	private CustomerList customerList;
 	private ApplianceList applianceList;
+	private RepairPlanList repairPlanList;
 	private static ApplianceCompany applianceCompany;
 	private double totalSales = 0;
 
@@ -40,6 +41,7 @@ public class ApplianceCompany implements Serializable {
 	private ApplianceCompany() {
 		customerList = CustomerList.instance();
 		applianceList = ApplianceList.instance();
+		repairPlanList = RepairPlanList.instance();
 	}
 
 	/**
@@ -73,6 +75,30 @@ public class ApplianceCompany implements Serializable {
 	}
 
 	/**
+	 * Enrolls customer in a repair plan.
+	 * 
+	 * @param customer  the customer that is to be enrolled in the plan
+	 * @param appliance the appliance corresponding to the repair plan
+	 * @return the repair plan if it is successfully enrolled
+	 */
+	public int enrollInRepairPlan(String customerId, String brand, String model) {
+		ApplianceItem appliance = applianceList.search(brand, model, "");
+		Customer customer = customerList.search(customerId, "", "");
+		if (appliance == null) {
+			return APPLIANCE_NOT_FOUND;
+		}
+		if (customer == null) {
+			return CUSTOMER_NOT_FOUND;
+		}
+
+		RepairPlan repairPlan = new RepairPlan(customer, appliance);
+		if (repairPlanList.insertRepairPlan(repairPlan)) {
+			return OPERATION_COMPLETED;
+		}
+		return OPERATION_FAILED;
+	}
+
+	/**
 	 * Organizes the operations for adding inventory.
 	 * 
 	 * @param brand    appliance brand
@@ -85,9 +111,9 @@ public class ApplianceCompany implements Serializable {
 		int result = OPERATION_FAILED;
 		int quantityToAdd = quantity;
 
-		ApplianceItem appliance = applianceList.search(brand, model);
+		ApplianceItem appliance = applianceList.search(brand, model, "");
 		if (appliance == null) {
-			result = WASHER_NOT_FOUND;
+			result = APPLIANCE_NOT_FOUND;
 		} else {
 
 			while (quantityToAdd > 0) {
@@ -205,11 +231,11 @@ public class ApplianceCompany implements Serializable {
 	 */
 	public int purchaseWasher(String customerId, String brand, String model, int quantity) {
 		int result = OPERATION_FAILED;
-		ApplianceItem appliance = applianceList.search(brand, model);
-		Customer customer = customerList.search(customerId, "");
+		ApplianceItem appliance = applianceList.search(brand, model, "");
+		Customer customer = customerList.search(customerId, "", "");
 
 		if (appliance == null) {
-			return (WASHER_NOT_FOUND);
+			return (APPLIANCE_NOT_FOUND);
 		}
 
 		if (customer == null) {
@@ -242,7 +268,7 @@ public class ApplianceCompany implements Serializable {
 	 * @return true if customer is a part of the customer list collection
 	 */
 	public Customer searchCustomer(String customerId) {
-		return customerList.search(customerId, "");
+		return customerList.search(customerId, "", "");
 	}
 
 	/**
