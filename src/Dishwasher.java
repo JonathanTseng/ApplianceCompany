@@ -26,7 +26,7 @@ public class Dishwasher extends ApplianceItem implements Serializable, Matchable
 	 */
 	@Override
 	public String toString() {
-		return "Dishwasher Information: \n" + super.toString();
+		return "Dishwasher: " + super.toString();
 	}
 
 	// I think I need to implement something for the visitor pattern

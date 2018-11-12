@@ -47,15 +47,14 @@ public class Refrigerator extends ApplianceItem implements Serializable, Matchab
 	 */
 	@Override
 	public String toString() {
-		return "Refrigerator Information: \n" + super.toString() + "Capacity (liters) " + capacity;
+		return "Refrigerator: " + super.toString() + "\tCapacity (liters) " + capacity;
 	}
 
 	// I think I need to implement something for the visitor pattern
 	/**
 	 * Implements the accept method of the Visitor pattern.
 	 * 
-	 * @param visitor
-	 *            the Visitor that will process the Periodical object
+	 * @param visitor the Visitor that will process the Periodical object
 	 */
 	@Override
 	public void accept(ApplianceItemVisitor visitor) {

@@ -211,7 +211,7 @@ public class ApplianceCompany implements Serializable {
 	 * 
 	 * @return iterator to the collection
 	 */
-	public Iterator listWashers() {
+	public Iterator listAppliances() {
 		if (applianceList.iterator() == null) {
 			return (null);
 		} else {
@@ -270,16 +270,15 @@ public class ApplianceCompany implements Serializable {
 	public Customer searchCustomer(String customerId) {
 		return customerList.search(customerId, "", "");
 	}
-	
+
 	/*
 	 * List all current back orders.
 	 */
-	
+
 	public void listBackOrders() {
-		
-		
+
 	}
-	
+
 	/*
 	 * This method will list all users currently under a repair plan.
 	 */
@@ -289,30 +288,31 @@ public class ApplianceCompany implements Serializable {
 		} else {
 			return repairPlanList.iterator();
 		}
-		
+
 	}
-	
-	
+
 	/*
-	 * This method will bill all users who are currently signed up for a repair plan. 
+	 * This method will bill all users who are currently signed up for a repair
+	 * plan.
 	 */
 	public void billRepairPlan() {
-		
-		
+
 	}
-	
+
 	/*
 	 * @param customerID id of customer
+	 * 
 	 * @param brand brand of appliance
-	 * @param model  model of appliance
+	 * 
+	 * @param model model of appliance
 	 */
-	
-	public int withdrawRepairPlan(String customerId, String brand,String model) {
-		
+
+	public int withdrawRepairPlan(String customerId, String brand, String model) {
+
 		int result = OPERATION_FAILED;
 		ApplianceItem appliance = applianceList.search(brand, model, "");
 		Customer customer = customerList.search(customerId, "", "");
-		
+
 		if (appliance == null) {
 			return (APPLIANCE_NOT_FOUND);
 		}
@@ -320,11 +320,10 @@ public class ApplianceCompany implements Serializable {
 		if (customer == null) {
 			return (CUSTOMER_NOT_FOUND);
 		}
-		
-		repairPlanList.removeRepairPlan(customerId,brand, model);
+
+		repairPlanList.removeRepairPlan(customerId, brand, model);
 		return result;
 	}
-	
 
 	/**
 	 * This method will try and deserialize a saved file of Washer Company from a

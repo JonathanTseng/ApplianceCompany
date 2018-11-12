@@ -1,4 +1,5 @@
 import java.io.Serializable;
+import java.text.NumberFormat;
 
 /**
  * Represents a single clothes dryer.
@@ -8,6 +9,7 @@ import java.io.Serializable;
  */
 public class ClothesDryer extends ApplianceItem implements Serializable, Matchable<String> {
 	private static final long serialVersionUID = 1L;
+	private NumberFormat moneyFormat = NumberFormat.getCurrencyInstance();
 	private double repairPlanPrice;
 
 	/**
@@ -48,15 +50,14 @@ public class ClothesDryer extends ApplianceItem implements Serializable, Matchab
 	 */
 	@Override
 	public String toString() {
-		return "Clothes Dryer Information: \n" + super.toString() + "\tRepair Plan Price " + repairPlanPrice;
+		return "Clothes Dryer: " + super.toString() + "\tRepair Plan Price " + moneyFormat.format(repairPlanPrice);
 	}
 
 	// I think I need to implement something for the visitor pattern
 	/**
 	 * Implements the accept method of the Visitor pattern.
 	 * 
-	 * @param visitor
-	 *            the Visitor that will process the Periodical object
+	 * @param visitor the Visitor that will process the Periodical object
 	 */
 	@Override
 	public void accept(ApplianceItemVisitor visitor) {

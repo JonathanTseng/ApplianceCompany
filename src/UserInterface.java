@@ -340,17 +340,22 @@ public class UserInterface {
 	}
 
 	/**
-	 * Method to be called to display a list of all the washers.
+	 * Method to be called to display a list of all the appliances.
 	 * 
 	 */
-	/*
-	 * Commentend out for testing only, do not erase public void displayWasherList()
-	 * { Iterator result = applianceCompany.listWashers(); if (result == null) {
-	 * System.out.println("No washers to print.\n"); } else {
-	 * System.out.println("Here is the list of washers: "); while (result.hasNext())
-	 * { Washer washer = (Washer) result.next();
-	 * System.out.println(washer.toString()); } System.out.println(); } }
-	 */
+	public void displayApplianceList() {
+		Iterator result = applianceCompany.listAppliances();
+		if (result == null) {
+			System.out.println("No washers to print.\n");
+		} else {
+			System.out.println("Here is the list of washers: ");
+			while (result.hasNext()) {
+				ApplianceItem appliance = (ApplianceItem) result.next();
+				System.out.println(appliance.toString());
+			}
+			System.out.println();
+		}
+	}
 
 	/**
 	 * Method to be called for displaying the total sales amount.
@@ -359,6 +364,7 @@ public class UserInterface {
 	public void displayTotalSales() {
 		System.out.println("Total Sales $" + applianceCompany.displayTotal());
 	}
+
 // 	NEED TO UPDATE TAKEN FROM LIST CUSTOMERS,NEED TO SHOW ENTIRE BACK ORDER WITH VISIOR PATTERN
 	private void listBackOrder() {
 		Iterator result = applianceCompany.listCustomers();
@@ -374,7 +380,9 @@ public class UserInterface {
 		}
 
 	}
-	// 	NEED TO UPDATE TAKEN FROM LIST CUSTOMERS,NEED TO SHOW LIST OF USER WITHIN REPAIR PLANS
+
+	// NEED TO UPDATE TAKEN FROM LIST CUSTOMERS,NEED TO SHOW LIST OF USER WITHIN
+	// REPAIR PLANS
 	private void listUserRepairPlans() {
 		Iterator result = applianceCompany.listUsersRepairPlans();
 		if (result == null) {
@@ -412,8 +420,7 @@ public class UserInterface {
 			System.out.println("Could not withdraw from Repair Plan.\n");
 			break;
 		case ApplianceCompany.OPERATION_COMPLETED:
-			System.out.println("Customer succesfully withdrew from"
-					+ " Repair Plan.");
+			System.out.println("Customer succesfully withdrew from" + " Repair Plan.");
 			break;
 		default:
 			System.out.println("An error has occurred\n");
@@ -507,10 +514,10 @@ public class UserInterface {
 				purchase();
 				break;
 			case LIST_APPLIANCE:
-				// displayWasherList(); Commentend out for testing only, do not erase
+				displayApplianceList();
 				break;
 			case LIST_CUSTOMERS:
-				// displayCustomerList(); Commentend out for testing only, do not erase
+				displayCustomerList();
 				break;
 			case DISPLAY_TOTAL:
 				displayTotalSales();
