@@ -281,7 +281,7 @@ public class ApplianceCompany implements Serializable {
 	 * 
 	 * @param customer  the customer that is to be enrolled in the plan
 	 * @param appliance the appliance corresponding to the repair plan
-	 * @return the repair plan if it is successfully enrolled
+	 * @return a code that represents the outcome of the operation
 	 */
 	public int enrollInRepairPlan(String customerId, String brand, String model) {
 		ApplianceItem appliance = applianceList.search(brand, model, "");
@@ -308,6 +308,14 @@ public class ApplianceCompany implements Serializable {
 	 * @param model model of appliance
 	 */
 
+	/**
+	 * Removes a customer from a repair plan
+	 * 
+	 * @param brand      the appliance brand
+	 * @param model      the appliance model
+	 * @param customerId the id of the customer tied to the repair plan
+	 * @return a code that represents the outcome of the operation
+	 */
 	public int withdrawRepairPlan(String brand, String model, String customerId) {
 		int result = OPERATION_FAILED;
 		RepairPlan repairPlan = repairPlanList.search(brand, model, customerId);
