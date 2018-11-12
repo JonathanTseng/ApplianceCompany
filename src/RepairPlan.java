@@ -14,7 +14,7 @@ public class RepairPlan implements Matchable<String>, Serializable {
 	public RepairPlan(Customer customer, ApplianceItem appliance) {
 		this.setCustomer(customer);
 		this.setAppliance(appliance);
-		this.setPrice(appliance.getPrice());
+		this.setPrice(appliance.getRepairPlanPrice());
 	}
 
 	public Customer getCustomer() {

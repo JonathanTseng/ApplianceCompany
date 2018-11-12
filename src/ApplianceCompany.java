@@ -22,6 +22,7 @@ public class ApplianceCompany implements Serializable {
 	public static final int BACKORDER_PLACED = 4;
 	public static final int CUSTOMER_NOT_FOUND = 5;
 	public static final int REPAIR_PLAN_NOT_FOUND = 6;
+	public static final int ALREADY_EXISTS = 7;
 
 	public static final int CLOTHES_WASHER = 1;
 	public static final int CLOTHES_DRYER = 2;
@@ -33,7 +34,8 @@ public class ApplianceCompany implements Serializable {
 	private ApplianceList applianceList;
 	private RepairPlanList repairPlanList;
 	private static ApplianceCompany applianceCompany;
-	private double totalSales = 0;
+	private double totalApplianceSales = 0;
+	private double totalRepairPlanSales = 0;
 
 	/**
 	 * Private for the singleton pattern, it creates the customer list and the
@@ -157,16 +159,31 @@ public class ApplianceCompany implements Serializable {
 	 */
 
 	/**
-	 * Organizes the operations for displaying the total sales
+	 * Getter for the total appliance sales
 	 * 
-	 * @return the amount of total sales
+	 * @return the amount of total appliance sales
 	 */
-	public double displayTotal() {
-		return totalSales;
+	public double getTotalApplianceSales() {
+		return totalApplianceSales;
 	}
 
+	/**
+	 * Setter for the total appliance sales
+	 * 
+	 * @param additionalSaleTotal the amount to be added to the total appliance
+	 *                            sales
+	 */
 	public void setTotalSales(double additionalSaleTotal) {
-		totalSales += additionalSaleTotal;
+		totalApplianceSales += additionalSaleTotal;
+	}
+
+	/**
+	 * Getter for the total repair plan sales
+	 * 
+	 * @return the amount of total repair plan sales
+	 */
+	public double getTotalRepairPlanSales() {
+		return totalRepairPlanSales;
 	}
 
 	/**
@@ -268,12 +285,26 @@ public class ApplianceCompany implements Serializable {
 
 	}
 
-	/*
-	 * This method will bill all users who are currently signed up for a repair
-	 * plan.
+	/**
+	 * Bills all of the customers in a repair plan.
+	 * 
+	 * @return a code that represents the outcome of the operation
 	 */
-	public void billRepairPlan() {
-
+	public int billRepairPlans() {
+		int result = OPERATION_FAILED;
+		Iterator repairPlanIterator = repairPlanList.iterator();
+		if (repairPlanIterator == null) {
+			result = REPAIR_PLAN_NOT_FOUND;
+		} else {
+			while (repairPlanIterator.hasNext()) {
+				RepairPlan repairPlan = (RepairPlan) repairPlanIterator.next();
+				Customer customer = repairPlan.getCustomer();
+				totalRepairPlanSales += repairPlan.getPrice();
+				customer.chargeRepairPlanAccount(repairPlan.getPrice());
+			}
+			result = OPERATION_COMPLETED;
+		}
+		return result;
 	}
 
 	/**
@@ -286,27 +317,25 @@ public class ApplianceCompany implements Serializable {
 	public int enrollInRepairPlan(String customerId, String brand, String model) {
 		ApplianceItem appliance = applianceList.search(brand, model, "");
 		Customer customer = customerList.search(customerId, "", "");
+		RepairPlan repairPlanCheck = repairPlanList.search(brand, model, customerId);
 		if (appliance == null) {
 			return APPLIANCE_NOT_FOUND;
 		}
 		if (customer == null) {
 			return CUSTOMER_NOT_FOUND;
 		}
-
-		RepairPlan repairPlan = new RepairPlan(customer, appliance);
-		if (repairPlanList.insertRepairPlan(repairPlan)) {
-			return OPERATION_COMPLETED;
+		if (repairPlanCheck != null) {
+			return ALREADY_EXISTS;
+		}
+		if (appliance instanceof ClothesWasher || appliance instanceof ClothesDryer) {
+			RepairPlan repairPlan = new RepairPlan(customer, appliance);
+			if (repairPlanList.insertRepairPlan(repairPlan)) {
+				customer.setHasRepairPlan(true);
+				return OPERATION_COMPLETED;
+			}
 		}
 		return OPERATION_FAILED;
 	}
-
-	/*
-	 * @param customerID id of customer
-	 * 
-	 * @param brand brand of appliance
-	 * 
-	 * @param model model of appliance
-	 */
 
 	/**
 	 * Removes a customer from a repair plan
@@ -320,9 +349,11 @@ public class ApplianceCompany implements Serializable {
 		int result = OPERATION_FAILED;
 		RepairPlan repairPlan = repairPlanList.search(brand, model, customerId);
 		if (repairPlan == null) {
-			return (REPAIR_PLAN_NOT_FOUND);
+			return REPAIR_PLAN_NOT_FOUND;
 		}
 		if (repairPlanList.removeRepairPlan(brand, model, customerId)) {
+			Customer customer = customerList.search(customerId, "", "");
+			customer.setHasRepairPlan(false);
 			result = OPERATION_COMPLETED;
 		}
 		return result;

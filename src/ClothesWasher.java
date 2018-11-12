@@ -31,6 +31,7 @@ public class ClothesWasher extends ApplianceItem implements Serializable, Matcha
 	 * 
 	 * @return the price of a repair plan for the washer
 	 */
+	@Override
 	public double getRepairPlanPrice() {
 		return repairPlanPrice;
 	}

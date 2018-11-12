@@ -362,7 +362,8 @@ public class UserInterface {
 	 * 
 	 */
 	public void displayTotalSales() {
-		System.out.println("Total Sales $" + applianceCompany.displayTotal());
+		System.out.println("Total Appliance Sales $" + applianceCompany.getTotalApplianceSales());
+		System.out.println("Total Repair Plan Sales $" + applianceCompany.getTotalRepairPlanSales());
 	}
 
 // 	NEED TO UPDATE TAKEN FROM LIST CUSTOMERS,NEED TO SHOW ENTIRE BACK ORDER WITH VISIOR PATTERN
@@ -398,9 +399,21 @@ public class UserInterface {
 
 	}
 
-	private void billRepairPlan() {
-		applianceCompany.billRepairPlan();
-
+	private void billRepairPlans() {
+		int result = applianceCompany.billRepairPlans();
+		switch (result) {
+		case ApplianceCompany.REPAIR_PLAN_NOT_FOUND:
+			System.out.println("No repair plans exist\n");
+			break;
+		case ApplianceCompany.OPERATION_FAILED:
+			System.out.println("Could not bill repair plans.\n");
+			break;
+		case ApplianceCompany.OPERATION_COMPLETED:
+			System.out.println("Repair plans were successfully billed.");
+			break;
+		default:
+			System.out.println("An error has occurred\n");
+		}
 	}
 
 	private void withdrawRepairPlan() {
@@ -410,17 +423,14 @@ public class UserInterface {
 		String model = getToken("Enter appliance model");
 		result = applianceCompany.withdrawRepairPlan(brand, model, customerId);
 		switch (result) {
-		case ApplianceCompany.APPLIANCE_NOT_FOUND:
-			System.out.println("No such washer in inventory\n");
-			break;
-		case ApplianceCompany.CUSTOMER_NOT_FOUND:
-			System.out.println("No such customer in customer list\n");
+		case ApplianceCompany.REPAIR_PLAN_NOT_FOUND:
+			System.out.println("No such repair plan exists\n");
 			break;
 		case ApplianceCompany.OPERATION_FAILED:
 			System.out.println("Could not withdraw from Repair Plan.\n");
 			break;
 		case ApplianceCompany.OPERATION_COMPLETED:
-			System.out.println("Customer succesfully withdrew from" + " Repair Plan.");
+			System.out.println("Customer successfully withdrew from Repair Plan.");
 			break;
 		default:
 			System.out.println("An error has occurred\n");
@@ -439,8 +449,14 @@ public class UserInterface {
 		String model = getToken("Enter appliance model");
 		result = applianceCompany.enrollInRepairPlan(customerId, brand, model);
 		switch (result) {
-		case ApplianceCompany.REPAIR_PLAN_NOT_FOUND:
-			System.out.println("No such repair plan exists\n");
+		case ApplianceCompany.APPLIANCE_NOT_FOUND:
+			System.out.println("No such washer in inventory\n");
+			break;
+		case ApplianceCompany.CUSTOMER_NOT_FOUND:
+			System.out.println("No such customer in customer list\n");
+			break;
+		case ApplianceCompany.ALREADY_EXISTS:
+			System.out.println("Repair plan already exists\n");
 			break;
 		case ApplianceCompany.OPERATION_FAILED:
 			System.out.println("Could not be enrolled in Repair Plan.\n");
@@ -526,7 +542,7 @@ public class UserInterface {
 				withdrawRepairPlan();
 				break;
 			case BILL_REPAIRPLAN:
-				billRepairPlan();
+				billRepairPlans();
 				break;
 			case LIST_REPAIRPLANS:
 				listUserRepairPlans();

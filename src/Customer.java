@@ -13,6 +13,9 @@ public class Customer implements Serializable, Matchable<String> {
 	private String phoneNumber;
 	private String name;
 
+	private boolean hasRepairPlan = false;
+	private double repairPlanAccount = 0.0;
+
 	/**
 	 * Constructor for an individual customer.
 	 * 
@@ -77,6 +80,37 @@ public class Customer implements Serializable, Matchable<String> {
 	 */
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	/**
+	 * Getter for hasRepairPlan;
+	 * 
+	 * @return whether or not the customer has a repair plan
+	 */
+	public boolean getHasRepairPlan() {
+		return hasRepairPlan;
+	}
+
+	/**
+	 * Setter for has repair plan
+	 * 
+	 * @param value the true or false value
+	 */
+	public void setHasRepairPlan(boolean value) {
+		hasRepairPlan = value;
+	}
+
+	/**
+	 * Getter for repair plan account
+	 * 
+	 * @return the amount in the repair plan account
+	 */
+	public double getRepairPlanAccount() {
+		return repairPlanAccount;
+	}
+
+	public void chargeRepairPlanAccount(double billAmount) {
+		repairPlanAccount += billAmount;
 	}
 
 	/*
