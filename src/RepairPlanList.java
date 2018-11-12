@@ -36,8 +36,8 @@ public class RepairPlanList extends ItemList<RepairPlan, String> {
 	 * @param customerId     the id of the customer that has the repair plan
 	 * @return true iff appliance could be removed
 	 */
-	public boolean removeRepairPlan(String applianceModel, String applianceBrand, String customerId) {
-		RepairPlan repairPlan = search(applianceModel, applianceBrand, customerId);
+	public boolean removeRepairPlan(String applianceBrand, String applianceModel, String customerId) {
+		RepairPlan repairPlan = search(applianceBrand, applianceModel, customerId);
 		if (repairPlan == null) {
 			return false;
 		} else {

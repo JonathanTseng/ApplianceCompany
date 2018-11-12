@@ -21,6 +21,7 @@ public class ApplianceCompany implements Serializable {
 	public static final int OPERATION_COMPLETED = 3;
 	public static final int BACKORDER_PLACED = 4;
 	public static final int CUSTOMER_NOT_FOUND = 5;
+	public static final int REPAIR_PLAN_NOT_FOUND = 6;
 
 	public static final int CLOTHES_WASHER = 1;
 	public static final int CLOTHES_DRYER = 2;
@@ -72,30 +73,6 @@ public class ApplianceCompany implements Serializable {
 			return (customer);
 		}
 		return null;
-	}
-
-	/**
-	 * Enrolls customer in a repair plan.
-	 * 
-	 * @param customer  the customer that is to be enrolled in the plan
-	 * @param appliance the appliance corresponding to the repair plan
-	 * @return the repair plan if it is successfully enrolled
-	 */
-	public int enrollInRepairPlan(String customerId, String brand, String model) {
-		ApplianceItem appliance = applianceList.search(brand, model, "");
-		Customer customer = customerList.search(customerId, "", "");
-		if (appliance == null) {
-			return APPLIANCE_NOT_FOUND;
-		}
-		if (customer == null) {
-			return CUSTOMER_NOT_FOUND;
-		}
-
-		RepairPlan repairPlan = new RepairPlan(customer, appliance);
-		if (repairPlanList.insertRepairPlan(repairPlan)) {
-			return OPERATION_COMPLETED;
-		}
-		return OPERATION_FAILED;
 	}
 
 	/**
@@ -299,6 +276,30 @@ public class ApplianceCompany implements Serializable {
 
 	}
 
+	/**
+	 * Enrolls customer in a repair plan.
+	 * 
+	 * @param customer  the customer that is to be enrolled in the plan
+	 * @param appliance the appliance corresponding to the repair plan
+	 * @return the repair plan if it is successfully enrolled
+	 */
+	public int enrollInRepairPlan(String customerId, String brand, String model) {
+		ApplianceItem appliance = applianceList.search(brand, model, "");
+		Customer customer = customerList.search(customerId, "", "");
+		if (appliance == null) {
+			return APPLIANCE_NOT_FOUND;
+		}
+		if (customer == null) {
+			return CUSTOMER_NOT_FOUND;
+		}
+
+		RepairPlan repairPlan = new RepairPlan(customer, appliance);
+		if (repairPlanList.insertRepairPlan(repairPlan)) {
+			return OPERATION_COMPLETED;
+		}
+		return OPERATION_FAILED;
+	}
+
 	/*
 	 * @param customerID id of customer
 	 * 
@@ -307,21 +308,15 @@ public class ApplianceCompany implements Serializable {
 	 * @param model model of appliance
 	 */
 
-	public int withdrawRepairPlan(String customerId, String brand, String model) {
-
+	public int withdrawRepairPlan(String brand, String model, String customerId) {
 		int result = OPERATION_FAILED;
-		ApplianceItem appliance = applianceList.search(brand, model, "");
-		Customer customer = customerList.search(customerId, "", "");
-
-		if (appliance == null) {
-			return (APPLIANCE_NOT_FOUND);
+		RepairPlan repairPlan = repairPlanList.search(brand, model, customerId);
+		if (repairPlan == null) {
+			return (REPAIR_PLAN_NOT_FOUND);
 		}
-
-		if (customer == null) {
-			return (CUSTOMER_NOT_FOUND);
+		if (repairPlanList.removeRepairPlan(brand, model, customerId)) {
+			result = OPERATION_COMPLETED;
 		}
-
-		repairPlanList.removeRepairPlan(customerId, brand, model);
 		return result;
 	}
 

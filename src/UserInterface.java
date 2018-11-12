@@ -408,7 +408,7 @@ public class UserInterface {
 		String customerId = getToken("Enter customer ID");
 		String brand = getToken("Enter appliance brand");
 		String model = getToken("Enter appliance model");
-		result = applianceCompany.withdrawRepairPlan(customerId, brand, model);
+		result = applianceCompany.withdrawRepairPlan(brand, model, customerId);
 		switch (result) {
 		case ApplianceCompany.APPLIANCE_NOT_FOUND:
 			System.out.println("No such washer in inventory\n");
@@ -439,11 +439,8 @@ public class UserInterface {
 		String model = getToken("Enter appliance model");
 		result = applianceCompany.enrollInRepairPlan(customerId, brand, model);
 		switch (result) {
-		case ApplianceCompany.APPLIANCE_NOT_FOUND:
-			System.out.println("No such washer in inventory\n");
-			break;
-		case ApplianceCompany.CUSTOMER_NOT_FOUND:
-			System.out.println("No such customer in customer list\n");
+		case ApplianceCompany.REPAIR_PLAN_NOT_FOUND:
+			System.out.println("No such repair plan exists\n");
 			break;
 		case ApplianceCompany.OPERATION_FAILED:
 			System.out.println("Could not be enrolled in Repair Plan.\n");
