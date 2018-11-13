@@ -352,6 +352,7 @@ public class UserInterface {
 		} else {
 			System.out.println("Here is the list of washers: ");
 			while (result.hasNext()) {
+				// if(type == 1 && appliance istanceof ClothesWasher) for all diff types
 				ApplianceItem appliance = (ApplianceItem) result.next();
 				System.out.println(appliance.toString());
 			}
