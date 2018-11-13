@@ -1,6 +1,7 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.text.NumberFormat;
 import java.util.Iterator;
 import java.util.StringTokenizer;
 
@@ -18,6 +19,7 @@ public class UserInterface {
 	private BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 	private int LIST_REPAIRPLAN;
 	private static ApplianceCompany applianceCompany;
+	private NumberFormat moneyFormat = NumberFormat.getCurrencyInstance();
 	private static final int EXIT = 0;
 	private static final int ADD_CUSTOMER = 1;
 	private static final int ADD_APPLIANCE = 2;
@@ -362,8 +364,9 @@ public class UserInterface {
 	 * 
 	 */
 	public void displayTotalSales() {
-		System.out.println("Total Appliance Sales $" + applianceCompany.getTotalApplianceSales());
-		System.out.println("Total Repair Plan Sales $" + applianceCompany.getTotalRepairPlanSales());
+		System.out.println("Total Appliance Sales $" + moneyFormat.format(applianceCompany.getTotalApplianceSales()));
+		System.out
+				.println("Total Repair Plan Sales $" + moneyFormat.format(applianceCompany.getTotalRepairPlanSales()));
 	}
 
 // 	NEED TO UPDATE TAKEN FROM LIST CUSTOMERS,NEED TO SHOW ENTIRE BACK ORDER WITH VISIOR PATTERN
@@ -384,6 +387,10 @@ public class UserInterface {
 
 	// NEED TO UPDATE TAKEN FROM LIST CUSTOMERS,NEED TO SHOW LIST OF USER WITHIN
 	// REPAIR PLANS
+	/**
+	 * Method to be called to display a list of all the customers enrolled in repair
+	 * plans.
+	 */
 	private void listUserRepairPlans() {
 		Iterator result = applianceCompany.listUsersRepairPlans();
 		if (result == null) {
@@ -391,8 +398,11 @@ public class UserInterface {
 		} else {
 			System.out.println("Here is the list of customers in a repair plan: ");
 			while (result.hasNext()) {
-				Customer customer = (Customer) result.next();
-				System.out.println(customer.toString());
+				RepairPlan repairPlan = (RepairPlan) result.next();
+				Customer customer = repairPlan.getCustomer();
+				ApplianceItem appliance = repairPlan.getAppliance();
+				System.out.println(customer.toString() + "\tAccount Balance: " + customer.getRepairPlanAccount()
+						+ "\tAppliance Brand: " + appliance.getBrand() + " Model: " + appliance.getModel());
 			}
 			System.out.println();
 		}

@@ -201,7 +201,7 @@ public class ApplianceCompany implements Serializable {
 	}
 
 	/**
-	 * Organizes the operations for displaying the washers
+	 * Organizes the operations for displaying the appliances
 	 * 
 	 * @return iterator to the collection
 	 */
