@@ -251,20 +251,6 @@ public class UserInterface {
 			}
 		} while (true);
 	}
-	/*
-	 * not needed with addition of addApplianceItems() method /** Method to be
-	 * called for adding a washer. Prompts the user for the appropriate values and
-	 * uses the appropriate WasherCompany method for adding a washer.
-	 * 
-	 *
-	 * public void addWashers() { Washer result; do { String brand =
-	 * getToken("Enter brand"); String model = getToken("Enter model"); double price
-	 * = getDoubleNumber("Enter price"); result = applianceCompany.addWasher(brand,
-	 * model, price); if (result != null) { System.out.println("Washer was added!");
-	 * System.out.println(result + "\n"); } else {
-	 * System.out.println("Washer could not be added.\n"); } } while
-	 * (yesOrNo("Add more washers?")); }
-	 */
 
 	/**
 	 * Method to be called for adding inventory of an appliance. Prompts the user
