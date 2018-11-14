@@ -39,6 +39,7 @@ public class Furnace extends ApplianceItem implements Serializable, Matchable<St
 		while (purchaseQuantity > 0) {
 			if (quantity > 0) {
 				super.decrementQuantity();
+				quantity--;
 				ApplianceCompany.instance().setTotalSales(super.getPrice());
 				result = ApplianceCompany.OPERATION_COMPLETED;
 			} else {

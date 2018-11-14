@@ -197,9 +197,8 @@ public class ApplianceItem implements Matchable<String>, Serializable {
 		return 0;
 	}
 
-	// needs to be updated
 	/**
-	 * String form of washer
+	 * String form of appliance
 	 * 
 	 */
 	public String toString() {

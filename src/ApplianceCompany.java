@@ -101,7 +101,7 @@ public class ApplianceCompany implements Serializable {
 				appliance.addQuantity(1);
 				if (appliance.hasBackOrder()) {
 					BackOrder backOrder = appliance.getNextBackOrder();
-					purchaseWasher(backOrder.getCustomer().getId(), backOrder.getApplianceItem().getBrand(),
+					purchaseAppliance(backOrder.getCustomer().getId(), backOrder.getApplianceItem().getBrand(),
 							backOrder.getApplianceItem().getModel(), 1);
 				}
 				quantityToAdd--;
@@ -112,7 +112,7 @@ public class ApplianceCompany implements Serializable {
 			if (backOrder == null) {
 				result = OPERATION_COMPLETED;
 			} else {
-				purchaseWasher(backOrder.getCustomer().getName(), backOrder.getApplianceItem().getBrand(),
+				purchaseAppliance(backOrder.getCustomer().getName(), backOrder.getApplianceItem().getBrand(),
 						backOrder.getApplianceItem().getModel(), backOrder.getApplianceItem().getQuantity());
 				result = OPERATION_COMPLETED;
 			}
@@ -288,7 +288,7 @@ public class ApplianceCompany implements Serializable {
 	 * @param quantity   quantity to be purchased
 	 * @return a code that represents the outcome of the operation
 	 */
-	public int purchaseWasher(String customerId, String brand, String model, int quantity) {
+	public int purchaseAppliance(String customerId, String brand, String model, int quantity) {
 		int result = OPERATION_FAILED;
 		ApplianceItem appliance = applianceList.search(brand, model, "");
 		Customer customer = customerList.search(customerId, "", "");

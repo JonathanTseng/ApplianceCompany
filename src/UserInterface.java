@@ -281,19 +281,19 @@ public class UserInterface {
 			result = applianceCompany.addInventory(brand, model, quantity);
 			switch (result) {
 			case ApplianceCompany.APPLIANCE_NOT_FOUND:
-				System.out.println("No such washer in inventory\n");
+				System.out.println("No such appliance in inventory\n");
 				break;
 			case ApplianceCompany.OPERATION_FAILED:
-				System.out.println("Washer quantity could not be updated.\n");
+				System.out.println("Appliance quantity could not be updated.\n");
 				break;
 			case ApplianceCompany.OPERATION_COMPLETED:
-				System.out.println("Washer quantity was updated.");
-				System.out.println("Any back orders on this washer were processed.\n");
+				System.out.println("Appliance quantity was updated.");
+				System.out.println("Any back orders on this appliance were processed.\n");
 				break;
 			default:
 				System.out.println("An error has occurred\n");
 			}
-			if (!yesOrNo("Add more quantity for other washers?")) {
+			if (!yesOrNo("Add more quantity for other appliance?")) {
 				break;
 			}
 		} while (true);
@@ -317,7 +317,7 @@ public class UserInterface {
 			String brand = getToken("Enter appliance brand");
 			String model = getToken("Enter appliance model");
 			int quantity = getIntegerNumber("Enter quantity");
-			result = applianceCompany.purchaseWasher(customerId, brand, model, quantity);
+			result = applianceCompany.purchaseAppliance(customerId, brand, model, quantity);
 			if (result == ApplianceCompany.OPERATION_COMPLETED) {
 				System.out.println("Appliance was successfully purchased.\n");
 			} else if (result == ApplianceCompany.BACKORDER_PLACED) {
@@ -325,6 +325,8 @@ public class UserInterface {
 			} else if (result == ApplianceCompany.APPLIANCE_NOT_FOUND) {
 				System.out.println("Appliance not found!");
 				System.out.println("Purchase could not be completed.\n");
+			} else if (result == ApplianceCompany.FURNACE) {
+				System.out.println("Unable to place back orders on furnaces.\n");
 			} else {
 				System.out.println("Purchase could not be completed.\n");
 			}
