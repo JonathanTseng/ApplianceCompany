@@ -155,6 +155,25 @@ public class UserInterface {
 	}
 
 	/**
+	 * Prompts the user to enter an appliance type.
+	 * 
+	 * @return the type of appliance
+	 */
+	public int getApplianceType() {
+		int type;
+		do {
+			type = getIntegerNumber("Enter \n" + ApplianceCompany.CLOTHES_WASHER + " for Clothes Washer\n"
+					+ ApplianceCompany.CLOTHES_DRYER + " for Clothes Dryer\n" + ApplianceCompany.KITCHEN_RANGE
+					+ " for Kitchen Range\n" + ApplianceCompany.DISHWASHER + " for Dishwasher\n"
+					+ ApplianceCompany.REFRIGERATOR + " for Refrigerator\n" + ApplianceCompany.FURNACE
+					+ " for Furnace");
+		} while (type != ApplianceCompany.CLOTHES_WASHER && type != ApplianceCompany.CLOTHES_DRYER
+				&& type != ApplianceCompany.KITCHEN_RANGE && type != ApplianceCompany.DISHWASHER
+				&& type != ApplianceCompany.REFRIGERATOR && type != ApplianceCompany.FURNACE);
+		return type;
+	}
+
+	/**
 	 * Displays the help screen
 	 * 
 	 */
@@ -195,7 +214,6 @@ public class UserInterface {
 		System.out.println(result + "\n");
 	}
 
-	// May want to refractor this method using extraction
 	/**
 	 * Method to be called for adding an appliance item. Prompts the user for the
 	 * appropriate values and uses the appropriate ApplianceCompany method for
@@ -205,16 +223,7 @@ public class UserInterface {
 	public void addApplianceItems() {
 		ApplianceItem result;
 		do {
-			int type;
-			do {
-				type = getIntegerNumber("Enter \n" + ApplianceCompany.CLOTHES_WASHER + " for Clothes Washer\n"
-						+ ApplianceCompany.CLOTHES_DRYER + " for Clothes Dryer\n" + ApplianceCompany.KITCHEN_RANGE
-						+ " for Kitchen Range\n" + ApplianceCompany.DISHWASHER + " for Dishwasher\n"
-						+ ApplianceCompany.REFRIGERATOR + " for Refrigerator\n" + ApplianceCompany.FURNACE
-						+ " for Furnace");
-			} while (type != ApplianceCompany.CLOTHES_WASHER && type != ApplianceCompany.CLOTHES_DRYER
-					&& type != ApplianceCompany.KITCHEN_RANGE && type != ApplianceCompany.DISHWASHER
-					&& type != ApplianceCompany.REFRIGERATOR && type != ApplianceCompany.FURNACE);
+			int type = getApplianceType();
 			String brand = getToken("Enter brand");
 			String model = getToken("Enter model");
 			double price = getDoubleNumber("EnterPrice");
@@ -346,25 +355,28 @@ public class UserInterface {
 	 * 
 	 */
 	public void displayApplianceList() {
-		Iterator result = applianceCompany.listAppliances();
-		int type = getIntegerNumber("What type of appliance");
-		if (result == null) {
-			System.out.println("No washers to print.\n");
+
+		// new attempt code
+		if (yesOrNo("Would you like to print all appliances? ")) {
+			// print the entire list entry
+			System.out.println(applianceCompany.listAppliances(0));
 		} else {
-			System.out.println("Here is the list of washers: ");
-			while (result.hasNext()) {
-				// if(type == 1 && appliance istanceof ClothesWasher) for all diff types
-				ApplianceItem appliance = (ApplianceItem) result.next();
-
-				// added code
-				if (type == 1 && appliance instanceof ClothesWasher) {
-					System.out.println(appliance.toString());
-				}
-
-				// System.out.println(appliance.toString());
-			}
-			System.out.println();
+			System.out.println(applianceCompany.listAppliances(getApplianceType()));
 		}
+
+		/*
+		 * old code Iterator result = applianceCompany.listAppliances(); int type =
+		 * getIntegerNumber("What type of appliance"); if (result == null) {
+		 * System.out.println("No washers to print.\n"); } else {
+		 * System.out.println("Here is the list of washers: "); while (result.hasNext())
+		 * { // if(type == 1 && appliance istanceof ClothesWasher) for all diff types
+		 * ApplianceItem appliance = (ApplianceItem) result.next();
+		 * 
+		 * // added code if (type == 1 && appliance instanceof ClothesWasher) {
+		 * System.out.println(appliance.toString()); }
+		 * 
+		 * // System.out.println(appliance.toString()); } System.out.println(); }
+		 */
 	}
 
 	/**
@@ -398,20 +410,6 @@ public class UserInterface {
 	/**
 	 * Method to be called to display a list of all the customers enrolled in repair
 	 * plans.
-	 */
-	/*
-	 * old method private void listUserRepairPlans() { Iterator result =
-	 * applianceCompany.listUsersRepairPlans(); if (result == null) {
-	 * System.out.println("No customers in repair plans.\n"); } else {
-	 * System.out.println("Here is the list of customers in a repair plan: "); while
-	 * (result.hasNext()) { RepairPlan repairPlan = (RepairPlan) result.next();
-	 * Customer customer = repairPlan.getCustomer(); ApplianceItem appliance =
-	 * repairPlan.getAppliance(); System.out.println(customer.toString() +
-	 * "\tAccount Balance: " + customer.getRepairPlanAccount() +
-	 * "\tAppliance Brand: " + appliance.getBrand() + " Model: " +
-	 * appliance.getModel()); } System.out.println(); }
-	 * 
-	 * }
 	 */
 
 	public void listUserRepairPlans() {

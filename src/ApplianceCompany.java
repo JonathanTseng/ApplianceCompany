@@ -205,14 +205,77 @@ public class ApplianceCompany implements Serializable {
 	 * 
 	 * @return iterator to the collection
 	 */
-	public Iterator listAppliances() {
-		if (applianceList.iterator() == null) {
-			return (null);
+	/**
+	 * Organizes the operations for displaying the appliances
+	 * 
+	 * @param type the type of appliance requested
+	 * @return a String of the requested list of appliances or the appropriate
+	 *         result
+	 */
+	public String listAppliances(int type) {
+		Iterator applianceIterator = applianceList.iterator();
+		String applianceList = "";
+		if (applianceIterator.hasNext() == false) {
+			applianceList = "There are no appliances that exist.\n";
 		} else {
-			return applianceList.iterator();
-		}
+			applianceList = "Here is the list of your requested appliances:\n";
+			while (applianceIterator.hasNext()) {
+				ApplianceItem appliance = (ApplianceItem) applianceIterator.next();
+				switch (type) {
+				case (0):
+					applianceList += appliance.toString() + "\n";
+					break;
+				case (CLOTHES_WASHER):
+					if (appliance instanceof ClothesWasher) {
+						applianceList += appliance.toString() + "\n";
+					}
+					break;
+				case (CLOTHES_DRYER):
+					if (appliance instanceof ClothesDryer) {
+						applianceList += appliance.toString() + "\n";
+					}
+					break;
+				case (KITCHEN_RANGE):
+					if (appliance instanceof KitchenRange) {
+						applianceList += appliance.toString() + "\n";
+					}
+					break;
+				case (DISHWASHER):
+					if (appliance instanceof Dishwasher) {
+						applianceList += appliance.toString() + "\n";
+					}
+					break;
+				case (REFRIGERATOR):
+					if (appliance instanceof Refrigerator) {
+						applianceList += appliance.toString() + "\n";
+					}
+					break;
+				case (FURNACE):
+					if (appliance instanceof Furnace) {
+						applianceList += appliance.toString() + "\n";
+					}
+					break;
 
+				}
+			}
+		}
+		return applianceList;
 	}
+
+	/*
+	 * code from userInterface delete after updating listAppliances method Iterator
+	 * result = applianceCompany.listAppliances(); int type =
+	 * getIntegerNumber("What type of appliance"); if (result == null) {
+	 * System.out.println("No washers to print.\n"); } else {
+	 * System.out.println("Here is the list of washers: "); while (result.hasNext())
+	 * { // if(type == 1 && appliance istanceof ClothesWasher) for all diff types
+	 * ApplianceItem appliance = (ApplianceItem) result.next();
+	 * 
+	 * // added code if (type == 1 && appliance instanceof ClothesWasher) {
+	 * System.out.println(appliance.toString()); }
+	 * 
+	 * // System.out.println(appliance.toString()); } System.out.println(); }
+	 */
 
 	/**
 	 * Organizes the purchase of an appliance
@@ -272,16 +335,6 @@ public class ApplianceCompany implements Serializable {
 	public void listBackOrders() {
 
 	}
-
-	/*
-	 * old listUserRepairPlans method This method will list all users currently
-	 * under a repair plan.
-	 * 
-	 * public Iterator listUsersRepairPlans() { if (repairPlanList.iterator() ==
-	 * null) { return (null); } else { return repairPlanList.iterator(); }
-	 * 
-	 * }
-	 */
 
 	/**
 	 * This method will list all users currently enrolled in a repair plan.
