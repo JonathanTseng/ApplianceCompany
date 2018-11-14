@@ -274,15 +274,36 @@ public class ApplianceCompany implements Serializable {
 	}
 
 	/*
-	 * This method will list all users currently under a repair plan.
+	 * old listUserRepairPlans method This method will list all users currently
+	 * under a repair plan.
+	 * 
+	 * public Iterator listUsersRepairPlans() { if (repairPlanList.iterator() ==
+	 * null) { return (null); } else { return repairPlanList.iterator(); }
+	 * 
+	 * }
 	 */
-	public Iterator listUsersRepairPlans() {
-		if (repairPlanList.iterator() == null) {
-			return (null);
-		} else {
-			return repairPlanList.iterator();
-		}
 
+	/**
+	 * This method will list all users currently enrolled in a repair plan.
+	 * 
+	 * @return a String of the users in repair plans or the appropriate result
+	 */
+	public String listUserRepairPlans() {
+		Iterator repairPlansIterator = repairPlanList.iterator();
+		String userRepairPlans = "";
+		if (repairPlansIterator.hasNext() == false) {
+			userRepairPlans = "No customers in repair plans.\n";
+		} else {
+			userRepairPlans = "Here is a list of customers in repair plans:\n";
+			while (repairPlansIterator.hasNext()) {
+				RepairPlan repairPlan = (RepairPlan) repairPlansIterator.next();
+				Customer customer = repairPlan.getCustomer();
+				ApplianceItem appliance = repairPlan.getAppliance();
+				userRepairPlans += customer.toString() + "\tAccount Balance: " + customer.getRepairPlanAccount()
+						+ "\tAppliance Brand: " + appliance.getBrand() + " Model: " + appliance.getModel() + "\n";
+			}
+		}
+		return userRepairPlans;
 	}
 
 	/**

@@ -347,6 +347,7 @@ public class UserInterface {
 	 */
 	public void displayApplianceList() {
 		Iterator result = applianceCompany.listAppliances();
+		int type = getIntegerNumber("What type of appliance");
 		if (result == null) {
 			System.out.println("No washers to print.\n");
 		} else {
@@ -354,7 +355,13 @@ public class UserInterface {
 			while (result.hasNext()) {
 				// if(type == 1 && appliance istanceof ClothesWasher) for all diff types
 				ApplianceItem appliance = (ApplianceItem) result.next();
-				System.out.println(appliance.toString());
+
+				// added code
+				if (type == 1 && appliance instanceof ClothesWasher) {
+					System.out.println(appliance.toString());
+				}
+
+				// System.out.println(appliance.toString());
 			}
 			System.out.println();
 		}
@@ -371,7 +378,7 @@ public class UserInterface {
 	}
 
 // 	NEED TO UPDATE TAKEN FROM LIST CUSTOMERS,NEED TO SHOW ENTIRE BACK ORDER WITH VISIOR PATTERN
-	private void listBackOrder() {
+	public void listBackOrder() {
 		Iterator result = applianceCompany.listCustomers();
 		if (result == null) {
 			System.out.println("No customers to print.\n");
@@ -392,25 +399,26 @@ public class UserInterface {
 	 * Method to be called to display a list of all the customers enrolled in repair
 	 * plans.
 	 */
-	private void listUserRepairPlans() {
-		Iterator result = applianceCompany.listUsersRepairPlans();
-		if (result == null) {
-			System.out.println("No customers in repair plans.\n");
-		} else {
-			System.out.println("Here is the list of customers in a repair plan: ");
-			while (result.hasNext()) {
-				RepairPlan repairPlan = (RepairPlan) result.next();
-				Customer customer = repairPlan.getCustomer();
-				ApplianceItem appliance = repairPlan.getAppliance();
-				System.out.println(customer.toString() + "\tAccount Balance: " + customer.getRepairPlanAccount()
-						+ "\tAppliance Brand: " + appliance.getBrand() + " Model: " + appliance.getModel());
-			}
-			System.out.println();
-		}
+	/*
+	 * old method private void listUserRepairPlans() { Iterator result =
+	 * applianceCompany.listUsersRepairPlans(); if (result == null) {
+	 * System.out.println("No customers in repair plans.\n"); } else {
+	 * System.out.println("Here is the list of customers in a repair plan: "); while
+	 * (result.hasNext()) { RepairPlan repairPlan = (RepairPlan) result.next();
+	 * Customer customer = repairPlan.getCustomer(); ApplianceItem appliance =
+	 * repairPlan.getAppliance(); System.out.println(customer.toString() +
+	 * "\tAccount Balance: " + customer.getRepairPlanAccount() +
+	 * "\tAppliance Brand: " + appliance.getBrand() + " Model: " +
+	 * appliance.getModel()); } System.out.println(); }
+	 * 
+	 * }
+	 */
 
+	public void listUserRepairPlans() {
+		System.out.println(applianceCompany.listUserRepairPlans());
 	}
 
-	private void billRepairPlans() {
+	public void billRepairPlans() {
 		int result = applianceCompany.billRepairPlans();
 		switch (result) {
 		case ApplianceCompany.REPAIR_PLAN_NOT_FOUND:
@@ -427,7 +435,7 @@ public class UserInterface {
 		}
 	}
 
-	private void withdrawRepairPlan() {
+	public void withdrawRepairPlan() {
 		int result;
 		String customerId = getToken("Enter customer ID");
 		String brand = getToken("Enter appliance brand");
