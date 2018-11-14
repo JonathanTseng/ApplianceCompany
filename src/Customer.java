@@ -14,6 +14,7 @@ public class Customer implements Serializable, Matchable<String> {
 	private String name;
 
 	private boolean hasRepairPlan = false;
+	private double applianceAccount = 0.0;
 	private double repairPlanAccount = 0.0;
 
 	/**
@@ -109,8 +110,31 @@ public class Customer implements Serializable, Matchable<String> {
 		return repairPlanAccount;
 	}
 
+	/**
+	 * Adds the billed amount to the repair plan account
+	 * 
+	 * @param billAmount the price of the repair plan
+	 */
 	public void chargeRepairPlanAccount(double billAmount) {
 		repairPlanAccount += billAmount;
+	}
+
+	/**
+	 * Getter for the appliance account total
+	 * 
+	 * @return the amount in the appliance account
+	 */
+	public double getApplianceAccount() {
+		return applianceAccount;
+	}
+
+	/**
+	 * Adds the appliance price to the appliance account
+	 * 
+	 * @param appliancePrice the price of the purchased appliance
+	 */
+	public void chargeApplianceAccount(double appliancePrice) {
+		applianceAccount += appliancePrice;
 	}
 
 	/*

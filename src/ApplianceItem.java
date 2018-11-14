@@ -47,6 +47,7 @@ public class ApplianceItem implements Matchable<String>, Serializable {
 			if (quantity > 0) {
 				quantity--;
 				ApplianceCompany.instance().setTotalSales(price);
+				customer.chargeApplianceAccount(price);
 				result = ApplianceCompany.OPERATION_COMPLETED;
 			} else {
 				BackOrder backOrder = new BackOrder(customer, appliance);

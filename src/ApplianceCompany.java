@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.text.NumberFormat;
 import java.util.Iterator;
 
 /**
@@ -16,6 +17,7 @@ import java.util.Iterator;
 public class ApplianceCompany implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+	private NumberFormat moneyFormat = NumberFormat.getCurrencyInstance();
 	public static final int APPLIANCE_NOT_FOUND = 1;
 	public static final int OPERATION_FAILED = 2;
 	public static final int OPERATION_COMPLETED = 3;
@@ -352,8 +354,10 @@ public class ApplianceCompany implements Serializable {
 				RepairPlan repairPlan = (RepairPlan) repairPlansIterator.next();
 				Customer customer = repairPlan.getCustomer();
 				ApplianceItem appliance = repairPlan.getAppliance();
-				userRepairPlans += customer.toString() + "\tAccount Balance: " + customer.getRepairPlanAccount()
-						+ "\tAppliance Brand: " + appliance.getBrand() + " Model: " + appliance.getModel() + "\n";
+				userRepairPlans += customer.toString() + "\tAppliance Account Balance: "
+						+ moneyFormat.format(customer.getApplianceAccount()) + "\tRepair Plan Account Balance: "
+						+ moneyFormat.format(customer.getRepairPlanAccount()) + "\tAppliance Brand: "
+						+ appliance.getBrand() + " Model: " + appliance.getModel() + "\n";
 			}
 		}
 		return userRepairPlans;

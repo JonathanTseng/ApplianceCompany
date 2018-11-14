@@ -344,7 +344,7 @@ public class UserInterface {
 			System.out.println("Here is the list of customers: ");
 			while (result.hasNext()) {
 				Customer customer = (Customer) result.next();
-				System.out.println(customer.toString());
+				System.out.println(customer.toString() + "\tEnrolled in Repair Plan: " + customer.getHasRepairPlan());
 			}
 			System.out.println();
 		}
@@ -384,9 +384,8 @@ public class UserInterface {
 	 * 
 	 */
 	public void displayTotalSales() {
-		System.out.println("Total Appliance Sales $" + moneyFormat.format(applianceCompany.getTotalApplianceSales()));
-		System.out
-				.println("Total Repair Plan Sales $" + moneyFormat.format(applianceCompany.getTotalRepairPlanSales()));
+		System.out.println("Total Appliance Sales " + moneyFormat.format(applianceCompany.getTotalApplianceSales()));
+		System.out.println("Total Repair Plan Sales " + moneyFormat.format(applianceCompany.getTotalRepairPlanSales()));
 	}
 
 // 	NEED TO UPDATE TAKEN FROM LIST CUSTOMERS,NEED TO SHOW ENTIRE BACK ORDER WITH VISIOR PATTERN
