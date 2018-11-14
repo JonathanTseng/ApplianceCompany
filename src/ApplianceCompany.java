@@ -66,8 +66,10 @@ public class ApplianceCompany implements Serializable {
 	/**
 	 * Organizes the operations for adding a customer
 	 * 
-	 * @param name        name of customer
-	 * @param phoneNumber customer phone number
+	 * @param name
+	 *            name of customer
+	 * @param phoneNumber
+	 *            customer phone number
 	 * @return the Customer object created
 	 * 
 	 */
@@ -82,9 +84,12 @@ public class ApplianceCompany implements Serializable {
 	/**
 	 * Organizes the operations for adding inventory.
 	 * 
-	 * @param brand    appliance brand
-	 * @param model    appliance model
-	 * @param quantity quantity of appliances
+	 * @param brand
+	 *            appliance brand
+	 * @param model
+	 *            appliance model
+	 * @param quantity
+	 *            quantity of appliances
 	 * @return the result of the operation
 	 */
 	public int addInventory(String brand, String model, int quantity) {
@@ -124,13 +129,20 @@ public class ApplianceCompany implements Serializable {
 	/**
 	 * Organizes the operations for adding an appliance item
 	 * 
-	 * @param type                 the type of appliance that is to be added
-	 * @param model                the model of the appliance
-	 * @param brand                the brand of the appliance
-	 * @param price                the price of the appliance
-	 * @param repairPlanPrice      the repair plan price if applicable
-	 * @param capacity             the appliance capacity if applicable
-	 * @param maximumHeatingOutput the maximum heating output if applicable
+	 * @param type
+	 *            the type of appliance that is to be added
+	 * @param model
+	 *            the model of the appliance
+	 * @param brand
+	 *            the brand of the appliance
+	 * @param price
+	 *            the price of the appliance
+	 * @param repairPlanPrice
+	 *            the repair plan price if applicable
+	 * @param capacity
+	 *            the appliance capacity if applicable
+	 * @param maximumHeatingOutput
+	 *            the maximum heating output if applicable
 	 * @return the ApplianceItem object that was added
 	 */
 	public ApplianceItem addApplianceItem(int type, String model, String brand, double price, double repairPlanPrice,
@@ -172,8 +184,8 @@ public class ApplianceCompany implements Serializable {
 	/**
 	 * Setter for the total appliance sales
 	 * 
-	 * @param additionalSaleTotal the amount to be added to the total appliance
-	 *                            sales
+	 * @param additionalSaleTotal
+	 *            the amount to be added to the total appliance sales
 	 */
 	public void setTotalSales(double additionalSaleTotal) {
 		totalApplianceSales += additionalSaleTotal;
@@ -210,7 +222,8 @@ public class ApplianceCompany implements Serializable {
 	/**
 	 * Organizes the operations for displaying the appliances
 	 * 
-	 * @param type the type of appliance requested
+	 * @param type
+	 *            the type of appliance requested
 	 * @return a String of the requested list of appliances or the appropriate
 	 *         result
 	 */
@@ -282,10 +295,14 @@ public class ApplianceCompany implements Serializable {
 	/**
 	 * Organizes the purchase of an appliance
 	 * 
-	 * @param customerId id of customer
-	 * @param brand      appliance brand
-	 * @param model      appliance model
-	 * @param quantity   quantity to be purchased
+	 * @param customerId
+	 *            id of customer
+	 * @param brand
+	 *            appliance brand
+	 * @param model
+	 *            appliance model
+	 * @param quantity
+	 *            quantity to be purchased
 	 * @return a code that represents the outcome of the operation
 	 */
 	public int purchaseAppliance(String customerId, String brand, String model, int quantity) {
@@ -323,7 +340,8 @@ public class ApplianceCompany implements Serializable {
 	/**
 	 * Searches for a given customer
 	 * 
-	 * @param customerId id of customer
+	 * @param customerId
+	 *            id of customer
 	 * @return true if customer is a part of the customer list collection
 	 */
 	public Customer searchCustomer(String customerId) {
@@ -334,7 +352,10 @@ public class ApplianceCompany implements Serializable {
 	 * List all current back orders.
 	 */
 
-	public void listBackOrders() {
+	public void listBackOrders(ApplianceItemVisitor visitor) {
+		for (Iterator<ApplianceItem> itemIterator = applianceList.iterator(); itemIterator.hasNext();) {
+			itemIterator.next().accept(visitor);
+		}
 
 	}
 
@@ -388,8 +409,10 @@ public class ApplianceCompany implements Serializable {
 	/**
 	 * Enrolls customer in a repair plan.
 	 * 
-	 * @param customer  the customer that is to be enrolled in the plan
-	 * @param appliance the appliance corresponding to the repair plan
+	 * @param customer
+	 *            the customer that is to be enrolled in the plan
+	 * @param appliance
+	 *            the appliance corresponding to the repair plan
 	 * @return a code that represents the outcome of the operation
 	 */
 	public int enrollInRepairPlan(String customerId, String brand, String model) {
@@ -418,9 +441,12 @@ public class ApplianceCompany implements Serializable {
 	/**
 	 * Removes a customer from a repair plan
 	 * 
-	 * @param brand      the appliance brand
-	 * @param model      the appliance model
-	 * @param customerId the id of the customer tied to the repair plan
+	 * @param brand
+	 *            the appliance brand
+	 * @param model
+	 *            the appliance model
+	 * @param customerId
+	 *            the id of the customer tied to the repair plan
 	 * @return a code that represents the outcome of the operation
 	 */
 	public int withdrawRepairPlan(String brand, String model, String customerId) {

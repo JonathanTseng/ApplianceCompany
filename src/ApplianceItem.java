@@ -18,14 +18,17 @@ public class ApplianceItem implements Matchable<String>, Serializable {
 	private int quantity = 0;
 	private String brand;
 	private String model;
-	public Queue<BackOrder> backOrderList = new LinkedList<BackOrder>();
+	public static Queue<BackOrder> backOrderList = new LinkedList<BackOrder>();
 
 	/**
 	 * Creates an appliance with the given brand, model, and price.
 	 * 
-	 * @param brand appliance brand
-	 * @param model appliance model
-	 * @param price appliance price
+	 * @param brand
+	 *            appliance brand
+	 * @param model
+	 *            appliance model
+	 * @param price
+	 *            appliance price
 	 */
 	public ApplianceItem(String brand, String model, double price) {
 		this.brand = brand;
@@ -36,9 +39,12 @@ public class ApplianceItem implements Matchable<String>, Serializable {
 	/**
 	 * Performs a purchase of an appliance.
 	 * 
-	 * @param purchaseQuantity the requested quantity to be purchased
-	 * @param customer         the customer who is purchasing
-	 * @param appliance        the appliance item to be purchased
+	 * @param purchaseQuantity
+	 *            the requested quantity to be purchased
+	 * @param customer
+	 *            the customer who is purchasing
+	 * @param appliance
+	 *            the appliance item to be purchased
 	 * @return the result of integer of the purchase
 	 */
 	public int purchase(int purchaseQuantity, Customer customer, ApplianceItem appliance) {
@@ -73,7 +79,8 @@ public class ApplianceItem implements Matchable<String>, Serializable {
 	/**
 	 * Adds the given additional quantity to the quantity of the appliance
 	 * 
-	 * @param additionalQuantity the quantity of the appliance being added
+	 * @param additionalQuantity
+	 *            the quantity of the appliance being added
 	 */
 	public void addQuantity(int additionalQuantity) {
 		quantity += additionalQuantity;
@@ -86,7 +93,8 @@ public class ApplianceItem implements Matchable<String>, Serializable {
 	/**
 	 * Adds on more back order to the appliance
 	 * 
-	 * @param backOrder the new back order on the appliance
+	 * @param backOrder
+	 *            the new back order on the appliance
 	 */
 	public void placeBackOrder(BackOrder backOrder) {
 		backOrderList.add(backOrder);
@@ -155,7 +163,8 @@ public class ApplianceItem implements Matchable<String>, Serializable {
 	/**
 	 * Setter for price
 	 * 
-	 * @param price appliance's new price
+	 * @param price
+	 *            appliance's new price
 	 */
 	public void setPrice(double price) {
 		this.price = price;
@@ -164,7 +173,8 @@ public class ApplianceItem implements Matchable<String>, Serializable {
 	/**
 	 * Setter for quantity
 	 * 
-	 * @param quantity appliance's new quantity
+	 * @param quantity
+	 *            appliance's new quantity
 	 */
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
@@ -173,7 +183,8 @@ public class ApplianceItem implements Matchable<String>, Serializable {
 	/**
 	 * Setter for brand
 	 * 
-	 * @param brand appliance's new brand
+	 * @param brand
+	 *            appliance's new brand
 	 */
 	public void setBrand(String brand) {
 		this.brand = brand;
@@ -182,7 +193,8 @@ public class ApplianceItem implements Matchable<String>, Serializable {
 	/**
 	 * Setter for model
 	 * 
-	 * @param model appliance's new model
+	 * @param model
+	 *            appliance's new model
 	 */
 	public void setModel(String model) {
 		this.model = model;
@@ -218,7 +230,8 @@ public class ApplianceItem implements Matchable<String>, Serializable {
 	/**
 	 * Implements the accept method of the Visitor pattern.
 	 * 
-	 * @param visitor the Visitor that will process the LoanableItem object
+	 * @param visitor
+	 *            the Visitor that will process the LoanableItem object
 	 */
 	public void accept(ApplianceItemVisitor visitor) {
 		visitor.visit(this);

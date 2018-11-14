@@ -64,7 +64,8 @@ public class UserInterface {
 	/**
 	 * Gets a token after prompting
 	 * 
-	 * @param prompt - whatever the user wants as prompt
+	 * @param prompt
+	 *            - whatever the user wants as prompt
 	 * @return - the token from the keyboard
 	 * 
 	 */
@@ -86,7 +87,8 @@ public class UserInterface {
 	/**
 	 * Queries for a yes or no and returns true for yes and false for no
 	 * 
-	 * @param prompt The string to be prepended to the yes/no prompt
+	 * @param prompt
+	 *            The string to be prepended to the yes/no prompt
 	 * @return true for yes and false for no
 	 * 
 	 */
@@ -101,7 +103,8 @@ public class UserInterface {
 	/**
 	 * Converts the string to a number of type integer
 	 * 
-	 * @param prompt the string for prompting
+	 * @param prompt
+	 *            the string for prompting
 	 * @return the integer corresponding to the string
 	 * 
 	 */
@@ -120,7 +123,8 @@ public class UserInterface {
 	/**
 	 * Converts the string to a number of type double
 	 * 
-	 * @param prompt the string for prompting
+	 * @param prompt
+	 *            the string for prompting
 	 * @return the double corresponding to the string
 	 */
 	public double getDoubleNumber(String prompt) {
@@ -359,19 +363,22 @@ public class UserInterface {
 		System.out.println("Total Repair Plan Sales " + moneyFormat.format(applianceCompany.getTotalRepairPlanSales()));
 	}
 
-// 	NEED TO UPDATE TAKEN FROM LIST CUSTOMERS,NEED TO SHOW ENTIRE BACK ORDER WITH VISIOR PATTERN
+	// NEED TO UPDATE TAKEN FROM LIST CUSTOMERS,NEED TO SHOW ENTIRE BACK ORDER WITH
+	// VISIOR PATTERN
 	public void listBackOrder() {
-		Iterator result = applianceCompany.listCustomers();
-		if (result == null) {
-			System.out.println("No customers to print.\n");
-		} else {
-			System.out.println("Here is the list of customers: ");
-			while (result.hasNext()) {
-				Customer customer = (Customer) result.next();
-				System.out.println(customer.toString());
-			}
-			System.out.println();
-		}
+		// Iterator result = applianceCompany.listCustomers();
+		// if (result == null) {
+		// System.out.println("No customers to print.\n");
+		// } else {
+		// System.out.println("Here is the list of customers: ");
+		// while (result.hasNext()) {
+		// Customer customer = (Customer) result.next();
+		// System.out.println(customer.toString());
+		// }
+		// System.out.println();
+		// }
+
+		applianceCompany.listBackOrders(PrintFormat.instance());
 
 	}
 
@@ -548,7 +555,8 @@ public class UserInterface {
 	/**
 	 * The method to start the application. Simply calls process().
 	 * 
-	 * @param args not used
+	 * @param args
+	 *            not used
 	 */
 	public static void main(String[] args) {
 		UserInterface.instance().process();

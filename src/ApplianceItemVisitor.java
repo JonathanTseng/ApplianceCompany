@@ -6,8 +6,8 @@
  */
 public interface ApplianceItemVisitor {
 	/**
-	 * This is the method for catching all ApplianceItems objects that may be
-	 * added in the future.
+	 * This is the method for catching all ApplianceItems objects that may be added
+	 * in the future.
 	 * 
 	 * @param item
 	 *            the ApplianceItem to be processed
@@ -29,6 +29,7 @@ public interface ApplianceItemVisitor {
 	 *            the ClothesDryer to be processed
 	 */
 	public void visit(ClothesDryer clothesDryer);
+
 	/**
 	 * The method processes ClothesWasher objects
 	 * 
@@ -38,11 +39,15 @@ public interface ApplianceItemVisitor {
 	public void visit(ClothesWasher clothesWasher);
 
 	/**
- 	* The method processes Furnace objects
- 	* 
- 	* @param furnance
- 	*            the furnace to be processed
- 	*/
+	 * The method processes Furnace objects
+	 * 
+	 * @param furnance
+	 *            the furnace to be processed
+	 */
 	public void visit(Furnace furnance);
-	
+
+	public void visit(KitchenRange kitchenRange);
+
+	public void visit(Dishwasher dishWasher);
+
 }
