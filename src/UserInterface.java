@@ -357,28 +357,11 @@ public class UserInterface {
 	 * 
 	 */
 	public void displayApplianceList() {
-
-		// new attempt code
 		if (yesOrNo("Would you like to print all appliances? ")) {
-			// print the entire list entry
 			System.out.println(applianceCompany.listAppliances(0));
 		} else {
 			System.out.println(applianceCompany.listAppliances(getApplianceType()));
 		}
-
-		/*
-		 * old code Iterator result = applianceCompany.listAppliances(); int type =
-		 * getIntegerNumber("What type of appliance"); if (result == null) {
-		 * System.out.println("No washers to print.\n"); } else {
-		 * System.out.println("Here is the list of washers: "); while (result.hasNext())
-		 * { // if(type == 1 && appliance istanceof ClothesWasher) for all diff types
-		 * ApplianceItem appliance = (ApplianceItem) result.next();
-		 * 
-		 * // added code if (type == 1 && appliance instanceof ClothesWasher) {
-		 * System.out.println(appliance.toString()); }
-		 * 
-		 * // System.out.println(appliance.toString()); } System.out.println(); }
-		 */
 	}
 
 	/**
@@ -406,8 +389,6 @@ public class UserInterface {
 
 	}
 
-	// NEED TO UPDATE TAKEN FROM LIST CUSTOMERS,NEED TO SHOW LIST OF USER WITHIN
-	// REPAIR PLANS
 	/**
 	 * Method to be called to display a list of all the customers enrolled in repair
 	 * plans.
