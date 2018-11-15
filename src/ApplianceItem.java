@@ -4,9 +4,9 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 /**
- * This class is the super class for all items that can be loaned out by the
- * library. It implements some of the functionality needed to issue, return,
- * remove, and renew a single item.
+ * This class is the super class for all appliances that can be put on back
+ * order out by the appliance company. It implements some of the functionality
+ * needed to issue, return, remove, and renew a single item.
  * 
  * @author Stephen Thomas, Jonathan Tseng, Jose Morales
  *

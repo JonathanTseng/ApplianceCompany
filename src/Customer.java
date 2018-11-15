@@ -1,7 +1,7 @@
 import java.io.Serializable;
 
 /**
- * Object class for an individual customer of the Washer Company.
+ * Object class for an individual customer of the Appliance Company.
  * 
  * @author Stephen Thomas, Jonathan Tseng, Jose Morales and Xeng Vang
  *

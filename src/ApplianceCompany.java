@@ -9,7 +9,7 @@ import java.util.Iterator;
 
 /**
  * This class implements Serializable. It contains the methods that are used to
- * organize business processes in the WasherCompany project.
+ * organize business processes in the ApplianceCompany project.
  * 
  * @author Jose Morales, Jonathan Tseng, Stephen Thomas, and Xeng Vang
  *
@@ -40,8 +40,8 @@ public class ApplianceCompany implements Serializable {
 	private double totalRepairPlanSales = 0;
 
 	/**
-	 * Private for the singleton pattern, it creates the customer list and the
-	 * washer list collection objects.
+	 * Private for the singleton pattern, it creates the customer list, the washer
+	 * list collection, and the repair plan list objects.
 	 */
 	private ApplianceCompany() {
 		customerList = CustomerList.instance();
@@ -112,7 +112,6 @@ public class ApplianceCompany implements Serializable {
 				quantityToAdd--;
 			}
 
-			// What is the purpose of the following segment of code
 			BackOrder backOrder = appliance.getNextBackOrder();
 			if (backOrder == null) {
 				result = OPERATION_COMPLETED;
@@ -415,16 +414,16 @@ public class ApplianceCompany implements Serializable {
 	}
 
 	/**
-	 * This method will try and deserialize a saved file of Washer Company from a
+	 * This method will try and deserialize a saved file of Appliance Company from a
 	 * disk
 	 * 
-	 * @return a WasherCompany object
+	 * @return a ApplianceCompany object
 	 */
 
 	public static ApplianceCompany retrieve() {
 
 		try {
-			FileInputStream file = new FileInputStream("WasherCompanyData");
+			FileInputStream file = new FileInputStream("ApplianceCompanyData");
 			ObjectInputStream input = new ObjectInputStream(file);
 			applianceCompany = (ApplianceCompany) input.readObject();
 			MemberIdServer.retrieve(input);
@@ -440,7 +439,7 @@ public class ApplianceCompany implements Serializable {
 	}
 
 	/**
-	 * Will serialize the WasherCompany object.
+	 * Will serialize the ApplianceCompany object.
 	 * 
 	 * @return true if file could be saved somewhere on disk
 	 * @return false if it can't be saved to disk
@@ -461,7 +460,7 @@ public class ApplianceCompany implements Serializable {
 	}
 
 	/**
-	 * String of the WasherCompany
+	 * String of the ApplianceCompany
 	 * 
 	 */
 	@Override

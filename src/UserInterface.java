@@ -6,9 +6,10 @@ import java.util.Iterator;
 import java.util.StringTokenizer;
 
 /**
- * This class implements the user interface for the WasherCompany project. The
- * commands are encoded as integers using a number of static final variables. A
- * number of utility methods exist to make it easier to parse the input.
+ * This class implements the user interface for the ApplianceCompany project.
+ * The commands are encoded as integers using a number of static final
+ * variables. A number of utility methods exist to make it easier to parse the
+ * input.
  * 
  * @author Jose Morales, Jonathan Tseng, Stephen Thomas and Xeng Vang
  *
@@ -38,7 +39,7 @@ public class UserInterface {
 
 	/**
 	 * Made private for singleton pattern. Conditionally looks for any saved data.
-	 * Otherwise, it gets a singleton WasherCompany object.
+	 * Otherwise, it gets a singleton ApplianceCompany object.
 	 */
 	private UserInterface() {
 		if (yesOrNo("Look for saved data and  use it?")) {
@@ -202,8 +203,8 @@ public class UserInterface {
 
 	/**
 	 * Method to be called for adding a customer. Prompts the user for the
-	 * appropriate values and uses the appropriate WasherCompany method for adding a
-	 * customer.
+	 * appropriate values and uses the appropriate ApplianceCompany method for
+	 * adding a customer.
 	 * 
 	 */
 	public void addCustomer() {
@@ -382,6 +383,9 @@ public class UserInterface {
 		System.out.println(applianceCompany.listUserRepairPlans());
 	}
 
+	/**
+	 * 
+	 */
 	public void billRepairPlans() {
 		int result = applianceCompany.billRepairPlans();
 		switch (result) {
@@ -399,6 +403,9 @@ public class UserInterface {
 		}
 	}
 
+	/**
+	 * 
+	 */
 	public void withdrawRepairPlan() {
 		int result;
 		String customerId = getToken("Enter customer ID");
@@ -433,7 +440,7 @@ public class UserInterface {
 		result = applianceCompany.enrollInRepairPlan(customerId, brand, model);
 		switch (result) {
 		case ApplianceCompany.APPLIANCE_NOT_FOUND:
-			System.out.println("No such washer in inventory\n");
+			System.out.println("No such appliance in inventory\n");
 			break;
 		case ApplianceCompany.CUSTOMER_NOT_FOUND:
 			System.out.println("No such customer in customer list\n");
@@ -453,13 +460,13 @@ public class UserInterface {
 	}
 
 	/**
-	 * Method to be called for saving the WasherCompany object. Uses the appropriate
-	 * WasherCompany method for saving.
+	 * Method to be called for saving the ApplianceCompany object. Uses the
+	 * appropriate ApplianceCompany method for saving.
 	 * 
 	 */
 	private void save() {
 		if (applianceCompany.save()) {
-			System.out.println(" The WasherCompany has been successfully saved in the file WasherCompanyData \n");
+			System.out.println(" The ApplianceCompany has been successfully saved in the file ApplianceCompanyData \n");
 		} else {
 			System.out.println(" There has been an error in saving \n");
 		}
@@ -467,7 +474,7 @@ public class UserInterface {
 
 	/**
 	 * Method to be called for retrieving saved data. Uses the appropriate
-	 * WasherCompany method for retrieval.
+	 * ApplianceCompany method for retrieval.
 	 * 
 	 */
 	private void retrieve() {
@@ -476,9 +483,9 @@ public class UserInterface {
 				applianceCompany = ApplianceCompany.retrieve();
 				if (applianceCompany != null) {
 					System.out.println(
-							"The WasherCompany has been successfully retrieved from the file WasherCompany \n");
+							"The ApplianceCompany has been successfully retrieved from the file ApplianceCompanyData \n");
 				} else {
-					System.out.println("File doesnt exist; creating new WasherCompany");
+					System.out.println("File doesnt exist; creating new ApplianceCompany");
 					applianceCompany = ApplianceCompany.instance();
 				}
 			}
