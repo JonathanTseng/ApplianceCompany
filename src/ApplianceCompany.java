@@ -40,7 +40,7 @@ public class ApplianceCompany implements Serializable {
 	private double totalRepairPlanSales = 0;
 
 	/**
-	 * Private for the singleton pattern, it creates the customer list, the washer
+	 * Private for the singleton pattern, it creates the customer list, the appliance
 	 * list collection, and the repair plan list objects.
 	 */
 	private ApplianceCompany() {
