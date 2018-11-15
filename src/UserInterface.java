@@ -363,21 +363,11 @@ public class UserInterface {
 		System.out.println("Total Repair Plan Sales " + moneyFormat.format(applianceCompany.getTotalRepairPlanSales()));
 	}
 
-	// NEED TO UPDATE TAKEN FROM LIST CUSTOMERS,NEED TO SHOW ENTIRE BACK ORDER WITH
-	// VISIOR PATTERN
+	/**
+	 * Method to be called for displaying the back orders.
+	 * 
+	 */
 	public void listBackOrder() {
-		// Iterator result = applianceCompany.listCustomers();
-		// if (result == null) {
-		// System.out.println("No customers to print.\n");
-		// } else {
-		// System.out.println("Here is the list of customers: ");
-		// while (result.hasNext()) {
-		// Customer customer = (Customer) result.next();
-		// System.out.println(customer.toString());
-		// }
-		// System.out.println();
-		// }
-
 		applianceCompany.listBackOrders(PrintFormat.instance());
 
 	}

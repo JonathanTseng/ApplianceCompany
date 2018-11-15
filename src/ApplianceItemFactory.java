@@ -4,7 +4,7 @@
  * introduced, the constructor for that class must be invoked from here. This is
  * a singleton.
  * 
- * @author Stephen Thomas
+ * @author Stephen Thomas, Jonathan Tseng, Jose Morales
  *
  */
 public class ApplianceItemFactory {
@@ -28,6 +28,19 @@ public class ApplianceItemFactory {
 		return factory;
 	}
 
+	/**
+	 * Creating an appliance which can be a washer, dryer, range, dishwasher,
+	 * refrigerator or a furnace.
+	 * 
+	 * @param type
+	 * @param model
+	 * @param brand
+	 * @param price
+	 * @param repairPlanPrice
+	 * @param capacity
+	 * @param maximumHeatingOutput
+	 * @return
+	 */
 	public ApplianceItem createApplianceItem(int type, String model, String brand, double price, double repairPlanPrice,
 			int capacity, int maximumHeatingOutput) {
 		switch (type) {

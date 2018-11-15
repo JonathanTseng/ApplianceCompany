@@ -1,6 +1,7 @@
 /**
+ * Prints all BackOrder objects formatted.
  * 
- * @author Jose
+ * @author Jose Morales, Jonathan Tseng, Stephen Thomas
  *
  */
 public class PrintFormat implements ApplianceItemVisitor {
@@ -36,7 +37,6 @@ public class PrintFormat implements ApplianceItemVisitor {
 
 	@Override
 	public void visit(Refrigerator refrigerator) {
-		// TODO Auto-generated method stub
 		backOrderQueue = refrigerator.getNextBackOrder();
 		if (backOrderQueue == null) {
 			System.out.println("No back orders for refrigerators!");
@@ -49,7 +49,6 @@ public class PrintFormat implements ApplianceItemVisitor {
 
 	@Override
 	public void visit(ClothesDryer clothesDryer) {
-		// TODO Auto-generated method stub
 		backOrderQueue = clothesDryer.getNextBackOrder();
 		if (backOrderQueue == null) {
 			System.out.println("No back orders for dryers!");
@@ -61,7 +60,6 @@ public class PrintFormat implements ApplianceItemVisitor {
 
 	@Override
 	public void visit(ClothesWasher clothesWasher) {
-		// TODO Auto-generated method stub
 		backOrderQueue = clothesWasher.getNextBackOrder();
 		if (backOrderQueue == null) {
 			System.out.println("No back orders for washers!");
@@ -73,14 +71,12 @@ public class PrintFormat implements ApplianceItemVisitor {
 
 	@Override
 	public void visit(Furnace furnance) {
-		// TODO Auto-generated method stub
 		System.out.println("Furnances can't have back orders.");
 
 	}
 
 	@Override
 	public void visit(KitchenRange kitchenRange) {
-		// TODO Auto-generated method stub
 		backOrderQueue = kitchenRange.getNextBackOrder();
 		if (backOrderQueue == null) {
 			System.out.println("No back orders for kitchen ranges");
@@ -94,7 +90,6 @@ public class PrintFormat implements ApplianceItemVisitor {
 
 	@Override
 	public void visit(Dishwasher dishWasher) {
-		// TODO Auto-generated method stub
 		backOrderQueue = dishWasher.getNextBackOrder();
 		if (backOrderQueue == null) {
 			System.out.println("No back orders for dish washers!");

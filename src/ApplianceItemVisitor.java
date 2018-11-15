@@ -1,7 +1,7 @@
 /**
  * This is the standard Visitor interface for the visitor pattern.
  * 
- * @author Jonathan Tseng
+ * @author Jonathan Tseng, Jose Morales, Stephen Thomas
  *
  */
 public interface ApplianceItemVisitor {
@@ -46,8 +46,18 @@ public interface ApplianceItemVisitor {
 	 */
 	public void visit(Furnace furnance);
 
+	/**
+	 * The method processes Kitchen Range objects
+	 * 
+	 * @param kitchenRange
+	 */
 	public void visit(KitchenRange kitchenRange);
 
+	/**
+	 * The method processes Dish washer objects
+	 * 
+	 * @param dishWasher
+	 */
 	public void visit(Dishwasher dishWasher);
 
 }

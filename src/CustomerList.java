@@ -30,24 +30,17 @@ public class CustomerList extends ItemList<Customer, String> {
 		}
 	}
 
-	// not sure if this method is required considering the super class already has
-	// search method
 	/**
 	 * Checks whether a customer with a given customer id exists.
 	 * 
-	 * @param customerId the id of the customer
+	 * @param customerId
+	 *            the id of the customer
 	 * @return the Customer object within the list iff the customer exists
 	 */
 	@Override
 	public Customer search(String customerId, String blankId1, String blankId2) {
 		return super.search(customerId, blankId1, blankId2);
 	}
-	/*
-	 * prior to extending the ItemList class search method public Customer
-	 * search(String customerId) { for (Iterator iterator = customers.iterator();
-	 * iterator.hasNext();) { Customer customer = (Customer) iterator.next(); if
-	 * (customer.getId().equals(customerId)) { return customer; } } return null; }
-	 */
 
 	/**
 	 * Insert the customer to the list.
@@ -58,17 +51,12 @@ public class CustomerList extends ItemList<Customer, String> {
 	public boolean insertCustomer(Customer customer) {
 		return super.add(customer);
 	}
-	/*
-	 * prior to extending the ItemList class insert method public boolean
-	 * insertCustomer(Customer customer) { customers.add(customer); return true; }
-	 */
-
-	// I believe the following two methods are required for serialization
 
 	/**
 	 * Supports serialization
 	 * 
-	 * @param output the stream to be written to
+	 * @param output
+	 *            the stream to be written to
 	 */
 	private void writeObject(java.io.ObjectOutputStream output) throws IOException {
 		output.defaultWriteObject();
@@ -78,7 +66,8 @@ public class CustomerList extends ItemList<Customer, String> {
 	/**
 	 * Supports serialization
 	 * 
-	 * @param input the stream to be read from
+	 * @param input
+	 *            the stream to be read from
 	 */
 	private void readObject(java.io.ObjectInputStream input) throws IOException, ClassNotFoundException {
 		input.defaultReadObject();
@@ -88,14 +77,5 @@ public class CustomerList extends ItemList<Customer, String> {
 			input.readObject();
 		}
 	}
-
-	/*
-	 * method no longer necessary /** Returns an iterator to all customers
-	 * 
-	 * @return iterator to the customer list
-	 *
-	 * public Iterator getCustomerList() { if (customers.isEmpty()) { return null; }
-	 * return customers.iterator(); }
-	 */
 
 }

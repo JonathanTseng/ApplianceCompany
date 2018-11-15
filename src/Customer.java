@@ -20,8 +20,10 @@ public class Customer implements Serializable, Matchable<String> {
 	/**
 	 * Constructor for an individual customer.
 	 * 
-	 * @param name        name of the customer
-	 * @param phoneNumber phone number of the customer
+	 * @param name
+	 *            name of the customer
+	 * @param phoneNumber
+	 *            phone number of the customer
 	 */
 	public Customer(String name, String phoneNumber) {
 		this.name = name;
@@ -59,7 +61,8 @@ public class Customer implements Serializable, Matchable<String> {
 	/**
 	 * Setter for id
 	 * 
-	 * @param id customer's new id
+	 * @param id
+	 *            customer's new id
 	 */
 	public void setId(String id) {
 		this.id = id;
@@ -68,7 +71,8 @@ public class Customer implements Serializable, Matchable<String> {
 	/**
 	 * Setter for phone number
 	 * 
-	 * @param phoneNumber customer's new phone number
+	 * @param phoneNumber
+	 *            customer's new phone number
 	 */
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
@@ -77,7 +81,8 @@ public class Customer implements Serializable, Matchable<String> {
 	/**
 	 * Setter for name
 	 * 
-	 * @param name customer's new name
+	 * @param name
+	 *            customer's new name
 	 */
 	public void setName(String name) {
 		this.name = name;
@@ -95,7 +100,8 @@ public class Customer implements Serializable, Matchable<String> {
 	/**
 	 * Setter for has repair plan
 	 * 
-	 * @param value the true or false value
+	 * @param value
+	 *            the true or false value
 	 */
 	public void setHasRepairPlan(boolean value) {
 		hasRepairPlan = value;
@@ -113,7 +119,8 @@ public class Customer implements Serializable, Matchable<String> {
 	/**
 	 * Adds the billed amount to the repair plan account
 	 * 
-	 * @param billAmount the price of the repair plan
+	 * @param billAmount
+	 *            the price of the repair plan
 	 */
 	public void chargeRepairPlanAccount(double billAmount) {
 		repairPlanAccount += billAmount;
@@ -131,27 +138,18 @@ public class Customer implements Serializable, Matchable<String> {
 	/**
 	 * Adds the appliance price to the appliance account
 	 * 
-	 * @param appliancePrice the price of the purchased appliance
+	 * @param appliancePrice
+	 *            the price of the purchased appliance
 	 */
 	public void chargeApplianceAccount(double appliancePrice) {
 		applianceAccount += appliancePrice;
 	}
 
-	/*
-	 * Old equals method /** Checks whether the customer is equal to the one with
-	 * the given id
-	 * 
-	 * @param id id of the customer who should be compared
-	 * 
-	 * @return true iff the customer ids match
-	 *
-	 * public boolean equals(String id) { return this.id.equals(id); }
-	 */
-
 	/**
 	 * Checks whether the customer is equal to another Customer
 	 * 
-	 * @param object id of the member who should be compared
+	 * @param object
+	 *            id of the member who should be compared
 	 * @return true iff the member ids match
 	 */
 	@Override
@@ -171,7 +169,8 @@ public class Customer implements Serializable, Matchable<String> {
 	/**
 	 * To implement the Matchable interface
 	 * 
-	 * @param key the member id
+	 * @param key
+	 *            the member id
 	 */
 	@Override
 	public boolean matches(String id, String blankKey1, String blankKey2) {

@@ -155,23 +155,6 @@ public class ApplianceCompany implements Serializable {
 		return null;
 	}
 
-	/*
-	 * no longer needed because of the addAppliance method /** Organizes the
-	 * operations to add a new washer
-	 * 
-	 * @param brand washer brand
-	 * 
-	 * @param model washer model
-	 * 
-	 * @param price washer price
-	 * 
-	 * @return
-	 *
-	 * public Washer addWasher(String brand, String model, double price) { Washer
-	 * washer = new Washer(brand, model, price); if
-	 * (washerList.insertWasher(washer)) { return (washer); } return null; }
-	 */
-
 	/**
 	 * Getter for the total appliance sales
 	 * 
@@ -214,11 +197,6 @@ public class ApplianceCompany implements Serializable {
 		}
 	}
 
-	/**
-	 * Organizes the operations for displaying the appliances
-	 * 
-	 * @return iterator to the collection
-	 */
 	/**
 	 * Organizes the operations for displaying the appliances
 	 * 
@@ -277,21 +255,6 @@ public class ApplianceCompany implements Serializable {
 		return applianceList;
 	}
 
-	/*
-	 * code from userInterface delete after updating listAppliances method Iterator
-	 * result = applianceCompany.listAppliances(); int type =
-	 * getIntegerNumber("What type of appliance"); if (result == null) {
-	 * System.out.println("No washers to print.\n"); } else {
-	 * System.out.println("Here is the list of washers: "); while (result.hasNext())
-	 * { // if(type == 1 && appliance istanceof ClothesWasher) for all diff types
-	 * ApplianceItem appliance = (ApplianceItem) result.next();
-	 * 
-	 * // added code if (type == 1 && appliance instanceof ClothesWasher) {
-	 * System.out.println(appliance.toString()); }
-	 * 
-	 * // System.out.println(appliance.toString()); } System.out.println(); }
-	 */
-
 	/**
 	 * Organizes the purchase of an appliance
 	 * 
@@ -320,19 +283,6 @@ public class ApplianceCompany implements Serializable {
 
 		result = appliance.purchase(quantity, customer, appliance);
 
-		/*
-		 * code moved to the ApplianceItem and Furnace classes while (quantity > 0) {
-		 * 
-		 * if (appliance.getQuantity() > 0) { appliance.purchase(); totalSales +=
-		 * appliance.getPrice(); result = OPERATION_COMPLETED; } else { BackOrder
-		 * backOrder = new BackOrder(customer, appliance);
-		 * appliance.placeBackOrder(backOrder); result = BACKORDER_PLACED; }
-		 * 
-		 * quantity--;
-		 * 
-		 * }
-		 */
-
 		return result;
 
 	}
@@ -348,10 +298,11 @@ public class ApplianceCompany implements Serializable {
 		return customerList.search(customerId, "", "");
 	}
 
-	/*
-	 * List all current back orders.
+	/**
+	 * Displays the list of all back orders
+	 * 
+	 * @param visitor
 	 */
-
 	public void listBackOrders(ApplianceItemVisitor visitor) {
 		for (Iterator<ApplianceItem> itemIterator = applianceList.iterator(); itemIterator.hasNext();) {
 			itemIterator.next().accept(visitor);

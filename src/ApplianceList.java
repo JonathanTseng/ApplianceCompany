@@ -3,7 +3,7 @@ import java.io.IOException;
 /**
  * The collection class for all ApplianceItem objects
  * 
- * @author Stephen Thomas
+ * @author Stephen Thomas, Jonathan Tseng, Jose Morales
  *
  */
 public class ApplianceList extends ItemList<ApplianceItem, String> {
@@ -28,12 +28,13 @@ public class ApplianceList extends ItemList<ApplianceItem, String> {
 		}
 	}
 
-	// method may not be needed
 	/**
 	 * Removes an appliance from the appliance list
 	 * 
-	 * @param applianceModel the appliance's model
-	 * @param applianceBrand the appliance's brand
+	 * @param applianceModel
+	 *            the appliance's model
+	 * @param applianceBrand
+	 *            the appliance's brand
 	 * @return true iff appliance could be removed
 	 */
 	public boolean removeApplianceItem(String applianceModel, String applianceBrand) {
@@ -48,7 +49,8 @@ public class ApplianceList extends ItemList<ApplianceItem, String> {
 	/**
 	 * Inserts an appliance into the collection
 	 * 
-	 * @param applianceItem the appliance to be inserted
+	 * @param applianceItem
+	 *            the appliance to be inserted
 	 * @return true iff the appliance could be inserted.
 	 */
 	public boolean insertApplianceItem(ApplianceItem applianceItem) {
@@ -58,7 +60,8 @@ public class ApplianceList extends ItemList<ApplianceItem, String> {
 	/**
 	 * Supports serialization
 	 * 
-	 * @param output the stream to be written to
+	 * @param output
+	 *            the stream to be written to
 	 */
 	private void writeObject(java.io.ObjectOutputStream output) throws IOException {
 		output.defaultWriteObject();
@@ -68,7 +71,8 @@ public class ApplianceList extends ItemList<ApplianceItem, String> {
 	/**
 	 * Supports deserialization
 	 * 
-	 * @param input the stream to be read from
+	 * @param input
+	 *            the stream to be read from
 	 */
 	private void readObject(java.io.ObjectInputStream input) throws IOException, ClassNotFoundException {
 		input.defaultReadObject();

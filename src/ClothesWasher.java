@@ -4,7 +4,7 @@ import java.text.NumberFormat;
 /**
  * Represents a single clothes washer.
  * 
- * @author Stephen Thomas
+ * @author Stephen Thomas, Jose Morales, Jonathan Tseng
  *
  */
 public class ClothesWasher extends ApplianceItem implements Serializable, Matchable<String> {
@@ -16,10 +16,14 @@ public class ClothesWasher extends ApplianceItem implements Serializable, Matcha
 	 * Creates a clothes washer with the given brand, model, price, and repair plan
 	 * price.
 	 * 
-	 * @param brand           washer brand
-	 * @param model           washer model
-	 * @param price           washer price
-	 * @param repairPlanPrice washer repair plan price
+	 * @param brand
+	 *            washer brand
+	 * @param model
+	 *            washer model
+	 * @param price
+	 *            washer price
+	 * @param repairPlanPrice
+	 *            washer repair plan price
 	 */
 	public ClothesWasher(String brand, String model, double price, double repairPlanPrice) {
 		super(brand, model, price);
@@ -39,7 +43,8 @@ public class ClothesWasher extends ApplianceItem implements Serializable, Matcha
 	/**
 	 * Setter for the repair plan price
 	 * 
-	 * @param repairPlanPrice washer repair plan price
+	 * @param repairPlanPrice
+	 *            washer repair plan price
 	 */
 	public void setRepairPlanPrice(double repairPlanPrice) {
 		this.repairPlanPrice = repairPlanPrice;
@@ -54,11 +59,11 @@ public class ClothesWasher extends ApplianceItem implements Serializable, Matcha
 		return "Clothes Washer: " + super.toString() + "\tRepair Plan Price " + moneyFormat.format(repairPlanPrice);
 	}
 
-	// I think I need to implement something for the visitor pattern
 	/**
 	 * Implements the accept method of the Visitor pattern.
 	 * 
-	 * @param visitor the Visitor that will process the Periodical object
+	 * @param visitor
+	 *            the Visitor that will process the Periodical object
 	 */
 	@Override
 	public void accept(ApplianceItemVisitor visitor) {

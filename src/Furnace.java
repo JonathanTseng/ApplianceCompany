@@ -3,7 +3,7 @@ import java.io.Serializable;
 /**
  * Represents a single furnace.
  * 
- * @author Stephen Thomas
+ * @author Stephen Thomas, Jonathan Tseng, Jose Morales
  *
  */
 public class Furnace extends ApplianceItem implements Serializable, Matchable<String> {
@@ -14,10 +14,14 @@ public class Furnace extends ApplianceItem implements Serializable, Matchable<St
 	 * Creates a furnace with the given brand, model, price, and maximum heating
 	 * output.
 	 * 
-	 * @param brand                furnace brand
-	 * @param model                furnace model
-	 * @param price                furnace price
-	 * @param maximumHeatingOutput furnace maximum heating output in BTU
+	 * @param brand
+	 *            furnace brand
+	 * @param model
+	 *            furnace model
+	 * @param price
+	 *            furnace price
+	 * @param maximumHeatingOutput
+	 *            furnace maximum heating output in BTU
 	 */
 	public Furnace(String brand, String model, double price, int maximumHeatingOutput) {
 		super(brand, model, price);
@@ -27,9 +31,12 @@ public class Furnace extends ApplianceItem implements Serializable, Matchable<St
 	/**
 	 * Performs a purchase of an appliance.
 	 * 
-	 * @param purchaseQuantity the requested quantity to be purchased
-	 * @param customer         the customer who is purchasing
-	 * @param appliance        the appliance item to be purchased
+	 * @param purchaseQuantity
+	 *            the requested quantity to be purchased
+	 * @param customer
+	 *            the customer who is purchasing
+	 * @param appliance
+	 *            the appliance item to be purchased
 	 * @return the result of integer of the purchase
 	 */
 	@Override
@@ -62,7 +69,8 @@ public class Furnace extends ApplianceItem implements Serializable, Matchable<St
 	/**
 	 * Setter for the furnace maximum heating output
 	 * 
-	 * @param maximumHeatingOutput furnace maximum heating output in BTU
+	 * @param maximumHeatingOutput
+	 *            furnace maximum heating output in BTU
 	 */
 	public void setMaximumHeatingOutput(int maximumHeatingOutput) {
 		this.maximumHeatingOutput = maximumHeatingOutput;
@@ -77,11 +85,11 @@ public class Furnace extends ApplianceItem implements Serializable, Matchable<St
 		return "Furnace: " + super.toString() + "\tMaxiumum Heating Output (BTU) " + maximumHeatingOutput;
 	}
 
-	// I think I need to implement something for the visitor pattern
 	/**
 	 * Implements the accept method of the Visitor pattern.
 	 * 
-	 * @param visitor the Visitor that will process the Periodical object
+	 * @param visitor
+	 *            the Visitor that will process the Periodical object
 	 */
 	@Override
 	public void accept(ApplianceItemVisitor visitor) {

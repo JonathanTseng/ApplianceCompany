@@ -8,7 +8,7 @@ import java.util.Queue;
  * library. It implements some of the functionality needed to issue, return,
  * remove, and renew a single item.
  * 
- * @author Stephen Thomas
+ * @author Stephen Thomas, Jonathan Tseng, Jose Morales
  *
  */
 public class ApplianceItem implements Matchable<String>, Serializable {
@@ -64,17 +64,6 @@ public class ApplianceItem implements Matchable<String>, Serializable {
 		}
 		return result;
 	}
-
-	/*
-	 * Old code Represents a purchase of an appliance. Thus, the quantity of the
-	 * appliance is decremented.
-	 * 
-	 *
-	 * public void purchase() {
-	 * 
-	 * 
-	 * quantity--; }
-	 */
 
 	/**
 	 * Adds the given additional quantity to the quantity of the appliance
@@ -200,7 +189,6 @@ public class ApplianceItem implements Matchable<String>, Serializable {
 		this.model = model;
 	}
 
-	// method needed in order to be overridden but could be alternate way or doing
 	/**
 	 * A blank method intended to be overridden by either the ClothesWasher or
 	 * ClothesDryer methods

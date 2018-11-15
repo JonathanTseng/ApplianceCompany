@@ -3,7 +3,7 @@ import java.io.Serializable;
 /**
  * Represents a single dishwasher.
  * 
- * @author Stephen Thomas
+ * @author Stephen Thomas, Jose Morales, Jonathan Tseng
  *
  */
 public class Dishwasher extends ApplianceItem implements Serializable, Matchable<String> {
@@ -32,7 +32,6 @@ public class Dishwasher extends ApplianceItem implements Serializable, Matchable
 		return "Dishwasher: " + super.toString();
 	}
 
-	// I think I need to implement something for the visitor pattern
 	/**
 	 * Implements the accept method of the Visitor pattern.
 	 * 

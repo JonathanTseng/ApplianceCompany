@@ -3,7 +3,7 @@ import java.io.IOException;
 /**
  * The collection class of all repair plan objects.
  * 
- * @author stephenthomas
+ * @author Stephen Thomas, Jose Morales, Jonathan Tseng
  *
  */
 public class RepairPlanList extends ItemList<RepairPlan, String> {
@@ -31,9 +31,12 @@ public class RepairPlanList extends ItemList<RepairPlan, String> {
 	/**
 	 * Removes a repair plan from the repair plan list
 	 * 
-	 * @param applianceModel the appliance's model
-	 * @param applianceBrand the appliance's brand
-	 * @param customerId     the id of the customer that has the repair plan
+	 * @param applianceModel
+	 *            the appliance's model
+	 * @param applianceBrand
+	 *            the appliance's brand
+	 * @param customerId
+	 *            the id of the customer that has the repair plan
 	 * @return true iff appliance could be removed
 	 */
 	public boolean removeRepairPlan(String applianceBrand, String applianceModel, String customerId) {
@@ -48,7 +51,8 @@ public class RepairPlanList extends ItemList<RepairPlan, String> {
 	/**
 	 * Inserts a repair plan into the collection
 	 * 
-	 * @param repairPlan the repair plan to be inserted
+	 * @param repairPlan
+	 *            the repair plan to be inserted
 	 * @return true iff the repair plan could be inserted.
 	 */
 	public boolean insertRepairPlan(RepairPlan repairPlan) {
@@ -58,7 +62,8 @@ public class RepairPlanList extends ItemList<RepairPlan, String> {
 	/**
 	 * Supports serialization
 	 * 
-	 * @param output the stream to be written to
+	 * @param output
+	 *            the stream to be written to
 	 */
 	private void writeObject(java.io.ObjectOutputStream output) throws IOException {
 		output.defaultWriteObject();
@@ -68,7 +73,8 @@ public class RepairPlanList extends ItemList<RepairPlan, String> {
 	/**
 	 * Supports deserialization
 	 * 
-	 * @param input the stream to be read from
+	 * @param input
+	 *            the stream to be read from
 	 */
 	private void readObject(java.io.ObjectInputStream input) throws IOException, ClassNotFoundException {
 		input.defaultReadObject();
