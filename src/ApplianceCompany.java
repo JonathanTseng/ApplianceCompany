@@ -448,7 +448,7 @@ public class ApplianceCompany implements Serializable {
 	public static boolean save() {
 
 		try {
-			FileOutputStream file = new FileOutputStream("WasherCompanyData");
+			FileOutputStream file = new FileOutputStream("ApplianceCompanyData");
 			ObjectOutputStream output = new ObjectOutputStream(file);
 			output.writeObject(applianceCompany);
 			output.writeObject(MemberIdServer.instance());

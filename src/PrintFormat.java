@@ -37,35 +37,40 @@ public class PrintFormat implements ApplianceItemVisitor {
 
 	@Override
 	public void visit(Refrigerator refrigerator) {
-		backOrderQueue = refrigerator.getNextBackOrder();
-		if (backOrderQueue == null) {
-			System.out.println("No back orders for refrigerators!");
-		} else {
-			System.out.println("Refrigerator brand: " + refrigerator.getBrand() + "\tRefrigerator model: "
-					+ refrigerator.getModel());
+		while (refrigerator.hasBackOrder()) {
+			backOrderQueue = refrigerator.getNextBackOrder();
+			if (backOrderQueue == null) {
+				System.out.println("No back orders for refrigerators!");
+			} else {
+				System.out.println(backOrderQueue.getCustomer() + "\tRefrigerator brand: " + refrigerator.getBrand()
+						+ "\tRefrigerator model: " + refrigerator.getModel());
+			}
 		}
-
 	}
 
 	@Override
 	public void visit(ClothesDryer clothesDryer) {
-		backOrderQueue = clothesDryer.getNextBackOrder();
-		if (backOrderQueue == null) {
-			System.out.println("No back orders for dryers!");
-		} else {
-			System.out.println("Dryer brand: " + clothesDryer.getBrand() + "\tDryer model: " + clothesDryer.getModel());
+		while (clothesDryer.hasBackOrder()) {
+			backOrderQueue = clothesDryer.getNextBackOrder();
+			if (backOrderQueue == null) {
+				System.out.println("No back orders for dryers!");
+			} else {
+				System.out.println(backOrderQueue.getCustomer() + "\tDryer brand: " + clothesDryer.getBrand()
+						+ "\tDryer model: " + clothesDryer.getModel());
+			}
 		}
-
 	}
 
 	@Override
 	public void visit(ClothesWasher clothesWasher) {
-		backOrderQueue = clothesWasher.getNextBackOrder();
-		if (backOrderQueue == null) {
-			System.out.println("No back orders for washers!");
-		} else {
-			System.out.println(
-					"Washer brand: " + clothesWasher.getBrand() + "\tWasher model: " + clothesWasher.getModel());
+		while (clothesWasher.hasBackOrder()) {
+			backOrderQueue = clothesWasher.getNextBackOrder();
+			if (backOrderQueue == null) {
+				System.out.println("No back orders for washers!");
+			} else {
+				System.out.println(backOrderQueue.getCustomer() + "\tWasher brand: " + clothesWasher.getBrand()
+						+ "\tWasher model: " + clothesWasher.getModel());
+			}
 		}
 	}
 
@@ -77,27 +82,29 @@ public class PrintFormat implements ApplianceItemVisitor {
 
 	@Override
 	public void visit(KitchenRange kitchenRange) {
-		backOrderQueue = kitchenRange.getNextBackOrder();
-		if (backOrderQueue == null) {
-			System.out.println("No back orders for kitchen ranges");
+		while (kitchenRange.hasBackOrder()) {
+			backOrderQueue = kitchenRange.getNextBackOrder();
+			if (backOrderQueue == null) {
+				System.out.println("No back orders for kitchen ranges");
 
-		} else {
-			System.out.println("Kitchen range brand: " + kitchenRange.getBrand() + "\tKitchen range model "
-					+ kitchenRange.getModel());
+			} else {
+				System.out.println(backOrderQueue.getCustomer() + "\tKitchen range brand: " + kitchenRange.getBrand()
+						+ "\tKitchen range model " + kitchenRange.getModel());
+			}
 		}
-
 	}
 
 	@Override
 	public void visit(Dishwasher dishWasher) {
-		backOrderQueue = dishWasher.getNextBackOrder();
-		if (backOrderQueue == null) {
-			System.out.println("No back orders for dish washers!");
-		} else {
-			System.out.println(
-					"Dishwasher brand: " + dishWasher.getBrand() + "\tDishwasher model: " + dishWasher.getModel());
+		while (dishWasher.hasBackOrder()) {
+			backOrderQueue = dishWasher.getNextBackOrder();
+			if (backOrderQueue == null) {
+				System.out.println("No back orders for dish washers!");
+			} else {
+				System.out.println(backOrderQueue.getCustomer() + "\tDishwasher brand: " + dishWasher.getBrand()
+						+ "\tDishwasher model: " + dishWasher.getModel());
+			}
 		}
-
 	}
 
 }

@@ -195,7 +195,7 @@ public class UserInterface {
 		System.out.println(WITHDRAW_REPAIRPLAN + " to withdraw repair plan");
 		System.out.println(BILL_REPAIRPLAN + " to bill all users for repair plan");
 		System.out.println(LIST_REPAIRPLANS + " to display all user repair plans");
-		System.out.println(LIST_BACKORDER + " to display the total of all back orders");
+		System.out.println(LIST_BACKORDER + " to display all back orders");
 		System.out.println(SAVE + " to save data");
 		System.out.println(HELP + " for help\n");
 	}
@@ -230,7 +230,7 @@ public class UserInterface {
 			int type = getApplianceType();
 			String brand = getToken("Enter brand");
 			String model = getToken("Enter model");
-			double price = getDoubleNumber("EnterPrice");
+			double price = getDoubleNumber("Enter price");
 			double repairPlanPrice = 0.0;
 			int capacity = 0;
 			int maximumHeatingOutput = 0;
@@ -320,7 +320,7 @@ public class UserInterface {
 			} else {
 				System.out.println("Purchase could not be completed.\n");
 			}
-		} while (yesOrNo("Buy more washers?"));
+		} while (yesOrNo("Buy more appliances?"));
 	}
 
 	/**
@@ -368,6 +368,7 @@ public class UserInterface {
 	 * 
 	 */
 	public void listBackOrder() {
+		System.out.println("Here is the list of all back orders: \n");
 		applianceCompany.listBackOrders(PrintFormat.instance());
 
 	}
