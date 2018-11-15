@@ -35,6 +35,9 @@ public class PrintFormat implements ApplianceItemVisitor {
 		System.out.println("Print " + item + " formatted");
 	}
 
+	/**
+	 * This method prints out any back order information for refrigerators.
+	 */
 	@Override
 	public void visit(Refrigerator refrigerator) {
 		while (refrigerator.hasBackOrder()) {
@@ -47,6 +50,9 @@ public class PrintFormat implements ApplianceItemVisitor {
 		}
 	}
 
+	/**
+	 * This method prints out any back order information for dryers.
+	 */
 	@Override
 	public void visit(ClothesDryer clothesDryer) {
 		while (clothesDryer.hasBackOrder()) {
@@ -59,6 +65,9 @@ public class PrintFormat implements ApplianceItemVisitor {
 		}
 	}
 
+	/**
+	 * This method prints out any back order information for washers.
+	 */
 	@Override
 	public void visit(ClothesWasher clothesWasher) {
 		while (clothesWasher.hasBackOrder()) {
@@ -71,12 +80,18 @@ public class PrintFormat implements ApplianceItemVisitor {
 		}
 	}
 
+	/**
+	 * This method prints out any back order information for furnaces.
+	 */
 	@Override
 	public void visit(Furnace furnance) {
 		System.out.println("Furnances can't have back orders.");
 
 	}
 
+	/**
+	 * This method prints out any back order information for kitchen ranges.
+	 */
 	@Override
 	public void visit(KitchenRange kitchenRange) {
 		while (kitchenRange.hasBackOrder()) {
@@ -90,6 +105,9 @@ public class PrintFormat implements ApplianceItemVisitor {
 		}
 	}
 
+	/**
+	 * This method prints out any back order information for dishwashers.
+	 */
 	@Override
 	public void visit(Dishwasher dishWasher) {
 		while (dishWasher.hasBackOrder()) {
