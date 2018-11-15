@@ -42,8 +42,7 @@ public class PrintFormat implements ApplianceItemVisitor {
 			if (backOrderQueue == null) {
 				System.out.println("No back orders for refrigerators!");
 			} else {
-				System.out.println(backOrderQueue.getCustomer() + "\tRefrigerator brand: " + refrigerator.getBrand()
-						+ "\tRefrigerator model: " + refrigerator.getModel());
+				System.out.println(backOrderQueue.getCustomer() + "\t\t" + backOrderQueue.getApplianceItem());
 			}
 		}
 	}
@@ -55,8 +54,7 @@ public class PrintFormat implements ApplianceItemVisitor {
 			if (backOrderQueue == null) {
 				System.out.println("No back orders for dryers!");
 			} else {
-				System.out.println(backOrderQueue.getCustomer() + "\tDryer brand: " + clothesDryer.getBrand()
-						+ "\tDryer model: " + clothesDryer.getModel());
+				System.out.println(backOrderQueue.getCustomer() + "\t\t" + backOrderQueue.getApplianceItem());
 			}
 		}
 	}
@@ -68,8 +66,7 @@ public class PrintFormat implements ApplianceItemVisitor {
 			if (backOrderQueue == null) {
 				System.out.println("No back orders for washers!");
 			} else {
-				System.out.println(backOrderQueue.getCustomer() + "\tWasher brand: " + clothesWasher.getBrand()
-						+ "\tWasher model: " + clothesWasher.getModel());
+				System.out.println(backOrderQueue.getCustomer() + "\t\t" + backOrderQueue.getApplianceItem());
 			}
 		}
 	}
@@ -88,8 +85,7 @@ public class PrintFormat implements ApplianceItemVisitor {
 				System.out.println("No back orders for kitchen ranges");
 
 			} else {
-				System.out.println(backOrderQueue.getCustomer() + "\tKitchen range brand: " + kitchenRange.getBrand()
-						+ "\tKitchen range model " + kitchenRange.getModel());
+				System.out.println(backOrderQueue.getCustomer() + "\t\t" + backOrderQueue.getApplianceItem());
 			}
 		}
 	}
@@ -101,8 +97,7 @@ public class PrintFormat implements ApplianceItemVisitor {
 			if (backOrderQueue == null) {
 				System.out.println("No back orders for dish washers!");
 			} else {
-				System.out.println(backOrderQueue.getCustomer() + "\tDishwasher brand: " + dishWasher.getBrand()
-						+ "\tDishwasher model: " + dishWasher.getModel());
+				System.out.println(backOrderQueue.getCustomer() + "\t\t" + backOrderQueue.getApplianceItem());
 			}
 		}
 	}
