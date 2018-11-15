@@ -384,7 +384,8 @@ public class UserInterface {
 	}
 
 	/**
-	 * 
+	 * Method to be called to bill all the customers that are enrolled in a repair
+	 * plan
 	 */
 	public void billRepairPlans() {
 		int result = applianceCompany.billRepairPlans();
@@ -404,7 +405,8 @@ public class UserInterface {
 	}
 
 	/**
-	 * 
+	 * Method to be called when a customer wants to withdraw from a repair plan.
+	 * Prompts the user for appliance and customer information.
 	 */
 	public void withdrawRepairPlan() {
 		int result;
